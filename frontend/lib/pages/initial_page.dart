@@ -39,6 +39,7 @@ class InitialPage extends StatelessWidget {
 
                       ),
                     ),
+                    RoutingButton(text: "Home", route: "/home-supervisor", callback: (){return true;},),
                   ],
                 )
               ],

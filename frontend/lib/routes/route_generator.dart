@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/home_supervisor.dart';
 import 'package:frontend/pages/initial_page.dart';
 import 'package:frontend/pages/login.dart';
 import 'package:frontend/pages/register.dart';
@@ -18,6 +19,9 @@ class RouteGenerator{
 
       case "/register":
         return MaterialPageRoute(builder: (_) => const Register());
+
+      case "/home-supervisor":
+        return MaterialPageRoute(builder: (_)=> const HomeSupervisor());
 
       default:
         return _errorRoute();
