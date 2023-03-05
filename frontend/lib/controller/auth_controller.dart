@@ -38,11 +38,12 @@ class AuthController{
     if(response.statusCode == 200){
       var loginArr = json.decode(response.body);
       shPref.setString("token", loginArr["data"]["token"]);
+      shPref.setString("usename", loginArr["data"]["token"]);
       
-      print(shPref.getString("token"));
+      Navigator.pushNamed(context, "/home-supervisor");
     }else{
       errorAlert(context, "Credenciales incorrectas");
-      print("Wrong Credentials");
+      // print("Wrong Credentials");
     }
 
   }

@@ -1,6 +1,5 @@
 
 import 'package:frontend/model/product.dart';
-import 'package:frontend/view/pages/products.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io';
 import 'package:path/path.dart';

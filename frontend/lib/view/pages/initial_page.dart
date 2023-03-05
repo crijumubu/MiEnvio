@@ -6,12 +6,17 @@ import 'package:frontend/view/widgets/logo.dart';
 import 'package:frontend/view/widgets/routing_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+double anchoApp = 0;
+
 
 class InitialPage extends StatelessWidget {
   const InitialPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    anchoApp = MediaQuery.of(context).size.width ;
+
+
     return Scaffold(
       backgroundColor: Colors.grey[50],
       body: Center(

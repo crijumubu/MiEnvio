@@ -5,6 +5,8 @@ import 'package:frontend/view/widgets/routing_button.dart';
 import 'package:frontend/view/widgets/text_input.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../controller/auth_controller.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -13,6 +15,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final AuthController _authController = AuthController();
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -45,7 +48,8 @@ class _LoginState extends State<Login> {
                     callback: (){
                       if(_key.currentState!.validate()){
                         _key.currentState!.save();
-                        return(true);
+                        _authController.login(context, _userController.text, _passwordController.text);
+                        return(false);
                       }
                     }
                   )
