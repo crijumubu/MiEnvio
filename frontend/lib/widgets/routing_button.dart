@@ -10,7 +10,7 @@ class RoutingButton extends StatelessWidget {
   final ButtonStyle? btnStyle;
 
   final TextStyle  _routingBtnStyle = const TextStyle( //* Estilo del texto
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: FontWeight.w500,
   );
   
@@ -24,16 +24,18 @@ class RoutingButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 35,vertical: 15)
       )),
       onPressed: (){
-
+        bool goNext = false;
         if(callback!= null){
-          callback();
+          goNext = callback() ?? false;
         }
-        
-        Navigator.pushNamed(context, route);
+
+        if(goNext == true){
+          Navigator.pushNamed(context, route);
+        }
 
       }, 
       
-      child: Text(text, style: btnStyle == null ? _routingBtnStyle : (const TextStyle( color: Colors.black, decoration: TextDecoration.underline)) ,)
+      child: Text(text, style: btnStyle == null ? _routingBtnStyle : (const TextStyle( color: Colors.black, decoration: TextDecoration.underline, fontSize: 15)) ,)
       );
   }
 }

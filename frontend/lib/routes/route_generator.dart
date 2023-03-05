@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/initial_page.dart';
 import 'package:frontend/pages/login.dart';
+import 'package:frontend/pages/register.dart';
 
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){
@@ -14,6 +15,9 @@ class RouteGenerator{
         
       case "/login":
         return MaterialPageRoute(builder: (_) => const Login());
+
+      case "/register":
+        return MaterialPageRoute(builder: (_) => const Register());
 
       default:
         return _errorRoute();

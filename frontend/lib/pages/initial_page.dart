@@ -27,9 +27,9 @@ class InitialPage extends StatelessWidget {
                     const SizedBox(height: 16,),
                     const Logo(opacity: 1, size: "200"),
                     const SizedBox(height: 16,),
-                    const RoutingButton(text: "Iniciar Sesion", route: "/login"),
-                    // const SizedBox(height: 3,),
-                    RoutingButton(text: "No tengo una cuenta", route: "/register", 
+                    RoutingButton(text: "Iniciar Sesion", route: "/login", callback: (){return true;},),
+                    const SizedBox(height: 5,),
+                    RoutingButton(text: "No tengo una cuenta", route: "/register", callback: (){return true;}, 
                     btnStyle: ElevatedButton.styleFrom(
                       elevation: 0,
                       // disabledBackgroundColor:Colors.white,
@@ -43,18 +43,6 @@ class InitialPage extends StatelessWidget {
                 )
               ],
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Image(
-            //       image: const AssetImage("assets/images/logo200.png"),
-            //       color: Colors.white.withOpacity(0.5),
-            //       colorBlendMode: BlendMode.modulate,
-            //       height: 100
-            //     ),
-            //   ],
-            // )
-            
             
           ], 
         ),
