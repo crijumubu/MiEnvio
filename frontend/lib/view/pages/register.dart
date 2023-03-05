@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/bottom.dart';
-import 'package:frontend/widgets/header_back.dart';
-import 'package:frontend/widgets/routing_button.dart';
-import 'package:frontend/widgets/text_input.dart';
+import 'package:frontend/controller/auth_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../widgets/alerts.dart';
+import '../widgets/bottom.dart';
+import '../widgets/header_back.dart';
+import '../widgets/routing_button.dart';
+import '../widgets/text_input.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+
+class _RegisterState extends State<Register> { 
+  final AuthController _authController = AuthController();
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfCont = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: headerBack(context),
+      resizeToAvoidBottomInset: false,
       body: 
         Center(
         child: Column(
@@ -35,25 +40,29 @@ class _LoginState extends State<Login> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text("Iniciar Sesion", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
-                  const SizedBox(height: 64,),
+                  Text("Registrarme", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
+                  const SizedBox(height: 45,),
                   TextInput(fieldController: _userController, placeholder: "Usuario", hide: false,),
-                  const SizedBox(height: 32,),
+                  const SizedBox(height: 22,),
                   TextInput(fieldController: _passwordController, placeholder:  "Contraseña", hide: true,),
-                  const SizedBox(height: 38,),
-                  RoutingButton(text: "Iniciar Sesion", route: "/login", btnStyle: null, 
+                  const SizedBox(height: 22,),
+                  TextInput(fieldController: _passwordConfCont, placeholder:  "Confirmar Contraseña", hide: true, checkPasswords: _passwordController,),
+                  const SizedBox(height: 32,),
+                  RoutingButton(text: "Registrarme", route: "/register", btnStyle: null, 
                     callback: (){
                       if(_key.currentState!.validate()){
                         _key.currentState!.save();
-                        return(true);
+                        _authController.register(context, _userController.text, _passwordController.text);
+                        return(false);
                       }
                     }
-                  )
+                  ),
+                  const SizedBox(height: 20,),
                 ],
               ),
             ))
             ),
-            const Expanded(flex: 4, child: 
+            const Expanded(flex: 3, child: 
              Bottom()
             )
           ]  

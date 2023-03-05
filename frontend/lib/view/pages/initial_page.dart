@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 // import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:frontend/widgets/logo.dart';
-import 'package:frontend/widgets/routing_button.dart';
+import 'package:frontend/view/widgets/logo.dart';
+import 'package:frontend/view/widgets/routing_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 

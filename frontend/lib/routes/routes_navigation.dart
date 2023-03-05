@@ -1,10 +1,10 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:frontend/pages/favorites.dart';
-import 'package:frontend/widgets/navigation.dart';
+import 'package:frontend/view/pages/favorites.dart';
+import 'package:frontend/view/widgets/navigation.dart';
 
-import '../pages/products.dart';
-import '../pages/user.dart';
+import '../view/pages/products.dart';
+import '../view/pages/user.dart';
 
 class RoutesNavigation extends StatelessWidget {
   final int index;
