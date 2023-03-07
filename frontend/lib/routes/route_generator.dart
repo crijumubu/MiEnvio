@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/view/pages/home_supervisor.dart';
 import 'package:frontend/view/pages/initial_page.dart';
+import 'package:frontend/view/pages/introduction.dart';
 import 'package:frontend/view/pages/login.dart';
 import 'package:frontend/view/pages/register.dart';
 
@@ -12,7 +13,7 @@ class RouteGenerator{
 
     switch (settings.name) {
       case "/":
-        return MaterialPageRoute(builder: (_) => const InitialPage());
+        return MaterialPageRoute(builder: (_) => const Introduction());
         
       case "/login":
         return MaterialPageRoute(builder: (_) => const Login());

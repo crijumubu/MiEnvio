@@ -23,7 +23,7 @@ class AuthController{
       });
       
     }else if(response.statusCode == 409){
-      errorAlert(context, "El usuario ya se encuentra en uso!");
+      errorAlert(context, 2, "El usuario ya se encuentra en uso!");
     }
   }
 
@@ -42,7 +42,7 @@ class AuthController{
       
       Navigator.pushNamed(context, "/home-supervisor");
     }else{
-      errorAlert(context, "Credenciales incorrectas");
+      errorAlert(context, 2, "Credenciales incorrectas");
       // print("Wrong Credentials");
     }
 
