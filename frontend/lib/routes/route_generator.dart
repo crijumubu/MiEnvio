@@ -12,7 +12,7 @@ class RouteGenerator{
     print(args);
 
     switch (settings.name) {
-      case "/":
+      case "introduction":
         return MaterialPageRoute(builder: (_) => const Introduction());
         
       case "/login":
@@ -23,6 +23,9 @@ class RouteGenerator{
 
       case "/home-supervisor":
         return MaterialPageRoute(builder: (_)=> const HomeSupervisor());
+      
+      case "/initial_page":
+        
 
       default:
         return _errorRoute();

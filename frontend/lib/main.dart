@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.rubikTextTheme()
       ),
-      initialRoute: "/",
+      initialRoute: "introduction",
       onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,
 
