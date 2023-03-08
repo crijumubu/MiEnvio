@@ -25,7 +25,7 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_)=> const HomeSupervisor());
       
       case "/initial_page":
-        
+        return MaterialPageRoute(builder: (_)=> const InitialPage());
 
       default:
         return _errorRoute();

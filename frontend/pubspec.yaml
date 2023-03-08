@@ -71,7 +71,7 @@ flutter:
      - assets/images/
      - assets/images/driver.png
      - assets/images/manager.png
-
+     - assets/images/empresas_de_envio.avif
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

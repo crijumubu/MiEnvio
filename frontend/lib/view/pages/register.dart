@@ -32,7 +32,7 @@ class _RegisterState extends State<Register> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded( flex: 10,child: 
+            Expanded( flex: 9,child: 
             Container(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Form(

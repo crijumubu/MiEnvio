@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:frontend/view/widgets/logo.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intro_slider/intro_slider.dart';
+import 'package:frontend/view/widgets/alerts.dart';
 
 
 class Introduction extends StatefulWidget {
@@ -42,12 +43,35 @@ class _IntroductionState extends State<Introduction> {
       )
     );
 
+    slides.add(
+      ContentConfig(
+        title: "Tipos de usuarios",
+        styleTitle: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700, color: const Color(0xff344E41)),
+        centerWidget: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: 
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              typeUser("manager", "Supervisor", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium ex lectus, ac tincidunt urna semper volutpat. Nam laoreet, mi   volutpat tincidunt fermentum, lacus est tincidunt elit, ac volutpat quam ipsum vel dui."),
+              const SizedBox(height: 30,),
+              typeUser("driver", "Conductor", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium ex lectus, ac tincidunt urna semper volutpat. Nam laoreet, mi   volutpat tincidunt fermentum, lacus est tincidunt elit, ac volutpat quam ipsum vel dui."),              
+            ],
+          )
+        ),
+        backgroundColor: Colors.grey[100],
+        // widgetDescription: Container(padding: const EdgeInsets.symmetric(horizontal: 10), child: Text( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium ex lectus, ac tincidunt urna semper volutpat. Nam laoreet, mi volutpat tincidunt fermentum, lacus est tincidunt elit, ac volutpat quam ipsum vel dui.", style: GoogleFonts.rubik(fontSize: 16), textAlign: TextAlign.justify,))
         
+      )
+    );  
 
   }
 
   void onDonePress(){
-    print("End of slider");
+
+    modalWindow(context,);
+    // Navigator.pushNamed(context, "/initial_page");
   }
   
   ButtonStyle navStyleButton(){
@@ -58,72 +82,50 @@ class _IntroductionState extends State<Introduction> {
     );
   }
 
-  ElevatedButton userButton(img){
-    return ElevatedButton(
-      onPressed: (){}, 
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), 
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        backgroundColor: const Color(0xffDAD7CD)
-      ),
-      child: Image.asset("assets/images/$img.png", width: 110,)
-    );
+  
+
+  Container typeUser(img, userType, text){
+    return Container( 
+      decoration: const BoxDecoration(color: Color(0xffDAD7CD), borderRadius: BorderRadius.all(Radius.circular(10))),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      child:Row(
+      children: [
+        Column(
+          children: [
+            Image.asset("assets/images/$img.png", width: 100,),
+            // userButton("manager"),
+            // const SizedBox(width: 10,), 
+            Text(userType, style: GoogleFonts.rubik(fontSize: 28, color: const Color.fromARGB(206, 0, 0, 0), fontWeight: FontWeight.w500),)
+          ],
+        ),
+        Expanded(
+          child: Container( padding:const  EdgeInsets.only(left: 10), child: 
+          Text(text,style:  GoogleFonts.rubik(fontSize: 15), textAlign:  TextAlign.justify, ),
+        ))
+      ],
+    ));
   }
   
 
   @override
   Widget build(BuildContext context) {
 
-    slides.add(
-      ContentConfig(
-        title: "Tipos de usuarios",
-        styleTitle: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700, color: const Color(0xff344E41)),
-        centerWidget: Container(
-          padding: const EdgeInsets.only(left: 20, right:20, top: 50),
-          child: 
-          Row(
-            mainAxisSize: MainAxisSize.max
-            ,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  userButton("manager"),
-                  const SizedBox(height: 10,), 
-                  Text('Supervisor', style: GoogleFonts.rubik(fontSize: 28, color: const Color.fromARGB(206, 0, 0, 0), fontWeight: FontWeight.w500),)
-                ],
-              ),
-              const Spacer(),
-              Column(
-                children: [
-                  userButton("driver"),
-                  const SizedBox(height: 10,), 
-                  Text('Conductor', style: GoogleFonts.rubik(fontSize: 28, color: const Color.fromARGB(206, 0, 0, 0), fontWeight: FontWeight.w500),)
-                ],
-              ),
-            ],
-          )
-        ),
-        // styleDescription: 
-        backgroundColor: Colors.grey[100],
-        // description:,
-        widgetDescription: Container(padding: const EdgeInsets.symmetric(horizontal: 10), child: Text( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium ex lectus, ac tincidunt urna semper volutpat. Nam laoreet, mi volutpat tincidunt fermentum, lacus est tincidunt elit, ac volutpat quam ipsum vel dui.", style: GoogleFonts.rubik(fontSize: 16), textAlign: TextAlign.justify,))
-        
-      )
-    );
+
     
     return Scaffold(
       body: IntroSlider(
         key: UniqueKey(),
-        backgroundColorAllTabs: Color(0xffDAD7CD),
+        backgroundColorAllTabs: const Color(0xffDAD7CD),
         listContentConfig: slides,
         onDonePress: onDonePress,
-        isShowDoneBtn: false,
+        // isShowDoneBtn: false,
         isShowSkipBtn: false,
         renderNextBtn: const Icon(Icons.navigate_next_rounded, size: 35, color: Color(0xff344E41),),
         renderPrevBtn: const Icon(Icons.navigate_before_rounded, size: 35, color: Color(0xff344E41),),
+        renderDoneBtn: const Icon(Icons.done_all_rounded, size: 35, color: Color(0xff344E41),),
         prevButtonStyle: navStyleButton(),
-        nextButtonStyle: navStyleButton()
+        nextButtonStyle: navStyleButton(),
+        doneButtonStyle: navStyleButton(),
       ),
     );
   }
