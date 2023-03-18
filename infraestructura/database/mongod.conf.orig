@@ -14,6 +14,7 @@ systemLog:
   destination: file
   logAppend: true
   path: /var/log/mongodb/mongod.log
+  verbosity: 5
 
 # network interfaces
 net:
