@@ -1,7 +1,0 @@
-version: "3.8"
-
-services:
-  app:
-    image: crijumubu/mienvio_docker:backend
-    ports:
-      - "1802:1802"
