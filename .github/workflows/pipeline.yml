@@ -19,6 +19,9 @@ jobs:
   lint:
     name: Code linting
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
     steps:
       - uses: actions/checkout@v2
         with:
@@ -28,10 +31,8 @@ jobs:
           node-version: '18.14.1'
       - name: Install dependencies
         run: npm ci
-        working-directory: ./backend
       - name: Lint
         run: npm run lint
-        working-directory: ./backend
 
   push_to_registry:
     name: Push image to Docker Hub
