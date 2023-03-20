@@ -1,3 +1,5 @@
+[![Publish Docker image](https://github.com/crijumubu/MiEnvio/actions/workflows/pipeline.yml/badge.svg?branch=backend)](https://github.com/crijumubu/MiEnvio/actions/workflows/pipeline.yml)
+
 ## Backend de aplicación móvil Mi Envío
 
 Este rama contiene el backend de la aplicación móvil Mi Envío desarrollado en TypeScript y utilizando el patrón Modelo-Vista-Controlador (MVC).
