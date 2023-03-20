@@ -33,7 +33,7 @@ const usersRoute_1 = __importDefault(require("./routes/usersRoute"));
 class Server {
     constructor() {
         this.config = () => {
-            this.backend.set("port", process.env.PORT);
+            this.backend.set('port', process.env.PORT);
             this.backend.use((0, express_1.urlencoded)({ extended: true }));
             this.backend.use((0, express_1.json)());
             this.backend.use((0, cors_1.default)());
@@ -43,7 +43,7 @@ class Server {
         };
         this.start = () => {
             this.backend.listen(process.env.PORT, () => {
-                console.log("Server on port:", process.env.PORT);
+                console.log('Server on port:', process.env.PORT);
             });
         };
         dotenv_1.default.config();

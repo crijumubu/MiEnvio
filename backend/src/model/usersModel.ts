@@ -3,59 +3,57 @@ import bcrypt from 'bcryptjs';
 
 class usersModel{
 
-    private mongo: mongo;
+  private mongo: mongo;
 
-    constructor(){
+  constructor(){
         
-        this.mongo = new mongo();
-    }
+    this.mongo = new mongo();
+  }
 
-    public login = async (email: string, password: string, fn: Function) => {
+  public login = async (email: string, password: string, fn: (status: number) => void) => {
         
-
-        this.mongo.connect();
+    this.mongo.connect();
         
-        await this.mongo.model.find({'email': email}, {'password': 1, '_id': 0})
-        .then((response: any, error: any) => {
+    await this.mongo.model.find({'email': email}, {'password': 1, '_id': 0})
+      .then((response: any, error: any) => {
             
-            if (error){
+        if (error){
 
-                fn(-1);
-                return;
-            }
+          fn(-1);
+          return;
+        }
 
-            if(response.length == 1){
+        if(response.length == 1){
                 
-                if (bcrypt.compareSync(password, response[0]['password'])){
+          if (bcrypt.compareSync(password, response[0]['password'])){
                     
-                    fn(1);
-                    return;
-                }
-            }
+            fn(1);
+            return;
+          }
+        }
 
-            fn(0);
-        })
-    }
+        fn(0);
+      })
+  }
 
-    public register = async (email: string, password: string, fn: Function) => {
+  public register = async (email: string, password: string, fn:(status: any) => void) => {
         
+    this.mongo.connect();
 
-        this.mongo.connect();
-
-        await this.mongo.model.create({'email': email, 'password': this.cryptPassword(password)})
-        .then((response: any, error: any) => {
+    await this.mongo.model.create({'email': email, 'password': this.cryptPassword(password)})
+      .then((response: any, error: any) => {
             
-            fn(error);
-        })
-    }
+        fn(error);
+      })
+  }
 
-    public cryptPassword = (password: string) => {
+  public cryptPassword = (password: string) => {
 
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
 
-        return hashedPassword;
-    }
+    return hashedPassword;
+  }
 }
 
 export default usersModel;

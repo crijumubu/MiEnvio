@@ -12,8 +12,8 @@ class usersRoute {
         this.config();
     }
     config() {
-        this.router.post("/login", this.controller.login);
-        this.router.post("/register", this.controller.register);
+        this.router.post('/login', this.controller.login);
+        this.router.post('/register', this.controller.register);
     }
 }
 exports.default = usersRoute;
