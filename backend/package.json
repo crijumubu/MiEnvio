@@ -8,7 +8,8 @@
     "tsc": "tsc",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "build": "npx tsc --build"
   },
   "keywords": [],
   "author": "",
