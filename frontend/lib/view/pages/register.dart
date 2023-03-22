@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/controller/auth_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../widgets/alerts.dart';
 import '../widgets/bottom.dart';
 import '../widgets/header_back.dart';
 import '../widgets/routing_button.dart';
@@ -32,35 +31,61 @@ class _RegisterState extends State<Register> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded( flex: 9,child: 
-            Container(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Form(
-              key: _key,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text("Registrarme", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
-                  const SizedBox(height: 45,),
-                  TextInput(fieldController: _userController, placeholder: "Usuario", hide: false,),
-                  const SizedBox(height: 22,),
-                  TextInput(fieldController: _passwordController, placeholder:  "Contraseña", hide: true,),
-                  const SizedBox(height: 22,),
-                  TextInput(fieldController: _passwordConfCont, placeholder:  "Confirmar Contraseña", hide: true, checkPasswords: _passwordController,),
-                  const SizedBox(height: 32,),
-                  RoutingButton(text: "Registrarme", route: "/register", btnStyle: null, 
-                    callback: (){
-                      if(_key.currentState!.validate()){
-                        _key.currentState!.save();
-                        _authController.register(context, _userController.text, _passwordController.text);
-                        return(false);
-                      }
-                    }
-                  ),
-                  const SizedBox(height: 20,),
-                ],
-              ),
-            ))
+            Expanded( 
+              flex: 9,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const SizedBox(height: 45,),
+                    Text("Registrarme", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
+                    const SizedBox(height: 45,),
+                    
+                    SizedBox(
+                      width: double.infinity,
+                      child: Text("Tipo de usuario:", style: GoogleFonts.rubik(fontSize: 28, fontWeight: FontWeight.w400),)
+                    ),
+                    Row(
+                      children: [
+                        Card(
+                          
+                        )
+                      ],
+                    )
+
+                  ],
+                ),
+              )
+            // Container(
+            // padding: const EdgeInsets.symmetric(horizontal: 25),
+            // child: Form(
+            //   key: _key,
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.end,
+            //     children: [
+            //       Text("Registrarme", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
+            //       const SizedBox(height: 45,),
+            //       TextInput(fieldController: _userController, placeholder: "Usuario", hide: false,),
+            //       const SizedBox(height: 22,),
+            //       TextInput(fieldController: _passwordController, placeholder:  "Contraseña", hide: true,),
+            //       const SizedBox(height: 22,),
+            //       TextInput(fieldController: _passwordConfCont, placeholder:  "Confirmar Contraseña", hide: true, checkPasswords: _passwordController,),
+            //       const SizedBox(height: 32,),
+            //       RoutingButton(text: "Registrarme", route: "/register", btnStyle: null, 
+            //         callback: (){
+            //           if(_key.currentState!.validate()){
+            //             _key.currentState!.save();
+            //             _authController.register(context, _userController.text, _passwordController.text);
+            //             return(false);
+            //           }
+            //         }
+            //       ),
+            //       const SizedBox(height: 20,),
+            //     ],
+            //   ),
+            // )
+            // )
             ),
             const Expanded(flex: 3, child: 
              Bottom()

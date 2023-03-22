@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:frontend/routes/routes_navigation.dart';
 import 'package:frontend/view/widgets/header.dart';
-import 'package:frontend/view/widgets/logo.dart';
 
 import '../widgets/navigation.dart';
 
@@ -55,7 +51,6 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
         child: ListView(
           children: [
             const Header(),
-            RoutesNavigation(index: index)
           ],
         ),
       ),
