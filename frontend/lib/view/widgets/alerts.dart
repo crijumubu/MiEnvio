@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void succesfulAlert(context, text){
   QuickAlert.show(
@@ -30,7 +31,11 @@ void errorAlert(context, time,  text){
     
   );
 }
+Future savePoliciy() async{
+  SharedPreferences shPref = await SharedPreferences.getInstance();
 
+  await shPref.setBool("policy", true);
+}
 
 void modalWindow(context){
   bool isChecked = false;
@@ -83,14 +88,17 @@ void modalWindow(context){
                   },
 
                 ),
-                
+                const SizedBox(height: 10,),
                 SizedBox(
-                  width: 120,
+                  width: (isChecked ? 130:120),
+                  
                   child: TextButton(
-                    style: TextButton.styleFrom(foregroundColor: (isChecked ? Colors.green[900]: Colors.grey[700]), backgroundColor:  (isChecked ? Colors.green[50]: Colors.grey[100])),
-                    onPressed: (){
+                    style: TextButton.styleFrom(foregroundColor: (isChecked ? Colors.green[900]: Colors.grey[700]), backgroundColor:  (isChecked ? Colors.green[100]: Colors.grey[300])),
+                    onPressed: ()  {
                       if(isChecked){
-                        Navigator.pushNamed(context, "/initial_page");
+                        savePoliciy();
+                        
+                        Navigator.pushNamed(context, "/initial-page");
                       }
                     }, 
                     child: Text("Aceptar", style: TextStyle(fontWeight: FontWeight.w700, fontSize:  (isChecked ? 16:13)),)
