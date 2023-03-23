@@ -49,7 +49,12 @@ class _RegisterState extends State<Register> {
                     Row(
                       children: [
                         Card(
-                          
+                          child: Column(
+                            children:  [
+                              // const Image(image: AssetImage("")),
+                              
+                            ],
+                          ),
                         )
                       ],
                     )
