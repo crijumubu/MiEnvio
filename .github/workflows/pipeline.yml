@@ -1,0 +1,98 @@
+name: Release application
+
+on:
+  push:
+    branches:
+      - frontend
+
+permissions: write-all
+
+jobs:
+
+  avoid_redundancy:
+
+    name: Check skip
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel previous redundant builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+  build_artifact:
+
+    name: Build android artifact
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Set up java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Set up flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.8'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build application
+        run: flutter build apk
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MiEnvio
+          path: ${{ secrets.APPLICATION_PATH }}
+  
+  release:
+
+    needs: [build_artifact]
+
+    name: Create Release
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: MiEnvio
+          path: ${{ secrets.APPLICATION_PATH }}
+
+      - name: List elements
+        run: ls -R
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Update file to release
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ secrets.APPLICATION_PATH }}
+          asset_name: app-release.apk
+          asset_content_type: application/vnd.android.package-archive
+        
