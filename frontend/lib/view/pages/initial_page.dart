@@ -32,7 +32,7 @@ class InitialPage extends StatelessWidget {
         backgroundColor: Colors.grey[50],
         body: Container(
           decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage("assets/images/initial-page.avif"), fit: BoxFit.fitHeight, colorFilter: ColorFilter.mode(Color(0xffA3B18A), BlendMode.modulate), ),
+            image: DecorationImage(image: AssetImage("assets/images/initial-page.png"), fit: BoxFit.fitHeight, colorFilter: ColorFilter.mode(Color(0xffA3B18A), BlendMode.modulate), ),
             color: Color(0xffA3B18A)
           ),
           child: BackdropFilter( filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0) ,child: Column(

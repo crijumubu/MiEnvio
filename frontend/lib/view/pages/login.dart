@@ -25,43 +25,38 @@ class _LoginState extends State<Login> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: headerBack(context),
+      bottomSheet: const SizedBox(
+        height: 100,
+        width: double.infinity,
+        child: Bottom(),
+      ) ,
       body: 
         Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded( flex: 10,child: 
-            Container(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Form(
-              key: _key,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text("Iniciar Sesion", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
-                  const SizedBox(height: 64,),
-                  TextInput(fieldController: _userController, placeholder: "Usuario", hide: false,),
-                  const SizedBox(height: 32,),
-                  TextInput(fieldController: _passwordController, placeholder:  "Contraseña", hide: true,),
-                  const SizedBox(height: 38,),
-                  RoutingButton(text: "Iniciar Sesion", route: "/login", btnStyle: null, 
-                    callback: (){
-                      if(_key.currentState!.validate()){
-                        _key.currentState!.save();
-                        _authController.login(context, _userController.text, _passwordController.text);
-                        return(false);
-                      }
-                    }
-                  )
-                ],
-              ),
-            ))
-            ),
-            const Expanded(flex: 4, child: 
-             Bottom()
-            )
-          ]  
-        ),
+        child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Form(
+          key: _key,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Iniciar Sesion", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
+              const SizedBox(height: 40,),
+              TextInput(fieldController: _userController, placeholder: "Usuario",  inputType: 'text'),
+              const SizedBox(height: 20,),
+              TextInput(fieldController: _passwordController, placeholder:  "Contraseña", inputType: 'password',),
+              const SizedBox(height: 20,),
+              RoutingButton(text: "Iniciar Sesion", route: "/home", btnStyle: null, 
+                callback: (){
+                  if(_key.currentState!.validate()){
+                    _key.currentState!.save();
+                    // _authController.login(context, _userController.text, _passwordController.text);
+                    return(true);
+                  }
+                }
+              )
+            ],
+          ),
+        )),
       ),
     );
   }

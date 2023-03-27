@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.0.17
   http: ^0.13.5
   quickalert: ^1.0.1
+  
   # sqflite: ^2.2.5
   # path_provider: ^2.0.13
   intro_slider: ^4.2.0
@@ -71,7 +72,7 @@ flutter:
      - assets/images/
      - assets/images/driver.png
      - assets/images/manager.png
-     - assets/images/empresas_de_envio.avif
+     - assets/images/initial-page.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
