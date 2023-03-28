@@ -1,7 +1,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:frontend/view/widgets/routing_button.dart';
+import 'package:frontend/views/initial_page/widgets/routing_button.dart';
 
 double anchoApp = 0;
 

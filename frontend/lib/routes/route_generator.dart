@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/view/pages/home_supervisor.dart';
-import 'package:frontend/view/pages/initial_page.dart';
-import 'package:frontend/view/pages/introduction.dart';
-import 'package:frontend/view/pages/login.dart';
-import 'package:frontend/view/pages/register.dart';
+import '../views/home_supervisor/home_supervisor.dart';
+import '../views/initial_page/initial_page.dart';
+import '../views/introduction/introduction.dart';
+import '../views/login/login.dart';
+import '../views/register/register.dart';
 
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){
-    final args = settings.arguments;
+    // final args = settings.arguments;
 
-    print(args);
+    // print(args);
 
     switch (settings.name) {
       case "introduction":

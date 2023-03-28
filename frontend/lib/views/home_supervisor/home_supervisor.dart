@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/view/widgets/header.dart';
+import 'package:frontend/views/home_supervisor/widgets/header.dart';
 
-import '../widgets/navigation.dart';
+import 'widgets/navigation.dart';
 
 class HomeSupervisor extends StatefulWidget {
   const HomeSupervisor({super.key});
@@ -49,6 +49,7 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
         Container(
         padding: const EdgeInsets.all(1),
         child: ListView(
+          // ignore: prefer_const_literals_to_create_immutables
           children: [
             const Header(),
           ],

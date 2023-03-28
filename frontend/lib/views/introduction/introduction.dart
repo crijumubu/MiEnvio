@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:frontend/view/widgets/logo.dart';
+// import 'package:frontend/view/pages/introduction/widgets/logo.dart';
+import 'package:frontend/views/introduction/widgets/alerts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intro_slider/intro_slider.dart';
-import 'package:frontend/view/widgets/alerts.dart';
 
 
 class Introduction extends StatefulWidget {

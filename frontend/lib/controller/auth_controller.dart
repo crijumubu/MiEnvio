@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:frontend/view/widgets/alerts.dart';
-import 'package:frontend/view/widgets/navigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../views/introduction/widgets/alerts.dart';
 
 class AuthController{
   final _url = "http://mienvio2.bucaramanga.upb.edu.co:1802/ecotienda/api"; 

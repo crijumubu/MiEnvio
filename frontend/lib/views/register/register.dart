@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/controller/auth_controller.dart';
-import 'package:frontend/view/pages/user.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../widgets/bottom.dart';
-import '../widgets/header_back.dart';
-import '../widgets/routing_button.dart';
-import '../widgets/text_input.dart';
+import 'widgets/bottom.dart';
+import 'widgets/header_back.dart';
+import '../initial_page/widgets/routing_button.dart';
+import 'widgets/text_input.dart';
 
 enum UserType {conductor, supervisor}
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/view/widgets/bottom.dart';
-import 'package:frontend/view/widgets/header_back.dart';
-import 'package:frontend/view/widgets/routing_button.dart';
-import 'package:frontend/view/widgets/text_input.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../controller/auth_controller.dart';
+import '../../../controller/auth_controller.dart';
+import '../initial_page/widgets/routing_button.dart';
+import '../register/widgets/bottom.dart';
+import '../register/widgets/header_back.dart';
+import '../register/widgets/text_input.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
