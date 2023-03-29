@@ -11,7 +11,7 @@ class mongo {
             mongoose_1.default.set('strictQuery', true);
             mongoose_1.default.connect(this.uri)
                 .then(() => {
-                console.log("Connected to MongoDB Atlas");
+                console.log('Connected to MongoDB Atlas');
             })
                 .catch(error => {
                 console.error('Error connecting to MongoDB Atlas: ', error);

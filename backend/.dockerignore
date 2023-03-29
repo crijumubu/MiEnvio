@@ -1,0 +1,9 @@
+*.log
+.dockerignore
+.git
+.gitignore
+src/*
+Dockerfile
+node_modules
+npm-debug.log*
+tsconfig.json
