@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/generate_qr/generate_qr.dart';
+import 'package:frontend/views/home/home.dart';
+import 'package:frontend/views/scan_qr/scan_qr.dart';
 import '../views/home_supervisor/home_supervisor.dart';
 import '../views/initial_page/initial_page.dart';
 import '../views/introduction/introduction.dart';
@@ -14,6 +17,9 @@ class RouteGenerator{
     switch (settings.name) {
       case "introduction":
         return MaterialPageRoute(builder: (_) => const Introduction());
+
+      case "initial-page":
+        return MaterialPageRoute(builder: (_)=> const InitialPage());
         
       case "/login":
         return MaterialPageRoute(builder: (_) => const Login());
@@ -27,8 +33,14 @@ class RouteGenerator{
       case "/initial-page":
         return MaterialPageRoute(builder: (_)=> const InitialPage());
       
-      case "initial-page":
-        return MaterialPageRoute(builder: (_)=> const InitialPage());
+      case "/home":
+        return MaterialPageRoute(builder: (_)=> const Home());
+      
+      case "/scan-qr":
+        return MaterialPageRoute(builder: (_)=> const ScanQR());
+
+      case "/generate-qr":
+        return MaterialPageRoute(builder: (_)=> const GenerateQR());
 
       default:
         return _errorRoute();
