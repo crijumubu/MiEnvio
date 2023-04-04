@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 // import 'package:frontend/view/pages/introduction/widgets/logo.dart';
 import 'package:frontend/views/introduction/widgets/alerts.dart';
@@ -49,7 +51,7 @@ class _IntroductionState extends State<Introduction> {
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: 
           Column(
-            mainAxisSize: MainAxisSize.max,
+            // mainAxisSize: MainAxisSize.max,
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               typeUser("manager", "Supervisor", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium ex lectus, ac tincidunt urna semper volutpat. Nam laoreet, mi   volutpat tincidunt fermentum, lacus est tincidunt elit, ac volutpat quam ipsum vel dui."),
@@ -59,6 +61,7 @@ class _IntroductionState extends State<Introduction> {
           )
         ),
         backgroundColor: Colors.grey[100],
+        marginDescription: const EdgeInsets.all(0)
         // widgetDescription: Container(padding: const EdgeInsets.symmetric(horizontal: 10), child: Text( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium ex lectus, ac tincidunt urna semper volutpat. Nam laoreet, mi volutpat tincidunt fermentum, lacus est tincidunt elit, ac volutpat quam ipsum vel dui.", style: GoogleFonts.rubik(fontSize: 16), textAlign: TextAlign.justify,))
         
       )

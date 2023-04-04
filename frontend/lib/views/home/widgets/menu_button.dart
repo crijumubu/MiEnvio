@@ -16,7 +16,7 @@ class MenuButton extends StatelessWidget {
       //   borderRadius: BorderRadius.all(Radius.circular(20)), 
       //   color: Color(0xffd9d9d9),
       // ),
-      margin: const EdgeInsets.symmetric(horizontal: 30),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, btnRoute);
