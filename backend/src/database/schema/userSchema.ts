@@ -2,6 +2,12 @@ import { Schema, model } from 'mongoose';
 import IUsers from '../interface/IUser';
 
 const usersSchema = new Schema({
+  name:{
+    type: String,
+    required: true,
+    unique: true
+
+  },
   email: {
     type: String,
     required: true,
@@ -10,6 +16,11 @@ const usersSchema = new Schema({
   password: {
     type: String,
     requied: true
+  },
+  userType:{
+    type: Number,
+    required: true,
+    unique: true
   }
 }, 
 {
