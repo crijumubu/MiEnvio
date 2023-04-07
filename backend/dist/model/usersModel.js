@@ -33,9 +33,9 @@ class usersModel {
                 fn(0);
             });
         });
-        this.register = (email, password, fn) => __awaiter(this, void 0, void 0, function* () {
+        this.register = (name, email, password, userType, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
-            yield this.mongo.model.create({ 'email': email, 'password': this.cryptPassword(password) })
+            yield this.mongo.model.create({ 'name': name, 'email': email, 'password': this.cryptPassword(password), 'userType': userType })
                 .then((response, error) => {
                 fn(error);
             });

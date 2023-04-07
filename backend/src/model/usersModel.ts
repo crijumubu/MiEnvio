@@ -36,11 +36,11 @@ class usersModel{
       })
   }
 
-  public register = async (email: string, password: string, fn:(status: any) => void) => {
+  public register = async (name:string, email: string, password: string, userType:Int16Array, fn:(status: any) => void) => {
         
     this.mongo.connect();
 
-    await this.mongo.model.create({'email': email, 'password': this.cryptPassword(password)})
+    await this.mongo.model.create({'name':name,'email': email, 'password': this.cryptPassword(password),'userType':userType})
       .then((response: any, error: any) => {
             
         fn(error);
