@@ -3,11 +3,11 @@ import usersModel from '../model/usersModel';
 
 const jwt = require('jsonwebtoken');
 
-class usersController{
+class usersController {
 
   private model: usersModel;
 
-  constructor(){
+  constructor() {
 
     this.model = new usersModel();
   }
@@ -16,27 +16,24 @@ class usersController{
 
     const { email, password } = req.body;
 
-    this.model.login(email, password, (status: number, userType:number) => {
-      
-        
-      switch (status){
+    this.model.login(email, password, (status: number, userType: number) => {
 
-      case 1: {
-        
+      switch (status) {
+        case 1: {
 
-        const token = jwt.sign({email: email}, process.env.TOKEN_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
-        res.header('auth-token', token).json({ error: null, data: {email, token, userType} });
-        //console.log(userType);
-        break;
-      }
-      case 0: {
+          const token = jwt.sign({ email: email }, process.env.TOKEN_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
+          res.header('auth-token', token).json({ error: null, data: { email, token, userType } });
+          //console.log(userType);
+          break;
+        }
+        case 0: {
 
-        return res.status(401).json({ error: true, message: 'Email o contraseña incorrecta!'});
-      } 
-      case -1: {
+          return res.status(401).json({ error: true, message: 'Email o contraseña incorrecta!' });
+        }
+        case -1: {
 
-        return res.status(500).json({ error: true, message: 'Algo ha salido mal al realizar el registro!'});
-      }
+          return res.status(500).json({ error: true, message: 'Algo ha salido mal al realizar el registro!' });
+        }
       }
     });
   }
@@ -45,21 +42,21 @@ class usersController{
 
     const { name, email, password, userType } = req.body;
 
-    this.model.register(name, email, password, userType,(error: any) => {
-            
-      if (!error){
+    this.model.register(name, email, password, userType, (error: any) => {
+
+      if (!error) {
 
         return res.status(200).json({ error: false, message: 'Registro exitóso!' });
       }
-      else{
+      else {
 
         const usedEmailError = error.keyPattern['email'];
 
-        if (usedEmailError){
+        if (usedEmailError) {
 
           return res.status(409).json({ error: true, message: 'El correo ya se encuentra en uso!' });
         }
-                
+
         return res.status(500).json({ error: true, message: 'Algo ha salido mal al realizar el registro!' });
       }
     });
@@ -69,26 +66,26 @@ class usersController{
 
     const { authorization } = req.headers;
 
-    if (!authorization){
+    if (!authorization) {
 
       return res.status(401).json({ error: true, message: 'No se ha proporcionado un token de acceso. Acceso denegado!' });
-    } 
+    }
 
     const bearerToken = authorization.split(' ')[1];
 
-    try{
+    try {
 
       const decodedToken = jwt.verify(bearerToken, process.env.TOKEN_SECRET);
       req.body.user = decodedToken;
       next();
-    } 
-    catch(error){
+    }
+    catch (error) {
 
-      if (error instanceof jwt.TokenExpiredError){
-                
+      if (error instanceof jwt.TokenExpiredError) {
+
         res.status(200).json({ error: true, message: 'El token ha expirado!' });
       }
-            
+
       res.status(406).json({ error: true, message: 'EL token no es válido!' });
     }
   }

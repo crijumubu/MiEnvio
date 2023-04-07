@@ -2,11 +2,9 @@ import { Schema, model } from 'mongoose';
 import IUsers from '../interface/IUser';
 
 const usersSchema = new Schema({
-  name:{
+  name: {
     type: String,
     required: true
-    
-
   },
   email: {
     type: String,
@@ -17,13 +15,12 @@ const usersSchema = new Schema({
     type: String,
     requied: true
   },
-  userType:{
+  userType: {
     type: Number,
     required: true
   }
-}, 
-{
-  versionKey: false
-});
-
+},
+  {
+    versionKey: false
+  });
 export default model<IUsers>('users', usersSchema);
