@@ -4,8 +4,8 @@ import IUsers from '../interface/IUser';
 const usersSchema = new Schema({
   name:{
     type: String,
-    required: true,
-    unique: true
+    required: true
+    
 
   },
   email: {
@@ -19,8 +19,7 @@ const usersSchema = new Schema({
   },
   userType:{
     type: Number,
-    required: true,
-    unique: true
+    required: true
   }
 }, 
 {
