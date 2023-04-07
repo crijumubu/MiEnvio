@@ -14,6 +14,7 @@ class usersController {
                     case 1: {
                         const token = jwt.sign({ email: email }, process.env.TOKEN_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
                         res.header('auth-token', token).json({ error: null, data: { email, token, userType } });
+                        //console.log(userType);
                         break;
                     }
                     case 0: {

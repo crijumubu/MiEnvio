@@ -14,7 +14,7 @@ class usersModel{
         
     this.mongo.connect();
         
-    await this.mongo.model.find({'email': email}, {'password': 1, '_id': 0})
+    await this.mongo.model.find({'email': email})
       .then((response: any, error: any) => {
             
         if (error){
@@ -24,6 +24,7 @@ class usersModel{
         }
 
         if(response.length == 1){
+          //console.log(response[0]['password']);
                 
           if (bcrypt.compareSync(password, response[0]['password'])){
                     
