@@ -40,9 +40,9 @@ class usersController{
 
   public register = (req: Request, res: Response) => {
 
-    const { email, password } = req.body;
+    const { name, email, password, userType } = req.body;
 
-    this.model.register(email, password, (error: any) => {
+    this.model.register(name, email, password, userType,(error: any) => {
             
       if (!error){
 

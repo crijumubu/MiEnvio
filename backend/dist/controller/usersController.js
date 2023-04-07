@@ -26,8 +26,8 @@ class usersController {
             });
         };
         this.register = (req, res) => {
-            const { email, password } = req.body;
-            this.model.register(email, password, (error) => {
+            const { name, email, password, userType } = req.body;
+            this.model.register(name, email, password, userType, (error) => {
                 if (!error) {
                     return res.status(200).json({ error: false, message: 'Registro exitóso!' });
                 }
