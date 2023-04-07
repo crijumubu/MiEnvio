@@ -9,11 +9,11 @@ class usersController {
     constructor() {
         this.login = (req, res) => {
             const { email, password } = req.body;
-            this.model.login(email, password, (status) => {
+            this.model.login(email, password, (status, userType) => {
                 switch (status) {
                     case 1: {
                         const token = jwt.sign({ email: email }, process.env.TOKEN_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
-                        res.header('auth-token', token).json({ error: null, data: { email, token } });
+                        res.header('auth-token', token).json({ error: null, data: { email, token, userType } });
                         break;
                     }
                     case 0: {

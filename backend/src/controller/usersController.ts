@@ -16,14 +16,14 @@ class usersController{
 
     const { email, password } = req.body;
 
-    this.model.login(email, password, (status: number) => {
+    this.model.login(email, password, (status: number, userType:number) => {
         
       switch (status){
 
       case 1: {
 
         const token = jwt.sign({email: email}, process.env.TOKEN_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
-        res.header('auth-token', token).json({ error: null, data: {email, token} });
+        res.header('auth-token', token).json({ error: null, data: {email, token, userType} });
         break;
       }
       case 0: {
