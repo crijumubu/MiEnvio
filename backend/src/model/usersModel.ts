@@ -10,7 +10,7 @@ class usersModel{
     this.mongo = new mongo();
   }
 
-  public login = async (email: string, password: string, fn: (status: number) => void) => {
+  public login = async (email: string, password: string, fn: (status: number, type:number) => void) => {
         
     this.mongo.connect();
         
@@ -19,7 +19,7 @@ class usersModel{
             
         if (error){
 
-          fn(-1);
+          fn(-1,-1);
           return;
         }
 
@@ -27,12 +27,12 @@ class usersModel{
                 
           if (bcrypt.compareSync(password, response[0]['password'])){
                     
-            fn(1);
+            fn(1,response[0]['userType']);
             return;
           }
         }
 
-        fn(0);
+        fn(0,0);
       })
   }
 

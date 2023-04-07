@@ -21,16 +21,16 @@ class usersModel {
             yield this.mongo.model.find({ 'email': email }, { 'password': 1, '_id': 0 })
                 .then((response, error) => {
                 if (error) {
-                    fn(-1);
+                    fn(-1, -1);
                     return;
                 }
                 if (response.length == 1) {
                     if (bcryptjs_1.default.compareSync(password, response[0]['password'])) {
-                        fn(1);
+                        fn(1, response[0]['userType']);
                         return;
                     }
                 }
-                fn(0);
+                fn(0, 0);
             });
         });
         this.register = (name, email, password, userType, fn) => __awaiter(this, void 0, void 0, function* () {
