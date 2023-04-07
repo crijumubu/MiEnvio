@@ -43,18 +43,13 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
       //   leading: null,
       // ),
       
-      body: WillPopScope(
-        onWillPop: () async => false,
-        child: 
-        Container(
-        padding: const EdgeInsets.all(1),
-        child: ListView(
-          // ignore: prefer_const_literals_to_create_immutables
-          children: [
-            const Header(),
-          ],
-        ),
+      body: Container(
+      padding: const EdgeInsets.all(1),
+      child: ListView(
+        children: const [
+          Header(),
+        ],
       ),
-    ));
+      ));
   }
 }

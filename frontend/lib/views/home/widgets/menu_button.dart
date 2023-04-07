@@ -16,7 +16,7 @@ class MenuButton extends StatelessWidget {
       //   borderRadius: BorderRadius.all(Radius.circular(20)), 
       //   color: Color(0xffd9d9d9),
       // ),
-      margin: const EdgeInsets.symmetric(horizontal: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 30),
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, btnRoute);
@@ -28,8 +28,8 @@ class MenuButton extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(20)), 
                 color: Color(0xffDAD7CD),
               ),
-              padding: const EdgeInsets.all(35),
-              child: Image.asset("assets/images/$imgRoute", scale: 8,)
+              padding: const EdgeInsets.all(30),
+              child: Image.asset("assets/images/$imgRoute", scale: 9,)
             ),
             const SizedBox(height: 15,),
             Text(text, style: GoogleFonts.rubik(fontSize: 20, fontWeight: FontWeight.w600),),

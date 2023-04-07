@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/views/generate_qr/generate_qr.dart';
 import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/scan_qr/scan_qr.dart';
+import 'package:frontend/views/shippings_driver/shippings_driver.dart';
 import '../views/home_supervisor/home_supervisor.dart';
 import '../views/initial_page/initial_page.dart';
 import '../views/introduction/introduction.dart';
@@ -41,6 +42,9 @@ class RouteGenerator{
 
       case "/generate-qr":
         return MaterialPageRoute(builder: (_)=> const GenerateQR());
+
+      case "/shippings-driver":
+        return MaterialPageRoute(builder: (_)=> const ShippingsDriver());
 
       default:
         return _errorRoute();
