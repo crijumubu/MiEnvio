@@ -44,7 +44,7 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_)=> const GenerateQR());
 
       case "/shippings-driver":
-        return MaterialPageRoute(builder: (_)=> const ShippingsDriver());
+        return MaterialPageRoute(builder: (_)=> ShippingsDriver());
 
       default:
         return _errorRoute();

@@ -14,9 +14,32 @@ class Bottom extends StatelessWidget {
         color: Colors.white.withOpacity(0.5),
         colorBlendMode: BlendMode.modulate,
         
-        height: 100
+        height: 90
       ),
     ],
     );
   }
 }
+
+class BottomBL extends StatelessWidget {
+  const BottomBL({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return 
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+      Image(
+        image: const AssetImage("assets/images/logobl.png"),
+        color: Colors.white.withOpacity(0.5),
+        colorBlendMode: BlendMode.modulate,
+        
+        height: 50
+      ),
+    ],
+    );
+  }
+}
+
+

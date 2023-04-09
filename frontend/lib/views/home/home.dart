@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
           Navigator.pushNamed(context, "/home-supervisor");
         },
         child: const SizedBox(
-          height: 100,
+          height: 90,
           child: Center(child: Bottom())
         ),
       ),
