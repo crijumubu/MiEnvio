@@ -86,7 +86,7 @@ class Home extends StatelessWidget {
                     MenuButton(text: 'Viajes', imgRoute: 'delivery2.png', btnRoute: '/shippings-driver',),
                     MenuButton(text: 'Escanear QR', imgRoute: 'camara.png', btnRoute: '/scan-qr',),
                     MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr',),
-                    MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '',),
+                    MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/flete-form',),
                   ],
                 ),
               )

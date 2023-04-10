@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/flete_form/flete_form.dart';
 import 'package:frontend/views/generate_qr/generate_qr.dart';
 import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/scan_qr/scan_qr.dart';
@@ -45,6 +46,9 @@ class RouteGenerator{
 
       case "/shippings-driver":
         return MaterialPageRoute(builder: (_)=> ShippingsDriver());
+
+      case "/flete-form":
+        return MaterialPageRoute(builder: (_)=> FleteForm());
 
       default:
         return _errorRoute();
