@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:frontend/views/flete_form/widgets/input.dart';
+import 'package:frontend/views/flete_form/widgets/select_input.dart';
 import 'package:frontend/views/register/widgets/header_back.dart';
-import 'package:frontend/views/register/widgets/text_input.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+List<String> confVehiculo = ["","Camión dos ejes - Sencillo", "Tractocamión dos ejes - Patineta - Minimula con semiremolque de dos ejes", "Tractocamión dos ejes - Patineta - Minimula con semiremolque de tres ejes", "Camión tres ejes - Dobletroque", "Tractocamión tres ejes - Tractomula con semiremolque de dos ejes", "Tractocamión tres ejes - Tractomula con semiremolque de tres ejes"];
 
 class FleteForm extends StatelessWidget {
   FleteForm({super.key});
+  String conf = "";
 
   final TextEditingController horaCargue = TextEditingController();
   final TextEditingController horaDescargue = TextEditingController();
@@ -30,7 +30,7 @@ class FleteForm extends StatelessWidget {
             Form(
               child: Column(
                 children:  [
-                  // Input(controller: controller, inputText: inputText)
+                  SelectInput(list: confVehiculo, value: conf)
                 ],
               ),
             )
