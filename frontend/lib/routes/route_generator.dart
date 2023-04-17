@@ -4,6 +4,7 @@ import 'package:frontend/views/generate_qr/generate_qr.dart';
 import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/scan_qr/scan_qr.dart';
 import 'package:frontend/views/shippings_driver/shippings_driver.dart';
+import 'package:frontend/views/test/test.dart';
 import '../views/home_supervisor/home_supervisor.dart';
 import '../views/initial_page/initial_page.dart';
 import '../views/introduction/introduction.dart';
@@ -49,6 +50,9 @@ class RouteGenerator{
 
       case "/flete-form":
         return MaterialPageRoute(builder: (_)=> FleteForm());
+
+      case "/test":
+        return MaterialPageRoute(builder: (_)=> const Test());
 
       default:
         return _errorRoute();
