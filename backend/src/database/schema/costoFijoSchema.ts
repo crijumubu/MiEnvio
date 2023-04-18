@@ -9,7 +9,6 @@ const costoFijoSchema = new Schema({
   idConfiguracionVehiculo: {
     type: Number,
     required: true,
-    unique: true
   },
   nombreItemFijo: {
     type: String,
