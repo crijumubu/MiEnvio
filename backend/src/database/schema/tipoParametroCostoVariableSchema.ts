@@ -3,7 +3,7 @@ import ITipoParametroCostoVariable from '../interface/ITipoParametroCostoVariabl
 
 const tipoParametroCostoVarible = new Schema({
   idParametro: {
-    type: String,
+    type: Number,
     required: true
   },
   nombreParametro: {

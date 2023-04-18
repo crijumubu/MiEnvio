@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const ciudadSchema = new mongoose_1.Schema({
     idCiudad: {
-        type: String,
+        type: Number,
         required: true
     },
     nombreCiudad: {

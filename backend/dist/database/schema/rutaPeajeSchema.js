@@ -3,15 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const rutaCiudadSchema = new mongoose_1.Schema({
     idRutaPeaje: {
-        type: String,
+        type: Number,
         required: true
     },
     idRuta: {
-        type: String,
+        type: Number,
         required: true,
     },
     idPeaje: {
-        type: String,
+        type: Number,
         requied: true
     }
 }, {

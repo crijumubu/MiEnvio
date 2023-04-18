@@ -3,7 +3,7 @@ import ITipoCarga from '../interface/ITipoCarga';
 
 const tipoCargaSchema = new Schema({
   idTipoCarga: {
-    type: String,
+    type: Number,
     required: true
   },
   nombreTipoCarga: {

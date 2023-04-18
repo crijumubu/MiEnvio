@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const tipoParametroCostoVarible = new mongoose_1.Schema({
     idParametro: {
-        type: String,
+        type: Number,
         required: true
     },
     nombreParametro: {

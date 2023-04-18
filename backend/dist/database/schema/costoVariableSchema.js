@@ -31,7 +31,7 @@ const costoVariableSchema = new mongoose_1.Schema({
         requied: true
     },
     idParametroItemVariable: {
-        type: String,
+        type: Number,
         requied: true
     }
 }, {

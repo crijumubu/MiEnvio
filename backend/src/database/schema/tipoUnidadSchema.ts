@@ -3,7 +3,7 @@ import ITipoUnidad from '../interface/ITipoUnidad';
 
 const tipoUnidad = new Schema({
   idTipoUnidad: {
-    type: String,
+    type: Number,
     required: true
   },
   nombreUnidad: {

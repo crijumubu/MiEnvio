@@ -3,15 +3,15 @@ import IRutaPeaje from '../interface/IRutaPeaje';
 
 const rutaCiudadSchema = new Schema({
   idRutaPeaje: {
-    type: String,
+    type: Number,
     required: true
   },
   idRuta: {
-    type: String,
+    type: Number,
     required: true,
   },
   idPeaje: {
-    type: String,
+    type: Number,
     requied: true
   }
 },

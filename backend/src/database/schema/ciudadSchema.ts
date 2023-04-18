@@ -3,7 +3,7 @@ import ICiudad from '../interface/ICiudad';
 
 const ciudadSchema = new Schema({
     idCiudad: {
-        type: String,
+        type: Number,
         required: true
     },
     nombreCiudad: {

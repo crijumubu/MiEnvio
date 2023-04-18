@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const tipoCargaSchema = new mongoose_1.Schema({
     idTipoCarga: {
-        type: String,
+        type: Number,
         required: true
     },
     nombreTipoCarga: {
