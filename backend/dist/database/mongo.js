@@ -6,7 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const userSchema_1 = __importDefault(require("./schema/userSchema"));
 class mongo {
-    constructor() {
+    constructor(indexSchema) {
+        this.schemasList = [userSchema_1.default];
         this.connect = () => {
             mongoose_1.default.set('strictQuery', true);
             mongoose_1.default.connect(this.uri)
@@ -19,7 +20,7 @@ class mongo {
             });
         };
         this.uri = `${process.env.MONGODB}`;
-        this.model = userSchema_1.default;
+        this.model = this.schemasList[indexSchema];
     }
 }
 exports.default = mongo;

@@ -46,7 +46,7 @@ class usersModel {
             const hashedPassword = bcryptjs_1.default.hashSync(password, salt);
             return hashedPassword;
         };
-        this.mongo = new mongo_1.default();
+        this.mongo = new mongo_1.default(0);
     }
 }
 exports.default = usersModel;

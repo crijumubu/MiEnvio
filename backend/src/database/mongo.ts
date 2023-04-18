@@ -5,11 +5,13 @@ class mongo{
 
   private uri: string;
   public model: any;
+  public schemasList: any[] =[userSchema];
 
-  constructor(){
-
+  constructor(indexSchema:number){
+    
+    
     this.uri = `${process.env.MONGODB}`;
-    this.model = userSchema;
+    this.model = this.schemasList[indexSchema];
   }
 
   public connect = () => {
