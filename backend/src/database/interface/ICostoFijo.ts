@@ -4,5 +4,5 @@ export default interface ICostoFijo extends Document {
     idItemFijo: number;
     idConfiguracionVehiculo: number;
     nombreItemFijo: string;
-    valorItemFijo: number; 
+    valorItemFijo: number;
 }

@@ -5,7 +5,7 @@ export default interface IRuta extends Document {
     idCiudadOrigen: number;
     nombreRuta: string;
     planoRuta: number;
-    onduladoRuta: number; 
+    onduladoRuta: number;
     montanaRuta: number;
     urbanoRuta: number;
     despavimentadoRuta: number;
