@@ -22,4 +22,4 @@ const costoFijoSchema = new mongoose_1.Schema({
 }, {
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('users', costoFijoSchema);
+exports.default = (0, mongoose_1.model)('costosFijos', costoFijoSchema);
