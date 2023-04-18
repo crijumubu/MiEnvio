@@ -4,7 +4,7 @@ import 'package:frontend/views/flete_form/widgets/input.dart';
 import 'package:frontend/views/flete_form/widgets/select_input.dart';
 import 'package:frontend/views/register/widgets/header_back.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 List<String> confVehiculo = ["Camión dos ejes - Sencillo", "Tractocamión dos ejes - Patineta - Minimula con semiremolque de dos ejes", "Tractocamión dos ejes - Patineta - Minimula con semiremolque de tres ejes", "Camión tres ejes - Dobletroque", "Tractocamión tres ejes - Tractomula con semiremolque de dos ejes", "Tractocamión tres ejes - Tractomula con semiremolque de tres ejes"];
 List<String> tipoCarga = ["General","Contenedor","Carga Refrigerada","Granel Sólido",];
@@ -39,8 +39,8 @@ class FleteForm extends StatelessWidget {
 
 
     final now = DateTime.now();
-    final year = DateFormat.y().format(now); // Extract year
-    final month = now.month.toString().padLeft(2, '0');
+    // final year = DateFormat.y().format(now); // Extract year
+    // final month = now.month.toString().padLeft(2, '0');
 
     return Scaffold(
       appBar: headerBack(context),
@@ -63,9 +63,9 @@ class FleteForm extends StatelessWidget {
                           Text("Periodo:",
                             style: GoogleFonts.rubik(fontSize: 18),
                           ),
-                          Text("$year$month",
-                            style: GoogleFonts.rubik(fontSize: 18),
-                          ),
+                          // Text("$year$month",
+                          //   style: GoogleFonts.rubik(fontSize: 18),
+                          // ),
                         ],
                       ),
                       DatePicker(),

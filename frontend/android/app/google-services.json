@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "102646600268",
+    "project_id": "mienvio-1705f",
+    "storage_bucket": "mienvio-1705f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102646600268:android:0ed341b9d1bf83aeeb1ae9",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102646600268-aekdu1f7227ioeihvlgigc68964jb37d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAU_r4PzrUu9Q0Qqkabx8E3LEQ3ytuNZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102646600268-aekdu1f7227ioeihvlgigc68964jb37d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
