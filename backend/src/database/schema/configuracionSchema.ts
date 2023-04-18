@@ -2,20 +2,19 @@ import { Schema, model } from 'mongoose';
 import IConfiguracion from '../interface/IConfiguracion';
 
 const configuracionSchema = new Schema({
-  name: {
-    type: String,
+  idConfiguracion: {
+    type: Number,
     required: true
   },
-  email: {
-    type: String,
+  idVehiculoConfiguracion: {
+    type: Number,
     required: true,
-    unique: true
   },
-  password: {
-    type: String,
+  idCargaConfiguracion: {
+    type: Number,
     requied: true
   },
-  userType: {
+  idUnidadConfiguracion: {
     type: Number,
     required: true
   }
