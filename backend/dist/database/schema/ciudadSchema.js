@@ -8,7 +8,7 @@ const ciudadSchema = new mongoose_1.Schema({
     },
     nombreCiudad: {
         type: String,
-        required: true,
+        required: true
     }
 }, {
     versionKey: false

@@ -8,7 +8,7 @@ const costoFijoSchema = new mongoose_1.Schema({
     },
     idConfiguracionVehiculo: {
         type: Number,
-        required: true,
+        required: true
     },
     nombreItemFijo: {
         type: String,

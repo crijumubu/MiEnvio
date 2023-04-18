@@ -8,7 +8,7 @@ const peajeSchema = new mongoose_1.Schema({
     },
     nombrePeaje: {
         type: String,
-        required: true,
+        required: true
     },
     sector: {
         type: String,

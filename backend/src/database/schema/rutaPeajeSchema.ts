@@ -9,7 +9,6 @@ const rutaCiudadSchema = new Schema({
   idRuta: {
     type: String,
     required: true,
-    unique: true
   },
   idPeaje: {
     type: String,

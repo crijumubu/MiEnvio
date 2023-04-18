@@ -8,7 +8,7 @@ const costoVariableSchema = new mongoose_1.Schema({
     },
     idConfiguracionVehiculo: {
         type: Number,
-        required: true,
+        required: true
     },
     nombreItemVariable: {
         type: String,
@@ -24,7 +24,7 @@ const costoVariableSchema = new mongoose_1.Schema({
     },
     cambioItemVariable: {
         type: Number,
-        required: true,
+        required: true
     },
     costoItemVariable: {
         type: Number,

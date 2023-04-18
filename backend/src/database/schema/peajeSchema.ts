@@ -8,7 +8,7 @@ const peajeSchema = new Schema({
   },
   nombrePeaje: {
     type: String,
-    required: true,
+    required: true
   },
   sector: {
     type: String,

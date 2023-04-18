@@ -8,7 +8,7 @@ const ciudadSchema = new Schema({
     },
     nombreCiudad: {
         type: String,
-        required: true,
+        required: true
     }
 },
     {

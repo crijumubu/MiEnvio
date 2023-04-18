@@ -9,7 +9,6 @@ const rutaCiudadSchema = new mongoose_1.Schema({
     idRuta: {
         type: String,
         required: true,
-        unique: true
     },
     idPeaje: {
         type: String,

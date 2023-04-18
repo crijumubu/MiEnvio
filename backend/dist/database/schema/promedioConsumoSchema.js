@@ -8,8 +8,7 @@ const promedioConsumoSchema = new mongoose_1.Schema({
     },
     idVehiculoConsumo: {
         type: Number,
-        required: true,
-        unique: true
+        required: true
     },
     plano: {
         type: Number,

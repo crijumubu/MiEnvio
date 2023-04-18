@@ -8,8 +8,7 @@ const rutaSchema = new Schema({
   },
   idCiudadOrigen: {
     type: Number,
-    required: true,
-    unique: true
+    required: true
   },
   idCiudadDestino: {
     type: Number,

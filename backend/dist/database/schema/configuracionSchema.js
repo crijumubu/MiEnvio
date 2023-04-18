@@ -8,7 +8,7 @@ const configuracionSchema = new mongoose_1.Schema({
     },
     idVehiculoConfiguracion: {
         type: Number,
-        required: true,
+        required: true
     },
     idCargaConfiguracion: {
         type: Number,
