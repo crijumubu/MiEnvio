@@ -1,12 +1,12 @@
 import mongo from '../database/mongo';
 
-class costoFijoModel {
+class rutaPeajeModel {
     private mongo: mongo;
 
     constructor() {
-      this.mongo = new mongo(3);
+      this.mongo = new mongo(8);
       
     }
   
 }
-export default costoFijoModel;
+export default rutaPeajeModel;
