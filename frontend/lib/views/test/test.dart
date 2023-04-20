@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +16,14 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  final loc.Location location = loc.Location();
+  // final loc.Location location = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
 
   @override
   void initState() {
+    
     super.initState();
+    
     _requestPermission();
     location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
     location.enableBackgroundMode(enable: true);
@@ -94,8 +95,11 @@ class _TestState extends State<Test> {
   }
 
   _getLocation() async {
+    print("GetLocation");
     try {
+      print("try");
       final loc.LocationData locationResult = await location.getLocation();
+      print(locationResult.altitude);
       await FirebaseFirestore.instance.collection('location').doc('user1').set({
         'latitude': locationResult.latitude,
         'longitude': locationResult.longitude,

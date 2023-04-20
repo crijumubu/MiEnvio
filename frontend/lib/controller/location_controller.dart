@@ -1,18 +1,40 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:location/location.dart' as loc;
+import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class LocationController{
 
-  final loc.Location location;
-  StreamSubscription<loc.LocationData>? locationSubscription;
+  Location location = new Location();
+  StreamSubscription<LocationData>? locationSubscription;
 
   LocationController({required this.location,required this.locationSubscription});
 
+  
+
   getLocation() async {
     try {
-      final loc.LocationData locationResult = await location.getLocation();
+      bool _serviceEnabled;
+      PermissionStatus _permissionGranted;
+      LocationData _locationData;
+
+      _serviceEnabled = await location.serviceEnabled();
+      if (!_serviceEnabled) {
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled) {
+          return;
+        }
+      }
+
+      _permissionGranted = await location.hasPermission();
+      if (_permissionGranted == PermissionStatus.denied) {
+        _permissionGranted = await location.requestPermission();
+        if (_permissionGranted != PermissionStatus.granted) {
+          return;
+        }
+      }
+
+_locationData = await location.getLocation();
       await FirebaseFirestore.instance.collection('location').doc('user1').set({
         'latitude': locationResult.latitude,
         'longitude': locationResult.longitude,
