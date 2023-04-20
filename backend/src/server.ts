@@ -3,17 +3,21 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import usersRoute from './routes/usersRoute';
+import viajeRoute from './routes/viajeRoute';
+
 
 class Server {
 
   private backend: Application;
   private userRouter: usersRoute;
+  private viajeRoute: viajeRoute
 
   constructor(){
         
     dotenv.config();
     this.backend = express();
     this.userRouter = new usersRoute();
+    this.viajeRoute= new viajeRoute();
     this.config();
     this.route();
     this.start();
@@ -30,6 +34,7 @@ class Server {
   public route = () => {
 
     this.backend.use(`${process.env.USERSROUTE}`, this.userRouter.router);
+    this.backend.use(`${process.env.USERSROUTE}`, this.viajeRoute.router);
   }
 
   public start = () => {

@@ -30,6 +30,7 @@ const express_1 = __importStar(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const usersRoute_1 = __importDefault(require("./routes/usersRoute"));
+const viajeRoute_1 = __importDefault(require("./routes/viajeRoute"));
 class Server {
     constructor() {
         this.config = () => {
@@ -40,6 +41,7 @@ class Server {
         };
         this.route = () => {
             this.backend.use(`${process.env.USERSROUTE}`, this.userRouter.router);
+            this.backend.use(`${process.env.USERSROUTE}`, this.viajeRoute.router);
         };
         this.start = () => {
             this.backend.listen(process.env.PORT, () => {
@@ -49,6 +51,7 @@ class Server {
         dotenv_1.default.config();
         this.backend = (0, express_1.default)();
         this.userRouter = new usersRoute_1.default();
+        this.viajeRoute = new viajeRoute_1.default();
         this.config();
         this.route();
         this.start();
