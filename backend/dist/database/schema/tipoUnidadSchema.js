@@ -13,4 +13,4 @@ const tipoUnidad = new mongoose_1.Schema({
 }, {
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('tipoUnidad', tipoUnidad);
+exports.default = (0, mongoose_1.model)('unidades', tipoUnidad);

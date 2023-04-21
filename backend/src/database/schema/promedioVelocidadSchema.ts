@@ -34,4 +34,4 @@ const promedioVelocidadSchema = new Schema({
   {
     versionKey: false
   });
-export default model<IPromedioVelocidad>('velocidadPromedio', promedioVelocidadSchema);
+export default model<IPromedioVelocidad>('velocidades', promedioVelocidadSchema);

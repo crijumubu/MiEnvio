@@ -18,4 +18,4 @@ const rutaCiudadSchema = new Schema({
   {
     versionKey: false
   });
-export default model<IRutaPeaje>('rutaPeajes', rutaCiudadSchema);
+export default model<IRutaPeaje>('rutapeajes', rutaCiudadSchema);

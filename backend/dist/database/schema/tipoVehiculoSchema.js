@@ -25,4 +25,4 @@ const tipoVehiculoSchema = new mongoose_1.Schema({
 }, {
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('tipoVehiculo', tipoVehiculoSchema);
+exports.default = (0, mongoose_1.model)('vehiculos', tipoVehiculoSchema);

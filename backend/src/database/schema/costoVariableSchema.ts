@@ -38,4 +38,4 @@ const costoVariableSchema = new Schema({
   {
     versionKey: false
   });
-export default model<ICostoVariable>('costosVariables', costoVariableSchema);
+export default model<ICostoVariable>('costosvariables', costoVariableSchema);

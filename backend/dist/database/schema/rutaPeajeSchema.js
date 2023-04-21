@@ -17,4 +17,4 @@ const rutaCiudadSchema = new mongoose_1.Schema({
 }, {
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('rutaPeajes', rutaCiudadSchema);
+exports.default = (0, mongoose_1.model)('rutapeajes', rutaCiudadSchema);

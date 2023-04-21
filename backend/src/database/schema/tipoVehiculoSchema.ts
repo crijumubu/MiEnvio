@@ -26,4 +26,4 @@ const tipoVehiculoSchema = new Schema({
   {
     versionKey: false
   });
-export default model<ItipoVehiculo>('tipoVehiculo', tipoVehiculoSchema);
+export default model<ItipoVehiculo>('vehiculos', tipoVehiculoSchema);

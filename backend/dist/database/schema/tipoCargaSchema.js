@@ -13,4 +13,4 @@ const tipoCargaSchema = new mongoose_1.Schema({
 }, {
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('tipoCarga', tipoCargaSchema);
+exports.default = (0, mongoose_1.model)('cargas', tipoCargaSchema);

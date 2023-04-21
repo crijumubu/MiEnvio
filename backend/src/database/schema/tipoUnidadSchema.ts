@@ -14,4 +14,4 @@ const tipoUnidad = new Schema({
   {
     versionKey: false
   });
-export default model<ITipoUnidad>('tipoUnidad', tipoUnidad);
+export default model<ITipoUnidad>('unidades', tipoUnidad);

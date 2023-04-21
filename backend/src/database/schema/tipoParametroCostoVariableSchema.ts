@@ -14,4 +14,4 @@ const tipoParametroCostoVarible = new Schema({
   {
     versionKey: false
   });
-export default model<ITipoParametroCostoVariable>('tipoParametroCostoVariable', tipoParametroCostoVarible);
+export default model<ITipoParametroCostoVariable>('parametros', tipoParametroCostoVarible);

@@ -33,4 +33,4 @@ const promedioVelocidadSchema = new mongoose_1.Schema({
 }, {
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('velocidadPromedio', promedioVelocidadSchema);
+exports.default = (0, mongoose_1.model)('velocidades', promedioVelocidadSchema);

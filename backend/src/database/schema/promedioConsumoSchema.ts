@@ -34,4 +34,4 @@ const promedioConsumoSchema = new Schema({
   {
     versionKey: false
   });
-export default model<IPromedioConsumo>('promedioConsumo', promedioConsumoSchema);
+export default model<IPromedioConsumo>('consumos', promedioConsumoSchema);

@@ -33,4 +33,4 @@ const promedioConsumoSchema = new mongoose_1.Schema({
 }, {
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('promedioConsumo', promedioConsumoSchema);
+exports.default = (0, mongoose_1.model)('consumos', promedioConsumoSchema);

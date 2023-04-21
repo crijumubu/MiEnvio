@@ -14,4 +14,4 @@ const tipoCargaSchema = new Schema({
   {
     versionKey: false
   });
-export default model<ITipoCarga>('tipoCarga', tipoCargaSchema);
+export default model<ITipoCarga>('cargas', tipoCargaSchema);

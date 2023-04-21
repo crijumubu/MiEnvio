@@ -22,4 +22,4 @@ const costoFijoSchema = new Schema({
   {
     versionKey: false
   });
-export default model<ICostoFijo>('costosFijos', costoFijoSchema);
+export default model<ICostoFijo>('costosfijos', costoFijoSchema);

@@ -13,4 +13,4 @@ const tipoParametroCostoVarible = new mongoose_1.Schema({
 }, {
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('tipoParametroCostoVariable', tipoParametroCostoVarible);
+exports.default = (0, mongoose_1.model)('parametros', tipoParametroCostoVarible);

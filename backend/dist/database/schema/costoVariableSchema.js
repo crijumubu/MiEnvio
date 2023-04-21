@@ -37,4 +37,4 @@ const costoVariableSchema = new mongoose_1.Schema({
 }, {
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('costosVariables', costoVariableSchema);
+exports.default = (0, mongoose_1.model)('costosvariables', costoVariableSchema);
