@@ -7,12 +7,12 @@ class tipoParametroCostoVariableModel {
       this.mongo = new mongo(11);
       
     }
-    public obtenerParametros= async (fn:Function)=>{
+    public obtenerParametros= async (fn:any)=>{
       this.mongo.connect();
       const rows=await this.mongo.model.find();
       fn(rows);
   }
-  public idParametros= async (id:number, fn:Function)=>{
+  public idParametros= async (id:number, fn:any)=>{
       this.mongo.connect();
       const rows=await this.mongo.model.find({idParametro:id});
       fn(rows);

@@ -7,12 +7,12 @@ class configuracionModel {
       this.mongo = new mongo(2);
       
     }
-  public obtenerConfiguraciones= async (fn:Function)=>{
+  public obtenerConfiguraciones= async (fn:any)=>{
       this.mongo.connect();
       const rows=await this.mongo.model.find();
       fn(rows);
   }
-  public idConfVehiculo= async (id:number, fn:Function)=>{
+  public idConfVehiculo= async (id:number, fn:any)=>{
       this.mongo.connect();
       const rows=await this.mongo.model.find({idVehiculoConfiguracion:id});
       fn(rows);
