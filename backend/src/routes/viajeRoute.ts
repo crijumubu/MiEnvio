@@ -1,22 +1,24 @@
 import { Router } from 'express';
-import ciudadModel from '../model/ciudadModel';
+import ciudadModel from '../model/tipoVehiculoModel';
+import viajesController from '../controller/viajesController';
+
 
 
 class viajeRoute{
 
   public router: Router;
-  public controller: ciudadModel;
+  public controller: viajesController;
 
   constructor(){
 
     this.router = Router();
-    this.controller = new ciudadModel();
+    this.controller = new viajesController();
     this.config();
   }
 
   public config(){
 
-   // this.router.get('/ciudades', this.controller.idCiudad);
+   this.router.get('/dataInicial', this.controller.dataInicio);
     
   }
 }
