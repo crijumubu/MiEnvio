@@ -4,22 +4,22 @@ import viajesController from '../controller/viajesController';
 
 
 
-class viajeRoute{
+class viajeRoute {
 
   public router: Router;
   public controller: viajesController;
 
-  constructor(){
+  constructor() {
 
     this.router = Router();
     this.controller = new viajesController();
     this.config();
   }
 
-  public config(){
+  public config() {
 
-   this.router.get('/dataInicial', this.controller.dataInicio);
-    
+    this.router.get('/dataInicial', this.controller.dataInicio);
+
   }
 }
 

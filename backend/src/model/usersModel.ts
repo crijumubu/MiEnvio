@@ -7,11 +7,11 @@ class usersModel {
 
   constructor() {
     this.mongo = new mongo(0);
-    
+
   }
 
   public login = async (email: string, password: string, fn: (status: number, type: number) => void) => {
-    
+
 
     this.mongo.connect();
 

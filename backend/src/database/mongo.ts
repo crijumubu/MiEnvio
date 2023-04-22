@@ -13,15 +13,14 @@ import tipoCargaSchema from './schema/tipoCargaSchema';
 import tipoParametroCostoVariableSchema from './schema/tipoParametroCostoVariableSchema';
 import tipoUnidadSchema from './schema/tipoUnidadSchema';
 import tipoVehiculoSchema from './schema/tipoVehiculoSchema';
-class mongo{
+class mongo {
 
   private uri: string;
   public model: any;
-  public schemasList: any[] =[userSchema,ciudadSchema,configuracionSchema,costoFijoSchema,costoVariableSchema,peajeSchema,promedioConsumoSchema,promedioVelocidadSchema,rutaPeajeSchema,rutaSchema,tipoCargaSchema,tipoParametroCostoVariableSchema,tipoUnidadSchema,tipoVehiculoSchema];
+  public schemasList: any[] = [userSchema, ciudadSchema, configuracionSchema, costoFijoSchema, costoVariableSchema, peajeSchema, promedioConsumoSchema, promedioVelocidadSchema, rutaPeajeSchema, rutaSchema, tipoCargaSchema, tipoParametroCostoVariableSchema, tipoUnidadSchema, tipoVehiculoSchema];
 
-  constructor(indexSchema:number){
-    
-    
+  constructor(indexSchema: number) {
+
     this.uri = `${process.env.MONGODB}`;
     this.model = this.schemasList[indexSchema];
   }
