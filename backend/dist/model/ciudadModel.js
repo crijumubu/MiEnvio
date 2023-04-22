@@ -18,6 +18,7 @@ class ciudadModel {
         this.obtenerCiudades = (fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
             const rows = yield this.mongo.model.find();
+            //console.log(rows);
             fn(rows);
         });
         this.idCiudad = (id, fn) => __awaiter(this, void 0, void 0, function* () {

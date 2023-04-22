@@ -10,6 +10,7 @@ class ciudadModel {
     public obtenerCiudades= async (fn:Function)=>{
         this.mongo.connect();
         const rows=await this.mongo.model.find();
+        //console.log(rows);
         fn(rows);
     }
     public idCiudad= async (id:number, fn:Function)=>{
