@@ -7,6 +7,16 @@ class promedioConsumoModel {
       this.mongo = new mongo(6);
       
     }
+    public obtenerConsumos= async (fn:Function)=>{
+      this.mongo.connect();
+      const rows=await this.mongo.model.find();
+      fn(rows);
+  }
+  public idConsumo= async (id:number, fn:Function)=>{
+      this.mongo.connect();
+      const rows=await this.mongo.model.find({idConsumo:id});
+      fn(rows);
+  }
   
 }
 export default promedioConsumoModel;
