@@ -27,7 +27,7 @@ class viajesController {
         this.vehiculo = new tipoVehiculoModel();
     }
     public dataInicio = async (req: Request, res: Response) => {
-        var data: String = '{';
+        let data: string = '{';
         await this.ciudad.obtenerCiudades((row: any) => {
             if (row) {
                 data = data + '"ciudades":' + JSON.stringify(row) + ',';
@@ -95,13 +95,5 @@ class viajesController {
             }
         });
     }
-
-
-
-
-
-
-
 }
-
 export default viajesController;

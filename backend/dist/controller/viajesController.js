@@ -23,7 +23,7 @@ const tipoVehiculoModel_1 = __importDefault(require("../model/tipoVehiculoModel"
 class viajesController {
     constructor() {
         this.dataInicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            var data = '{';
+            let data = '{';
             yield this.ciudad.obtenerCiudades((row) => {
                 if (row) {
                     data = data + '"ciudades":' + JSON.stringify(row) + ',';
