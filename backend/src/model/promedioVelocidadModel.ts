@@ -7,12 +7,12 @@ class promedioVelocidadModel {
       this.mongo = new mongo(7);
       
     }
-    public obtenerVelocidades= async (fn:Function)=>{
+    public obtenerVelocidades= async (fn:any)=>{
       this.mongo.connect();
       const rows=await this.mongo.model.find();
       fn(rows);
   }
-  public idVelocidad= async (id:number, fn:Function)=>{
+  public idVelocidad= async (id:number, fn:any)=>{
       this.mongo.connect();
       const rows=await this.mongo.model.find({idVelocidad:id});
       fn(rows);
