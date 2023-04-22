@@ -27,7 +27,8 @@ class viajesController {
         this.vehiculo = new tipoVehiculoModel();
     }
     public dataInicio = async (req: Request, res: Response) => {
-        let data: string='' ;
+        let data: string;
+        data='';
         await this.ciudad.obtenerCiudades((row: any) => {
             if (row) {
                 data = data + '{"ciudades":' + JSON.stringify(row) + ',';
