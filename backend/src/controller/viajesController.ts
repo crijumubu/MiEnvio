@@ -27,10 +27,10 @@ class viajesController {
         this.vehiculo = new tipoVehiculoModel();
     }
     public dataInicio = async (req: Request, res: Response) => {
-        let data: string = '{';
+        let data: string='' ;
         await this.ciudad.obtenerCiudades((row: any) => {
             if (row) {
-                data = data + '"ciudades":' + JSON.stringify(row) + ',';
+                data = data + '{"ciudades":' + JSON.stringify(row) + ',';
             }
             else {
                 return res.status(404).json({ error: false, message: 'User not found' });
