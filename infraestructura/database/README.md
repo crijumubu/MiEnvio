@@ -51,3 +51,7 @@ db.createUser({ user: "admin", pwd: ${ADMIN_PASSWORD}, roles: [ { role: "root", 
 
 `use mienvio
 db.createUser({ user: "backend", pwd: ${BACKEND_PASSWORD}, roles: [ { role: "readWrite", db: "mienvio" } ] } )`
+
+&nbsp;
+
+##### NOTA: Si se desea ver el estado actual de swarm se puede dirigir al siguiente enlace, http://20.163.24.28:8080/
