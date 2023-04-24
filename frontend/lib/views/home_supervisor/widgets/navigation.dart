@@ -12,8 +12,7 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int index = 0;
-
-
+  
   @override
   Widget build(BuildContext context) {
     return DotNavigationBar(
@@ -29,60 +28,22 @@ class _NavigationState extends State<Navigation> {
           color: Color.fromARGB(255, 216, 216, 216),
           spreadRadius: 2,
           blurRadius: 10
-
-
         )
       ],
       unselectedItemColor: Color(0xffA3B18A),
       selectedItemColor: Color(0xff3A5A40 ),
       items: [
         DotNavigationBarItem(
-          icon: const Icon(Icons.person_outlined),
-          // unselectedColor: 
-          // label: "Usuario"
+          icon: const Icon(Icons.home),
         ),
         DotNavigationBarItem(
-          icon: const Icon(Icons.shopping_cart_outlined),
-          // label: "Productos"
+          icon: const Icon(Icons.local_shipping),
         ),
         DotNavigationBarItem(
-          icon: const Icon(Icons.star_border),
-          // label: "Favoritos"
+          icon: const Icon(Icons.settings),
         ),
       ]
     );
-    // return BottomNavigationBar(
-    //   // backgroundColor: const Color(0xff2F463B),
-    //   unselectedItemColor: const Color(0x66344E41),
-    //   selectedItemColor: const Color(0xff344E41),
-    //   iconSize: 25.0,
-    //   selectedFontSize: 14.0,
-    //   unselectedFontSize: 12.0,
-
-    //   currentIndex: index,
-    //   onTap: (int i){
-    //     setState(() {
-    //       index = i;
-    //       widget.currentIndex(i);
-    //     });
-    //   },
-    //   type: BottomNavigationBarType.fixed,
-    //   items: const [
-    //     BottomNavigationBarItem(
-    //       icon: Icon(Icons.person_outlined),
-    //       label: "Usuario"
-    //     ),
-    //     BottomNavigationBarItem(
-    //       icon: Icon(Icons.shopping_cart_outlined),
-    //       label: "Productos"
-    //     ),
-    //     BottomNavigationBarItem(
-    //       icon: Icon(Icons.star_border),
-    //       label: "Favoritos"
-    //     ),
-        
-    //   ]
-    // );
   }
 }
 
