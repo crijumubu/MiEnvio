@@ -151,7 +151,12 @@ class _RegisterState extends State<Register> {
                                 
                                 _key.currentState!.save();
                                 // print("valido");
-                                // _authController.register(context, _userController.text, _passwordController.text);
+                                int typeUser = 0;
+
+                                if(_typeUser == "conductor") typeUser = 2; 
+                                if(_typeUser == "supervisor") typeUser = 1; 
+
+                                _authController.register(context, _userController.text, _passwordController.text, _emailController.text, typeUser);
                                 return(false);
                               }
                             }

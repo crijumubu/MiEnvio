@@ -31,17 +31,17 @@ class _LoginState extends State<Login> {
         child: Bottom(),
       ) ,
       body: 
-        Center(
-        child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
+        Container(
+          // color: Colors.red,
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 150),
         child: Form(
           key: _key,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Iniciar Sesion", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
               const SizedBox(height: 40,),
-              TextInput(fieldController: _userController, placeholder: "Usuario",  inputType: 'text'),
+              TextInput(fieldController: _userController, placeholder: "Email",  inputType: 'email'),
               const SizedBox(height: 20,),
               TextInput(fieldController: _passwordController, placeholder:  "Contraseña", inputType: 'password',),
               const SizedBox(height: 20,),
@@ -49,15 +49,14 @@ class _LoginState extends State<Login> {
                 callback: (){
                   if(_key.currentState!.validate()){
                     _key.currentState!.save();
-                    // _authController.login(context, _userController.text, _passwordController.text);
-                    return(true);
+                    _authController.login(context, _userController.text, _passwordController.text);
+                    // return(true);
                   }
                 }
-              )
+              ),
             ],
           ),
         )),
-      ),
     );
   }
 }

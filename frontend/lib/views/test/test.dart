@@ -16,7 +16,7 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  // final loc.Location location = loc.Location();
+  final loc.Location location = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
 
   @override
@@ -99,7 +99,7 @@ class _TestState extends State<Test> {
     try {
       print("try");
       final loc.LocationData locationResult = await location.getLocation();
-      print(locationResult.altitude);
+      print(locationResult.latitude);
       await FirebaseFirestore.instance.collection('location').doc('user1').set({
         'latitude': locationResult.latitude,
         'longitude': locationResult.longitude,
