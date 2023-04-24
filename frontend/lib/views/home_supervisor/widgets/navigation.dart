@@ -33,10 +33,12 @@ class _NavigationState extends State<Navigation> {
 
         )
       ],
-      unselectedItemColor: Colors.grey[400],
+      unselectedItemColor: Color(0xffA3B18A),
+      selectedItemColor: Color(0xff3A5A40 ),
       items: [
         DotNavigationBarItem(
           icon: const Icon(Icons.person_outlined),
+          // unselectedColor: 
           // label: "Usuario"
         ),
         DotNavigationBarItem(
