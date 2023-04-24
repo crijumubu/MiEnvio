@@ -62,22 +62,38 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
           Header(),
           Padding(padding: EdgeInsets.only(bottom: 20)),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 10),
             width: double.infinity,
-            child: Text("Envios Activos", style: GoogleFonts.rubik(fontSize: 32),)
+            child: Text("Envios Activos", style: GoogleFonts.rubik(fontSize: 30, fontWeight: FontWeight.bold),)
           ),
+          Divider(thickness: 1,),
           Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.green, width: 3)
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            height: 362,
+            // decoration: BoxDecoration(
+            //   border: Border.all(color: Color(0xff344E41), width: 3, ),
+            //   borderRadius: BorderRadius.all(Radius.circular(10)),
+            //   color: Colors.grey[100]
+            // ),
+            padding: EdgeInsets.symmetric(horizontal: 10, ),
+            height: 350,
             child: Expanded(
               child: SingleChildScrollView(
                 // slivers: [...enviosCard],
                 child: Column(children: [...enviosCard],),
               ),
             ),
+          ),
+          Divider(thickness: 1,),
+          ElevatedButton(
+            onPressed: (){}, 
+            child: Text("Asignar Conductor"),
+          ),
+          ElevatedButton(
+            onPressed: (){}, 
+            child: Text("Actualizar envio"),
+          ),
+          ElevatedButton(
+            onPressed: (){}, 
+            child: Text("Registrar nuevo envio"),
           )
         ],
       ),
