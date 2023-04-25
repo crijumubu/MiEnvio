@@ -23,6 +23,8 @@ const tipoVehiculoModel_1 = __importDefault(require("../model/tipoVehiculoModel"
 const peajeModel_1 = __importDefault(require("../model/peajeModel"));
 const costoFijoModel_1 = __importDefault(require("../model/costoFijoModel"));
 const costoVariableModel_1 = __importDefault(require("../model/costoVariableModel"));
+const rutaModel_1 = __importDefault(require("../model/rutaModel"));
+const rutapeajeModel_1 = __importDefault(require("../model/rutapeajeModel"));
 class viajesController {
     constructor() {
         this.dataInicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -126,6 +128,28 @@ class viajesController {
                 }
             });
         };
+        this.getRutaOriDet = (req, res) => {
+            this.ruta.obtenerRutas(Number(req.params.idOrigen), Number(req.params.idDestino), (row) => {
+                if (row) {
+                    res.json(row);
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not found' });
+                }
+            });
+        };
+        this.getRutaPeajeId = (req, res) => {
+            this.rutaPeaje.obtenerRutaPeaje(Number(req.params.id), (row) => {
+                if (row) {
+                    res.json(row);
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not found' });
+                }
+            });
+        };
+        this.rutaPeaje = new rutapeajeModel_1.default();
+        this.ruta = new rutaModel_1.default();
         this.costoVariable = new costoVariableModel_1.default();
         this.costoFijo = new costoFijoModel_1.default();
         this.peaje = new peajeModel_1.default();

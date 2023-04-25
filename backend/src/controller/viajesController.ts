@@ -10,10 +10,14 @@ import tipoVehiculoModel from '../model/tipoVehiculoModel';
 import peajeModel from '../model/peajeModel';
 import costoFijoModel from '../model/costoFijoModel';
 import costoVariableModel from '../model/costoVariableModel';
+import rutaModel from '../model/rutaModel';
+import rutaPeajeModel from '../model/rutapeajeModel';
+
 
 
 
 class viajesController {
+    private ruta: rutaModel;
     private ciudad: ciudadModel;
     private configuracion: configuracionModel;
     private consumo: promedioConsumoModel;
@@ -25,7 +29,11 @@ class viajesController {
     private peaje :peajeModel;
     private costoFijo :costoFijoModel;
     private costoVariable: costoVariableModel;
+    private rutaPeaje: rutaPeajeModel;
+    
     constructor() {
+        this.rutaPeaje= new rutaPeajeModel();
+        this.ruta= new rutaModel();
         this.costoVariable = new costoVariableModel();
         this.costoFijo = new costoFijoModel();
         this.peaje = new peajeModel();
@@ -134,6 +142,30 @@ class viajesController {
     }
     public getVariablesId = (req: Request, res: Response)=>{
         this.costoVariable.obtenerCostosVariables(Number(req.params.id),( row:any)=>{
+            if(row){
+            
+            res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+
+        });
+    }
+    public getRutaOriDet = (req: Request, res: Response)=>{
+        this.ruta.obtenerRutas(Number(req.params.idOrigen),Number(req.params.idDestino),( row:any)=>{
+            if(row){
+            
+            res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+
+        });
+    }
+    public getRutaPeajeId = (req: Request, res: Response)=>{
+        this.rutaPeaje.obtenerRutaPeaje(Number(req.params.id),( row:any)=>{
             if(row){
             
             res.json(row);

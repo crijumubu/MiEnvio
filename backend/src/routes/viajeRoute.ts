@@ -14,6 +14,8 @@ class viajeRoute {
     this.router.get('/peaje/:id', this.controller.getPeajeId);
     this.router.get('/costoFijo/:id', this.controller.getFijosId);
     this.router.get('/costoVariable/:id', this.controller.getVariablesId);
+    this.router.get('/ruta/:idOrigen/:idDestino', this.controller.getRutaOriDet);
+    this.router.get('/rutaPeaje/:id', this.controller.getRutaPeajeId);
   }
 }
 export default viajeRoute;
