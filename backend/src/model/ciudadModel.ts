@@ -1,11 +1,8 @@
 import mongo from '../database/mongo';
-
 class ciudadModel {
     private mongo: mongo;
-
     constructor() {
       this.mongo = new mongo(1);
-      
     }
     public obtenerCiudades= async (fn:any)=>{
         this.mongo.connect();
@@ -18,6 +15,5 @@ class ciudadModel {
         const rows=await this.mongo.model.find({idCiudad:id});
         fn(rows);
     }
-  
 }
 export default ciudadModel;

@@ -1,11 +1,8 @@
 import mongo from '../database/mongo';
-
 class tipoUnidadModel {
     private mongo: mongo;
-
     constructor() {
       this.mongo = new mongo(12);
-      
     }
     public obtenerUnidades= async (fn:any)=>{
       this.mongo.connect();
@@ -17,6 +14,5 @@ class tipoUnidadModel {
       const rows=await this.mongo.model.find({idTipoUnidad:id});
       fn(rows);
   }
-  
 }
 export default tipoUnidadModel;

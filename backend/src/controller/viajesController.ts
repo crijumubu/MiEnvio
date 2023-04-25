@@ -12,10 +12,6 @@ import costoFijoModel from '../model/costoFijoModel';
 import costoVariableModel from '../model/costoVariableModel';
 import rutaModel from '../model/rutaModel';
 import rutaPeajeModel from '../model/rutapeajeModel';
-
-
-
-
 class viajesController {
     private ruta: rutaModel;
     private ciudad: ciudadModel;
@@ -26,14 +22,13 @@ class viajesController {
     private parametro: tipoParametroCostoVariableModel;
     private unidad: tipoUnidadModel;
     private vehiculo: tipoVehiculoModel;
-    private peaje :peajeModel;
-    private costoFijo :costoFijoModel;
+    private peaje: peajeModel;
+    private costoFijo: costoFijoModel;
     private costoVariable: costoVariableModel;
     private rutaPeaje: rutaPeajeModel;
-    
     constructor() {
-        this.rutaPeaje= new rutaPeajeModel();
-        this.ruta= new rutaModel();
+        this.rutaPeaje = new rutaPeajeModel();
+        this.ruta = new rutaModel();
         this.costoVariable = new costoVariableModel();
         this.costoFijo = new costoFijoModel();
         this.peaje = new peajeModel();
@@ -48,7 +43,7 @@ class viajesController {
     }
     public dataInicio = async (req: Request, res: Response) => {
         let data: string;
-        data='';
+        data = '';
         await this.ciudad.obtenerCiudades((row: any) => {
             if (row) {
                 data = data + '{"ciudades":' + JSON.stringify(row) + ',';
@@ -116,64 +111,55 @@ class viajesController {
             }
         });
     }
-    public getPeajeId = (req: Request, res: Response)=>{
-        this.peaje.optenerPeaje(Number(req.params.id),( row:any)=>{
+    public getPeajeId = (req: Request, res: Response) => {
+        this.peaje.optenerPeaje(Number(req.params.id), (row: any) => {
             console.log(row);
-            if(row){
-                
+            if (row) {
                 res.json(row);
             }
             else {
                 return res.status(404).json({ error: true, message: 'User not found' });
             }
-
         });
     }
-    public getFijosId = (req: Request, res: Response)=>{
-        this.costoFijo.obtenerCostosFijos(Number(req.params.id),( row:any)=>{
-            if(row){
-            res.json(row);
+    public getFijosId = (req: Request, res: Response) => {
+        this.costoFijo.obtenerCostosFijos(Number(req.params.id), (row: any) => {
+            if (row) {
+                res.json(row);
             }
             else {
                 return res.status(404).json({ error: true, message: 'User not found' });
             }
-
         });
     }
-    public getVariablesId = (req: Request, res: Response)=>{
-        this.costoVariable.obtenerCostosVariables(Number(req.params.id),( row:any)=>{
-            if(row){
-            
-            res.json(row);
+    public getVariablesId = (req: Request, res: Response) => {
+        this.costoVariable.obtenerCostosVariables(Number(req.params.id), (row: any) => {
+            if (row) {
+                res.json(row);
             }
             else {
                 return res.status(404).json({ error: true, message: 'User not found' });
             }
-
         });
     }
-    public getRutaOriDet = (req: Request, res: Response)=>{
-        this.ruta.obtenerRutas(Number(req.params.idOrigen),Number(req.params.idDestino),( row:any)=>{
-            if(row){
-            
-            res.json(row);
+    public getRutaOriDet = (req: Request, res: Response) => {
+        this.ruta.obtenerRutas(Number(req.params.idOrigen), Number(req.params.idDestino), (row: any) => {
+            if (row) {
+                res.json(row);
             }
             else {
                 return res.status(404).json({ error: true, message: 'User not found' });
             }
-
         });
     }
-    public getRutaPeajeId = (req: Request, res: Response)=>{
-        this.rutaPeaje.obtenerRutaPeaje(Number(req.params.id),( row:any)=>{
-            if(row){
-            
-            res.json(row);
+    public getRutaPeajeId = (req: Request, res: Response) => {
+        this.rutaPeaje.obtenerRutaPeaje(Number(req.params.id), (row: any) => {
+            if (row) {
+                res.json(row);
             }
             else {
                 return res.status(404).json({ error: true, message: 'User not found' });
             }
-
         });
     }
 }
