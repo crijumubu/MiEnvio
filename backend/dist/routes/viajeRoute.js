@@ -13,6 +13,9 @@ class viajeRoute {
     }
     config() {
         this.router.get('/dataInicial', this.controller.dataInicio);
+        this.router.get('/peaje/:id', this.controller.getPeajeId);
+        this.router.get('/costoFijo/:id', this.controller.getFijosId);
+        this.router.get('/costoVariable/:id', this.controller.getVariablesId);
     }
 }
 exports.default = viajeRoute;

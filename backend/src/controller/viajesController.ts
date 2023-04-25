@@ -7,6 +7,12 @@ import tipoCargaModel from '../model/tipoCargaModel';
 import tipoParametroCostoVariableModel from '../model/tipoParametroCostoVariable';
 import tipoUnidadModel from '../model/tipoUnidadModel';
 import tipoVehiculoModel from '../model/tipoVehiculoModel';
+import peajeModel from '../model/peajeModel';
+import costoFijoModel from '../model/costoFijoModel';
+import costoVariableModel from '../model/costoVariableModel';
+
+
+
 class viajesController {
     private ciudad: ciudadModel;
     private configuracion: configuracionModel;
@@ -16,7 +22,13 @@ class viajesController {
     private parametro: tipoParametroCostoVariableModel;
     private unidad: tipoUnidadModel;
     private vehiculo: tipoVehiculoModel;
+    private peaje :peajeModel;
+    private costoFijo :costoFijoModel;
+    private costoVariable: costoVariableModel;
     constructor() {
+        this.costoVariable = new costoVariableModel();
+        this.costoFijo = new costoFijoModel();
+        this.peaje = new peajeModel();
         this.ciudad = new ciudadModel();
         this.configuracion = new configuracionModel();
         this.consumo = new promedioConsumoModel();
@@ -34,7 +46,7 @@ class viajesController {
                 data = data + '{"ciudades":' + JSON.stringify(row) + ',';
             }
             else {
-                return res.status(404).json({ error: false, message: 'User not found' });
+                return res.status(404).json({ error: true, message: 'User not found' });
             }
         });
         await this.vehiculo.obtenerVehiculos((row: any) => {
@@ -42,7 +54,7 @@ class viajesController {
                 data = data + '"vehiculos":' + JSON.stringify(row) + ',';
             }
             else {
-                return res.status(404).json({ error: false, message: 'User not found' });
+                return res.status(404).json({ error: true, message: 'User not found' });
             }
         });
         await this.carga.obtenerCargas((row: any) => {
@@ -50,7 +62,7 @@ class viajesController {
                 data = data + '"cargas":' + JSON.stringify(row) + ',';
             }
             else {
-                return res.status(404).json({ error: false, message: 'User not found' });
+                return res.status(404).json({ error: true, message: 'User not found' });
             }
         });
         await this.unidad.obtenerUnidades((row: any) => {
@@ -58,7 +70,7 @@ class viajesController {
                 data = data + '"unidades":' + JSON.stringify(row) + ',';
             }
             else {
-                return res.status(404).json({ error: false, message: 'User not found' });
+                return res.status(404).json({ error: true, message: 'User not found' });
             }
         });
         await this.configuracion.obtenerConfiguraciones((row: any) => {
@@ -66,7 +78,7 @@ class viajesController {
                 data = data + '"configuraciones":' + JSON.stringify(row) + ',';
             }
             else {
-                return res.status(404).json({ error: false, message: 'User not found' });
+                return res.status(404).json({ error: true, message: 'User not found' });
             }
         });
         await this.velocidad.obtenerVelocidades((row: any) => {
@@ -74,7 +86,7 @@ class viajesController {
                 data = data + '"velocidades":' + JSON.stringify(row) + ',';
             }
             else {
-                return res.status(404).json({ error: false, message: 'User not found' });
+                return res.status(404).json({ error: true, message: 'User not found' });
             }
         });
         await this.consumo.obtenerConsumos((row: any) => {
@@ -82,7 +94,7 @@ class viajesController {
                 data = data + '"consumos":' + JSON.stringify(row) + ',';
             }
             else {
-                return res.status(404).json({ error: false, message: 'User not found' });
+                return res.status(404).json({ error: true, message: 'User not found' });
             }
         });
         await this.parametro.obtenerParametros((row: any) => {
@@ -92,8 +104,44 @@ class viajesController {
                 //console.log(data);
             }
             else {
-                return res.status(404).json({ error: false, message: 'User not found' });
+                return res.status(404).json({ error: true, message: 'User not found' });
             }
+        });
+    }
+    public getPeajeId = (req: Request, res: Response)=>{
+        this.peaje.optenerPeaje(Number(req.params.id),( row:any)=>{
+            console.log(row);
+            if(row){
+                
+                res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+
+        });
+    }
+    public getFijosId = (req: Request, res: Response)=>{
+        this.costoFijo.obtenerCostosFijos(Number(req.params.id),( row:any)=>{
+            if(row){
+            res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+
+        });
+    }
+    public getVariablesId = (req: Request, res: Response)=>{
+        this.costoVariable.obtenerCostosVariables(Number(req.params.id),( row:any)=>{
+            if(row){
+            
+            res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+
         });
     }
 }
