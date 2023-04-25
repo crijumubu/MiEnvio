@@ -7,6 +7,11 @@ class peajeModel {
       this.mongo = new mongo(5);
       
     }
+    public optenerPeaje= async (id:number, fn:any)=>{
+      this.mongo.connect();
+      const rows=await this.mongo.model.find({idPeaje:id});
+      fn(rows);
+  }
   
 }
 export default peajeModel;
