@@ -15,70 +15,109 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
   int index = 0;
   Navigation ?navigation;
   late double height = 0;
-  double? _scrolledUnderElevation;
+  final ScrollController _scrollController = ScrollController();
+  bool scrolled = true;
+  // double? _scrolledUnderElevation;
 
   @override
   void initState() {
 
-    navigation = Navigation(currentIndex: (i){
-      setState(() {
-        index = i;
-      });
-    });
+    _scrollController.addListener(listenScroll);
+    navigation = Navigation(
+      currentIndex: (i){
+        // print(_scrollController.position.pixels);
+        if(!(_scrollController.position.pixels <= 0)){
+          _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+
+          Future.delayed(Duration(milliseconds: 500), (){
+              setState(() {
+                index = i;
+              });
+            }
+          );
+        }else{
+          setState(() {
+              index = i;
+          });
+        }
+      }
+    );
     super.initState();
     
+  }
+
+  void listenScroll() {
+    final bool isTop = _scrollController.position.pixels <= 0;
+    // print(_scrollController.position.pixels);
+    setState(() {
+      scrolled = isTop;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     if(height == 0) height = MediaQuery.of(context).size.height;
-    print(index);    
+    // print(index);    
 
     return Scaffold(
       bottomNavigationBar: navigation,
+      extendBody: true,
       backgroundColor: Colors.grey[100],      
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: (scrolled ? Colors.white : Colors.black),
         leading: SizedBox(width: 0, height: 0,),
         
-        flexibleSpace: Container(
+        flexibleSpace: AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          decoration: BoxDecoration(
+            color: (scrolled ? Colors.white : Color(0xff3344E41))
+            
+          ),
+          // foregroundDecoration: BoxDecoration(
+          //   color: Colors.red
+          // ),
           width: double.infinity,
           child: Padding(
-            padding: const EdgeInsets.only(top: 18,),
-            child: SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment:  Alignment.center,
-                      child: Image.asset(
-                        "assets/images/logo200.png",
-                        scale: 2,
-                        color: Color.fromARGB(190, 0, 0, 0),
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment:  Alignment.bottomCenter,
+                    child: Image.asset(
+                      "assets/images/logobl.png",
+                      scale: 2.3,
+                      color: (scrolled ? Color.fromARGB(190, 0, 0, 0) : Colors.white),
+                    ),
+                  ),
+            
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Image.asset("assets/images/logout.png", scale: 18, color: (scrolled ? Color.fromARGB(190, 0, 0, 0) : Colors.white),),
                       ),
                     ),
-              
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Image.asset("assets/images/logout.png", scale: 17, color: Color.fromARGB(190, 0, 0, 0),),
-                    )
-                          
-                  ],
-                ),
+                  )
+                        
+                ],
               ),
             ),
           ),
         ),
         // title: 
-        scrolledUnderElevation: _scrolledUnderElevation,
+        // scrolledUnderElevation: _scrolledUnderElevation,
         shadowColor: Colors.transparent,
       ),    
       body: SafeArea(
-        child: Center(
-        // padding: const EdgeInsets.all(1),
+        bottom: false,
         child: ListView(
+          controller: _scrollController,
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Header(),
@@ -89,7 +128,6 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
             else if(index == 2)
               NavigatorSettings()
           ],
-        ),
         ),
       )
     );

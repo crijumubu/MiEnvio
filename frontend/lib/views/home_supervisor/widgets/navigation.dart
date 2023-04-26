@@ -25,12 +25,12 @@ class _NavigationState extends State<Navigation> {
       },
       boxShadow: const [
         BoxShadow(
-          color: Color.fromARGB(255, 216, 216, 216),
-          spreadRadius: 2,
-          blurRadius: 10
+          color: Color.fromARGB(255, 147, 147, 147),
+          // spreadRadius: 2,
+          blurRadius: 5
         )
       ],
-      unselectedItemColor: Color(0xffA3B18A),
+      unselectedItemColor: Color.fromARGB(255, 177, 184, 166),
       selectedItemColor: Color(0xff3A5A40 ),
       items: [
         DotNavigationBarItem(
