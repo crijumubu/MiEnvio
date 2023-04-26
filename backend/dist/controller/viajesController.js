@@ -25,6 +25,9 @@ const costoFijoModel_1 = __importDefault(require("../model/costoFijoModel"));
 const costoVariableModel_1 = __importDefault(require("../model/costoVariableModel"));
 const rutaModel_1 = __importDefault(require("../model/rutaModel"));
 const rutapeajeModel_1 = __importDefault(require("../model/rutapeajeModel"));
+const fleteModel_1 = __importDefault(require("../model/fleteModel"));
+const detalleModel_1 = __importDefault(require("../model/detalleModel"));
+const viajeModel_1 = __importDefault(require("../model/viajeModel"));
 class viajesController {
     constructor() {
         this.dataInicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -148,6 +151,39 @@ class viajesController {
                 }
             });
         };
+        this.getFlete = (req, res) => {
+            this.flete.obtenerFleteId(Number(req.params.id), (row) => {
+                if (row) {
+                    res.json(row);
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not found' });
+                }
+            });
+        };
+        this.getDetalle = (req, res) => {
+            this.detalle.obtenerDetallesIdFlete(Number(req.params.id), (row) => {
+                if (row) {
+                    res.json(row);
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not found' });
+                }
+            });
+        };
+        this.getViaje = (req, res) => {
+            this.viaje.obtenerViajeIdUser(Number(req.params.id), (row) => {
+                if (row) {
+                    res.json(row);
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not found' });
+                }
+            });
+        };
+        this.detalle = new detalleModel_1.default();
+        this.viaje = new viajeModel_1.default();
+        this.flete = new fleteModel_1.default();
         this.rutaPeaje = new rutapeajeModel_1.default();
         this.ruta = new rutaModel_1.default();
         this.costoVariable = new costoVariableModel_1.default();

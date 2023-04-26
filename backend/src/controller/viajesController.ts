@@ -12,7 +12,15 @@ import costoFijoModel from '../model/costoFijoModel';
 import costoVariableModel from '../model/costoVariableModel';
 import rutaModel from '../model/rutaModel';
 import rutaPeajeModel from '../model/rutapeajeModel';
+import fleteModel from '../model/fleteModel';
+import detalleModel from '../model/detalleModel';
+import viajeModel from '../model/viajeModel';
+
+
 class viajesController {
+    private viaje : viajeModel;
+    private detalle:detalleModel;
+    private flete :fleteModel;
     private ruta: rutaModel;
     private ciudad: ciudadModel;
     private configuracion: configuracionModel;
@@ -27,6 +35,9 @@ class viajesController {
     private costoVariable: costoVariableModel;
     private rutaPeaje: rutaPeajeModel;
     constructor() {
+        this.detalle= new detalleModel();
+        this.viaje= new viajeModel();
+        this.flete = new fleteModel();
         this.rutaPeaje = new rutaPeajeModel();
         this.ruta = new rutaModel();
         this.costoVariable = new costoVariableModel();
@@ -154,6 +165,36 @@ class viajesController {
     }
     public getRutaPeajeId = (req: Request, res: Response) => {
         this.rutaPeaje.obtenerRutaPeaje(Number(req.params.id), (row: any) => {
+            if (row) {
+                res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+        });
+    }
+    public getFlete = (req: Request, res: Response) => {
+        this.flete.obtenerFleteId(Number(req.params.id), (row: any) => {
+            if (row) {
+                res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+        });
+    }
+    public getDetalle = (req: Request, res: Response) => {
+        this.detalle.obtenerDetallesIdFlete(Number(req.params.id), (row: any) => {
+            if (row) {
+                res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+        });
+    }
+    public getViaje = (req: Request, res: Response) => {
+        this.viaje.obtenerViajeIdUser(Number(req.params.id), (row: any) => {
             if (row) {
                 res.json(row);
             }
