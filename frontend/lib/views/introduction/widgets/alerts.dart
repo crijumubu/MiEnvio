@@ -49,7 +49,7 @@ void modalWindow(context){
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/logo200.png"),
-              opacity: 0.15,
+              opacity: 0.09,
               scale: 0.7            // colorFilter: ColorFilter.mode(Colors.green, BlendMode. colorDodge  )
             ),
 
