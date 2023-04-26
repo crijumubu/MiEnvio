@@ -22,8 +22,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp( 
       title: 'Flutter Demo',
       theme: ThemeData(
-
-        // primarySwatch: Color(0xff344E41),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: const Color(0xff344E41),
         ),
@@ -32,7 +30,6 @@ class MyApp extends StatelessWidget {
       initialRoute: route,
       onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,
-
     );
   }
 }
