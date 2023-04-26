@@ -18,9 +18,12 @@ const tipoCargaSchema_1 = __importDefault(require("./schema/tipoCargaSchema"));
 const tipoParametroCostoVariableSchema_1 = __importDefault(require("./schema/tipoParametroCostoVariableSchema"));
 const tipoUnidadSchema_1 = __importDefault(require("./schema/tipoUnidadSchema"));
 const tipoVehiculoSchema_1 = __importDefault(require("./schema/tipoVehiculoSchema"));
+const fleteSchema_1 = __importDefault(require("./schema/fleteSchema"));
+const detalleSchema_1 = __importDefault(require("./schema/detalleSchema"));
+const viajeSchema_1 = __importDefault(require("./schema/viajeSchema"));
 class mongo {
     constructor(indexSchema) {
-        this.schemasList = [userSchema_1.default, ciudadSchema_1.default, configuracionSchema_1.default, costoFijoSchema_1.default, costoVariableSchema_1.default, peajeSchema_1.default, promedioConsumoSchema_1.default, promedioVelocidadSchema_1.default, rutaPeajeSchema_1.default, rutaSchema_1.default, tipoCargaSchema_1.default, tipoParametroCostoVariableSchema_1.default, tipoUnidadSchema_1.default, tipoVehiculoSchema_1.default];
+        this.schemasList = [userSchema_1.default, ciudadSchema_1.default, configuracionSchema_1.default, costoFijoSchema_1.default, costoVariableSchema_1.default, peajeSchema_1.default, promedioConsumoSchema_1.default, promedioVelocidadSchema_1.default, rutaPeajeSchema_1.default, rutaSchema_1.default, tipoCargaSchema_1.default, tipoParametroCostoVariableSchema_1.default, tipoUnidadSchema_1.default, tipoVehiculoSchema_1.default, fleteSchema_1.default, detalleSchema_1.default, viajeSchema_1.default];
         this.connect = () => {
             mongoose_1.default.set('strictQuery', true);
             mongoose_1.default.connect(this.uri)

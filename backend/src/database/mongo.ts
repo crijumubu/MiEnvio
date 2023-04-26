@@ -13,32 +13,27 @@ import tipoCargaSchema from './schema/tipoCargaSchema';
 import tipoParametroCostoVariableSchema from './schema/tipoParametroCostoVariableSchema';
 import tipoUnidadSchema from './schema/tipoUnidadSchema';
 import tipoVehiculoSchema from './schema/tipoVehiculoSchema';
+import fleteSchema from './schema/fleteSchema';
+import detalleSchema from './schema/detalleSchema';
+import viajeSchema from './schema/viajeSchema';
 class mongo {
-
   private uri: string;
   public model: any;
-  public schemasList: any[] = [userSchema, ciudadSchema, configuracionSchema, costoFijoSchema, costoVariableSchema, peajeSchema, promedioConsumoSchema, promedioVelocidadSchema, rutaPeajeSchema, rutaSchema, tipoCargaSchema, tipoParametroCostoVariableSchema, tipoUnidadSchema, tipoVehiculoSchema];
-
+  public schemasList: any[] = [userSchema, ciudadSchema, configuracionSchema, costoFijoSchema, costoVariableSchema, peajeSchema, promedioConsumoSchema, promedioVelocidadSchema, rutaPeajeSchema, rutaSchema, tipoCargaSchema, tipoParametroCostoVariableSchema, tipoUnidadSchema, tipoVehiculoSchema, fleteSchema, detalleSchema, viajeSchema];
   constructor(indexSchema: number) {
-
     this.uri = `${process.env.MONGODB}`;
     this.model = this.schemasList[indexSchema];
   }
-
   public connect = () => {
-
     mongoose.set('strictQuery', true);
     mongoose.connect(this.uri)
       .then(() => {
-
         console.log('Connected to MongoDB Atlas');
       })
       .catch(error => {
-
         console.error('Error connecting to MongoDB Atlas: ', error);
         return process.exit(1);
       });
   }
 }
-
 export default mongo;
