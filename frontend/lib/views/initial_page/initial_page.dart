@@ -50,7 +50,11 @@ class InitialPage extends StatelessWidget {
                         const Image(
                           image: AssetImage("assets/images/logo200.png"),
                         ),
-                        RoutingButton(text: "Iniciar Sesion", route: "/login", callback: (){return true;},),
+                        RoutingButton(text: "Iniciar Sesion", route: "/login", callback: (){
+                            Navigator.pushNamed(context, "/home-supervisor");
+                            // return true;
+                          },
+                        ),
                         const SizedBox(height: 10,),
                         RoutingButton(text: "No tengo una cuenta", route: "/register", callback: (){return true;}, 
                         btnStyle: ElevatedButton.styleFrom(

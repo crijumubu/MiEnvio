@@ -69,7 +69,7 @@ class Home extends StatelessWidget {
                             onPressed: (){
                               Navigator.pushNamed(context, "initial-page");
                             }, 
-                            child: Image.asset("assets/images/logout.png", scale: 17, color: const      Color          (0xffffffff),)
+                            child: Image.asset("assets/images/logout.png", scale: 17, color: const Color(0xffffffff),)
                           ),
                           const SizedBox(width: 5,),
                         ],
