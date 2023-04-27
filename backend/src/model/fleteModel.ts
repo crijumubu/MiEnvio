@@ -33,7 +33,7 @@ class fleteModel {
   }
   public obtenerFleteId = async (id: number, fn: any) => {
     this.mongo.connect();
-    const rows = await this.mongo.model.find({ idCiudad: id });
+    const rows = await this.mongo.model.find({ id: id });
     fn(rows);
   }
   public async idflete(): Promise<any> {
