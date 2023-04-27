@@ -5,8 +5,8 @@ export default interface IViaje extends Document {
     idUsuario:number;
     nombre:string;
     idFlete:number;
-    idOrigen:number;
-    idLlegada:number;
+    origen:string;
+    destino:string;
     estado:number;
     idConductor: number;
 }

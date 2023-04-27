@@ -18,12 +18,12 @@ const viajeSchema = new Schema({
         type: Number,
         required: true
     },
-    idOrigen: {
-        type: Number,
+    origen: {
+        type: String,
         required: true
     },
-    idLlegada: {
-        type: Number,
+    destino: {
+        type: String,
         required: true
     },
     estado: {
