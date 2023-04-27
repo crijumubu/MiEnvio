@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../shippings_driver/shippings_driver.dart';
-import '../../shippings_driver/widgets/card_shipping.dart';
 import '../../shippings_driver/widgets/map.dart';
 
 class NavigatorHome extends StatelessWidget {

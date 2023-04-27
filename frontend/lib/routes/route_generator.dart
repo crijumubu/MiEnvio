@@ -13,9 +13,11 @@ import '../views/register/register.dart';
 
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){
-    // final args = settings.arguments;
+    final args = settings.arguments;
+    // settings.
+    
 
-    // print(args);
+    print(args.runtimeType);
 
     switch (settings.name) {
       case "introduction":
@@ -40,10 +42,12 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_)=> const Home());
       
       case "/scan-qr":
-        return MaterialPageRoute(builder: (_)=> const ScanQR());
+        return MaterialPageRoute(builder: (_)=> ScanQR());
 
       case "/generate-qr":
-        return MaterialPageRoute(builder: (_)=> const GenerateQR());
+        final args = settings.arguments as QrGenerator;
+        return MaterialPageRoute(builder: (_)=>  GenerateQR(hasAppbar: args.hasAppBar, title: args.title, qrData: args.qrData, ));
+        
 
       case "/shippings-driver":
         return MaterialPageRoute(builder: (_)=> ShippingsDriver());
@@ -74,4 +78,13 @@ class RouteGenerator{
       );
     });
   }
+}
+
+class QrGenerator{
+  final bool hasAppBar;
+  final String title;
+  final double qrData;
+
+  QrGenerator(this.hasAppBar, this.title, this.qrData);
+
 }

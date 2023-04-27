@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/routes/route_generator.dart';
 import 'package:frontend/views/home/widgets/menu_button.dart';
 import 'package:frontend/views/register/widgets/bottom.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -82,10 +83,10 @@ class Home extends StatelessWidget {
               const SizedBox(height: 50,),
               Center(
                 child: Wrap(
-                  children: const [
+                  children:  [
                     MenuButton(text: 'Viajes', imgRoute: 'delivery2.png', btnRoute: '/shippings-driver',),
                     MenuButton(text: 'Escanear QR', imgRoute: 'camara.png', btnRoute: '/scan-qr',),
-                    MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr',),
+                    MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr', args: QrGenerator(true, "QR Conductor", 1234567),) ,
                     MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/test',),
                   ],
                 ),

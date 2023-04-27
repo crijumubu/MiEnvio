@@ -4,10 +4,11 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MenuButton extends StatelessWidget {
-  const MenuButton({super.key, required this.text, required this.imgRoute, required this.btnRoute});
+  const MenuButton({super.key, required this.text, required this.imgRoute, required this.btnRoute, this.args});
   final String text;
   final String imgRoute;
   final String btnRoute;
+  final Object? args;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class MenuButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, btnRoute);
+          Navigator.pushNamed(context, btnRoute, arguments: args );
         },
         child: Column(
           children: [
