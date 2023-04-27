@@ -43,7 +43,7 @@ class viajeModel {
             console.log(err);
             cantf = 1;
         }
-        await this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'idOrigen': idOrigen, 'idLlegada': idLlegada, 'estado': estado ,'idConductor':0})
+        await this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'idOrigen': idOrigen, 'idLlegada': idLlegada, 'estado': estado, 'idConductor': 0 })
             .then((response: any, error: any) => {
                 //console.log(response);
                 //console.log(error);
@@ -55,18 +55,18 @@ class viajeModel {
         const rows = await this.mongo.model.find({ idCiudad: id });
         fn(rows);
     }
-    public cambiarEstado = async (id: number,estado:number, fn: any) => {
+    public cambiarEstado = async (id: number, estado: number, fn: any) => {
         this.mongo.connect();
-        await this.mongo.model.update({'idViaje':id},{$set:{'estado':estado}},{multi:true})
+        await this.mongo.model.update({ 'idViaje': id }, { $set: { 'estado': estado } }, { multi: true })
             .then((response: any, error: any) => {
                 //console.log(response);
                 //console.log(error);
                 fn(error);
             })
     }
-    public asignarConductor = async (id: number,idConductor:number, fn: any) => {
+    public asignarConductor = async (id: number, idConductor: number, fn: any) => {
         this.mongo.connect();
-        await this.mongo.model.update({'idViaje':id},{$set:{'idConductor':idConductor}},{multi:true})
+        await this.mongo.model.update({ 'idViaje': id }, { $set: { 'idConductor': idConductor } }, { multi: true })
             .then((response: any, error: any) => {
                 //console.log(response);
                 //console.log(error);

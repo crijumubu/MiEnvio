@@ -5,22 +5,22 @@ class usersModel {
   constructor() {
     this.mongo = new mongo(0);
   }
-  public login = async (email: string, password: string, fn: (status: number, type: number, id:number) => void) => {
+  public login = async (email: string, password: string, fn: (status: number, type: number, id: number) => void) => {
     this.mongo.connect();
     await this.mongo.model.find({ 'email': email })
       .then((response: any, error: any) => {
         if (error) {
-          fn(-1, -1,-1);
+          fn(-1, -1, -1);
           return;
         }
         if (response.length == 1) {
           //console.log(response[0]['password']);
           if (bcrypt.compareSync(password, response[0]['password'])) {
-            fn(1, response[0]['userType'],response[0]['id']);
+            fn(1, response[0]['userType'], response[0]['id']);
             return;
           }
         }
-        fn(0, 0,0);
+        fn(0, 0, 0);
       })
   }
   public register = async (name: string, email: string, password: string, userType: Int16Array, fn: (status: any) => void) => {
