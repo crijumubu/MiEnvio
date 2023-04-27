@@ -181,6 +181,32 @@ class viajesController {
                 }
             });
         };
+        this.registerViaje = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            yield this.flete.registroFlete(req.body.toneladaKilometro, req.body.costoTonelada, req.body.costocarga, req.body.costoHoraadicional, req.body.horasEspera, req.body.costoTiempoEspera, req.body.toneladaKilometroViaje, req.body.toneladaViaje, req.body.costoKilometro, req.body.costoKilometroViaje, (error) => {
+                if (error) {
+                    return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+                }
+            });
+            yield this.viaje.registroViaje(req.body.idUsuario, req.body.nombre, req.body.idOrigen, req.body.idLlegada, req.body.estado, (error) => {
+                if (error) {
+                    return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+                }
+            });
+            return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
+        });
+        this.registerDetalle = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            if (req.body) {
+                yield this.detalle.registroDetalles(req.body.idFlete, req.body.tipoCosto, req.body.concepto, req.body.mes, req.body.viaje, req.body.tonelada, req.body.participacion, (error) => {
+                    if (error) {
+                        return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+                    }
+                });
+            }
+            else {
+                return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+            }
+            return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
+        });
         this.detalle = new detalleModel_1.default();
         this.viaje = new viajeModel_1.default();
         this.flete = new fleteModel_1.default();

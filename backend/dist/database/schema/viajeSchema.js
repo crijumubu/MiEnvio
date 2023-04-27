@@ -10,12 +10,8 @@ const viajeSchema = new mongoose_1.Schema({
         type: Number,
         required: true
     },
-    nombreCiudad: {
-        type: String,
-        required: true
-    },
     nombre: {
-        type: Number,
+        type: String,
         required: true
     },
     idFlete: {

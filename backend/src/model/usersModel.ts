@@ -1,6 +1,5 @@
 import mongo from '../database/mongo';
 import bcrypt from 'bcryptjs';
-
 class usersModel {
   private mongo: mongo;
   constructor() {
@@ -26,8 +25,27 @@ class usersModel {
   }
   public register = async (name: string, email: string, password: string, userType: Int16Array, fn: (status: any) => void) => {
     this.mongo.connect();
-    await this.mongo.model.create({ 'name': name, 'email': email, 'password': this.cryptPassword(password), 'userType': userType })
+    let cant: number = -1
+    try {
+      await this.mongo.model.aggregate([
+        {
+          $group:
+          {
+            "_id": null,
+            "nid": { $max: "$id" },
+          }
+        }
+      ]).then((response: any, error: any) => {
+        cant = response[0].nid + 1;
+      });
+    } catch (err) {
+      console.log(err);
+      cant = 1;
+    }
+    await this.mongo.model.create({ 'id': cant, 'name': name, 'email': email, 'password': this.cryptPassword(password), 'userType': userType })
       .then((response: any, error: any) => {
+        //console.log(response);
+        //console.log(error);
         fn(error);
       })
   }

@@ -15,11 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongo_1 = __importDefault(require("../database/mongo"));
 class detalleModel {
     constructor() {
-        this.registroDetalles = (fn) => __awaiter(this, void 0, void 0, function* () {
+        this.registroDetalles = (idFlete, tipoCosto, concepto, mes, viaje, tonelada, participacion, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
-            const rows = yield this.mongo.model.find();
-            //console.log(rows);
-            fn(rows);
+            yield this.mongo.model.create({ 'idFlete': idFlete, 'tipoCosto': tipoCosto, 'concepto': concepto, 'mes': mes, 'viaje': viaje, 'tonelada': tonelada, 'participacion': participacion }).then((response, error) => {
+                //console.log(response);
+                //console.log(error);
+                fn(error);
+            });
         });
         this.obtenerDetallesIdFlete = (id, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
@@ -27,6 +29,7 @@ class detalleModel {
             fn(rows);
         });
         this.mongo = new mongo_1.default(15);
+        this.mongo2 = new mongo_1.default(14);
     }
 }
 exports.default = detalleModel;

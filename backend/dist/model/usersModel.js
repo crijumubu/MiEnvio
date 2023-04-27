@@ -36,8 +36,27 @@ class usersModel {
         });
         this.register = (name, email, password, userType, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
-            yield this.mongo.model.create({ 'name': name, 'email': email, 'password': this.cryptPassword(password), 'userType': userType })
+            let cant = -1;
+            try {
+                yield this.mongo.model.aggregate([
+                    {
+                        $group: {
+                            "_id": null,
+                            "nid": { $max: "$id" },
+                        }
+                    }
+                ]).then((response, error) => {
+                    cant = response[0].nid + 1;
+                });
+            }
+            catch (err) {
+                console.log(err);
+                cant = 1;
+            }
+            yield this.mongo.model.create({ 'id': cant, 'name': name, 'email': email, 'password': this.cryptPassword(password), 'userType': userType })
                 .then((response, error) => {
+                //console.log(response);
+                //console.log(error);
                 fn(error);
             });
         });

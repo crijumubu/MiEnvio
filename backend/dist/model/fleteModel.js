@@ -15,11 +15,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongo_1 = __importDefault(require("../database/mongo"));
 class fleteModel {
     constructor() {
-        this.registroFlete = (fn) => __awaiter(this, void 0, void 0, function* () {
+        this.registroFlete = (toneladaKilometro, costoTonelada, costocarga, costoHoraadicional, horasEspera, costoTiempoEspera, toneladaKilometroViaje, toneladaViaje, costoKilometro, costoKilometroViaje, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
-            const rows = yield this.mongo.model.find();
-            //console.log(rows);
-            fn(rows);
+            let cant = 0;
+            try {
+                yield this.mongo.model.aggregate([
+                    {
+                        $group: {
+                            "_id": null,
+                            "nid": { $max: "$id" },
+                        }
+                    }
+                ]).then((response, error) => {
+                    let cantn = response[0].nid;
+                    cant = cantn + 1;
+                });
+            }
+            catch (err) {
+                cant = 1;
+                console.log(err);
+            }
+            yield this.mongo.model.create({ 'id': cant, 'toneladaKilometro': toneladaKilometro, 'costoTonelada': costoTonelada, 'costocarga': costocarga, 'costoHoraadicional': costoHoraadicional, 'horasEspera': horasEspera, 'costoTiempoEspera': costoTiempoEspera, 'toneladaKilometroViaje': toneladaKilometroViaje, 'toneladaViaje': toneladaViaje, 'costoKilometro': costoKilometro, 'costoKilometroViaje': costoKilometroViaje })
+                .then((response, error) => {
+                //console.log(response);
+                //console.log(error);
+                fn(error);
+            });
         });
         this.obtenerFleteId = (id, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
@@ -27,6 +48,23 @@ class fleteModel {
             fn(rows);
         });
         this.mongo = new mongo_1.default(14);
+    }
+    idflete() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            let cant = -1;
+            this.mongo.model.aggregate([
+                {
+                    $group: {
+                        "_id": null,
+                        "nid": { $max: "$id" },
+                    }
+                }
+            ]).then((response, error) => {
+                cant = response[0].nid;
+            });
+            return cant;
+        });
     }
 }
 exports.default = fleteModel;
