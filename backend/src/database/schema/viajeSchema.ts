@@ -29,6 +29,10 @@ const viajeSchema = new Schema({
     estado: {
         type: Number,
         required: true
+    },
+    idConductor: {
+        type: Number,
+        required: false
     }
 },
     {

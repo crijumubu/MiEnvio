@@ -51,7 +51,7 @@ class viajeModel {
                 console.log(err);
                 cantf = 1;
             }
-            yield this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'idOrigen': idOrigen, 'idLlegada': idLlegada, 'estado': estado })
+            yield this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'idOrigen': idOrigen, 'idLlegada': idLlegada, 'estado': estado, 'idConductor': 0 })
                 .then((response, error) => {
                 //console.log(response);
                 //console.log(error);

@@ -29,6 +29,10 @@ const viajeSchema = new mongoose_1.Schema({
     estado: {
         type: Number,
         required: true
+    },
+    idConductor: {
+        type: Number,
+        required: false
     }
 }, {
     versionKey: false

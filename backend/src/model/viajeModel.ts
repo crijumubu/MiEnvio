@@ -43,7 +43,7 @@ class viajeModel {
             console.log(err);
             cantf = 1;
         }
-        await this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'idOrigen': idOrigen, 'idLlegada': idLlegada, 'estado': estado })
+        await this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'idOrigen': idOrigen, 'idLlegada': idLlegada, 'estado': estado ,'idConductor':0})
             .then((response: any, error: any) => {
                 //console.log(response);
                 //console.log(error);
