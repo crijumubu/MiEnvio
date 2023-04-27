@@ -31,6 +31,9 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const usersRoute_1 = __importDefault(require("./routes/usersRoute"));
 const viajeRoute_1 = __importDefault(require("./routes/viajeRoute"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
+const swaggerOptios_1 = require("./swaggerOptios");
 class Server {
     constructor() {
         this.config = () => {
@@ -38,6 +41,9 @@ class Server {
             this.backend.use((0, express_1.urlencoded)({ extended: true }));
             this.backend.use((0, express_1.json)());
             this.backend.use((0, cors_1.default)());
+            const specs = (0, swagger_jsdoc_1.default)(swaggerOptios_1.options);
+            console.log(specs);
+            this.backend.use('/docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(specs));
         };
         this.route = () => {
             this.backend.use(`${process.env.USERSROUTE}`, this.userRouter.router);

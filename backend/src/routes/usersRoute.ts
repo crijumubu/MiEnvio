@@ -11,6 +11,14 @@ class usersRoute {
   public config() {
     this.router.post('/login', this.controller.login);
     this.router.post('/register', this.controller.register);
+    
+    /**
+     * @swagger
+      * paths:
+       * /getDataUser:
+        *  get:
+         *    summary: Returns a list of tasks
+    */
     this.router.get('/getDataUser/:id', this.controller.getUserData);
     this.router.post('/updateUser', this.controller.updateUser);
   }
