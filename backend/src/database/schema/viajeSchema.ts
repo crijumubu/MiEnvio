@@ -9,12 +9,9 @@ const viajeSchema = new Schema({
         type: Number,
         required: true
     },
-    nombreCiudad: {
-        type: String,
-        required: true
-    },
+    
     nombre: {
-        type: Number,
+        type: String,
         required: true
     },
     idFlete: {

@@ -15,11 +15,48 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongo_1 = __importDefault(require("../database/mongo"));
 class viajeModel {
     constructor() {
-        this.registroViaje = (fn) => __awaiter(this, void 0, void 0, function* () {
+        this.registroViaje = (idUsuario, nombre, idOrigen, idLlegada, estado, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
-            const rows = yield this.mongo.model.find();
-            //console.log(rows);
-            fn(rows);
+            let cantviajes = -1;
+            try {
+                yield this.mongo.model.aggregate([
+                    {
+                        $group: {
+                            "_id": null,
+                            "nid": { $max: "$idViaje" },
+                        }
+                    }
+                ]).then((response, error) => {
+                    cantviajes = response[0].nid + 1;
+                });
+            }
+            catch (err) {
+                console.log(err);
+                cantviajes = 1;
+            }
+            let cantf = -1;
+            try {
+                yield this.mongo2.model.aggregate([
+                    {
+                        $group: {
+                            "_id": null,
+                            "nid": { $max: "$id" },
+                        }
+                    }
+                ]).then((response, error) => {
+                    cantf = response[0].nid;
+                });
+            }
+            catch (err) {
+                console.log(err);
+                cantf = 1;
+            }
+            yield this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'idOrigen': idOrigen, 'idLlegada': idLlegada, 'estado': estado })
+                .then((response, error) => {
+                //console.log(response);
+                //console.log(error);
+                fn(error);
+            });
         });
         this.obtenerViajeIdUser = (id, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
@@ -27,6 +64,7 @@ class viajeModel {
             fn(rows);
         });
         this.mongo = new mongo_1.default(16);
+        this.mongo2 = new mongo_1.default(14);
     }
 }
 exports.default = viajeModel;
