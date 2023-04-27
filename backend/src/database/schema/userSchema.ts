@@ -2,6 +2,10 @@ import { Schema, model } from 'mongoose';
 import IUsers from '../interface/IUser';
 
 const usersSchema = new Schema({
+  id: {
+    type: Number,
+    required: true
+  },
   name: {
     type: String,
     required: true
