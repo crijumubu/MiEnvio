@@ -15,8 +15,6 @@ import rutaPeajeModel from '../model/rutapeajeModel';
 import fleteModel from '../model/fleteModel';
 import detalleModel from '../model/detalleModel';
 import viajeModel from '../model/viajeModel';
-
-
 class viajesController {
     private viaje: viajeModel;
     private detalle: detalleModel;

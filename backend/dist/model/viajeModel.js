@@ -22,8 +22,8 @@ class viajeModel {
                 yield this.mongo.model.aggregate([
                     {
                         $group: {
-                            "_id": null,
-                            "nid": { $max: "$idViaje" },
+                            '_id': null,
+                            'nid': { $max: '$idViaje' },
                         }
                     }
                 ]).then((response, error) => {
@@ -39,8 +39,8 @@ class viajeModel {
                 yield this.mongo2.model.aggregate([
                     {
                         $group: {
-                            "_id": null,
-                            "nid": { $max: "$id" },
+                            '_id': null,
+                            'nid': { $max: '$id' },
                         }
                     }
                 ]).then((response, error) => {

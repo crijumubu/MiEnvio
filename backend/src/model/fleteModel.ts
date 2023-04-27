@@ -6,19 +6,18 @@ class fleteModel {
   }
   public registroFlete = async (toneladaKilometro: number, costoTonelada: number, costocarga: number, costoHoraadicional: number, horasEspera: number, costoTiempoEspera: number, toneladaKilometroViaje: number, toneladaViaje: number, costoKilometro: number, costoKilometroViaje: number, fn: any) => {
     this.mongo.connect();
-    let cant: number = 0
+    let cant = 0;
     try {
       await this.mongo.model.aggregate([
         {
           $group:
           {
-            "_id": null,
-            "nid": { $max: "$id" },
+            '_id': null,
+            'nid': { $max: '$id' },
           }
         }
       ]).then((response: any, error: any) => {
-        let cantn: number = response[0].nid;
-        cant = cantn + 1;
+        cant = response[0].nid + 1;
       });
 
     } catch (err) {
@@ -39,13 +38,13 @@ class fleteModel {
   }
   public async idflete(): Promise<any> {
     this.mongo.connect();
-    let cant: number = -1
+    let cant = -1;
     this.mongo.model.aggregate([
       {
         $group:
         {
-          "_id": null,
-          "nid": { $max: "$id" },
+          '_id': null,
+          'nid': { $max: '$id' },
         }
       }
     ]).then((response: any, error: any) => {

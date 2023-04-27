@@ -22,13 +22,12 @@ class fleteModel {
                 yield this.mongo.model.aggregate([
                     {
                         $group: {
-                            "_id": null,
-                            "nid": { $max: "$id" },
+                            '_id': null,
+                            'nid': { $max: '$id' },
                         }
                     }
                 ]).then((response, error) => {
-                    let cantn = response[0].nid;
-                    cant = cantn + 1;
+                    cant = response[0].nid + 1;
                 });
             }
             catch (err) {
@@ -56,8 +55,8 @@ class fleteModel {
             this.mongo.model.aggregate([
                 {
                     $group: {
-                        "_id": null,
-                        "nid": { $max: "$id" },
+                        '_id': null,
+                        'nid': { $max: '$id' },
                     }
                 }
             ]).then((response, error) => {

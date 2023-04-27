@@ -25,14 +25,14 @@ class usersModel {
   }
   public register = async (name: string, email: string, password: string, userType: Int16Array, fn: (status: any) => void) => {
     this.mongo.connect();
-    let cant: number = -1
+    let cant = -1;
     try {
       await this.mongo.model.aggregate([
         {
           $group:
           {
-            "_id": null,
-            "nid": { $max: "$id" },
+            '_id': null,
+            'nid': { $max: '$id' },
           }
         }
       ]).then((response: any, error: any) => {

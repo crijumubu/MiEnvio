@@ -8,14 +8,14 @@ class viajeModel {
     }
     public registroViaje = async (idUsuario: number, nombre: string, idOrigen: number, idLlegada: number, estado: number, fn: any) => {
         this.mongo.connect();
-        let cantviajes: number = -1
+        let cantviajes = -1
         try {
             await this.mongo.model.aggregate([
                 {
                     $group:
                     {
-                        "_id": null,
-                        "nid": { $max: "$idViaje" },
+                        '_id': null,
+                        'nid': { $max: '$idViaje' },
                     }
                 }
             ]).then((response: any, error: any) => {
@@ -26,16 +26,14 @@ class viajeModel {
             console.log(err);
             cantviajes = 1;
         }
-
-
-        let cantf: number = -1
+        let cantf = -1
         try {
             await this.mongo2.model.aggregate([
                 {
                     $group:
                     {
-                        "_id": null,
-                        "nid": { $max: "$id" },
+                        '_id': null,
+                        'nid': { $max: '$id' },
                     }
                 }
             ]).then((response: any, error: any) => {

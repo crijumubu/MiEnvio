@@ -41,8 +41,8 @@ class usersModel {
                 yield this.mongo.model.aggregate([
                     {
                         $group: {
-                            "_id": null,
-                            "nid": { $max: "$id" },
+                            '_id': null,
+                            'nid': { $max: '$id' },
                         }
                     }
                 ]).then((response, error) => {
