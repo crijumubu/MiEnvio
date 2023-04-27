@@ -233,6 +233,16 @@ class viajesController {
             }
             return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
         });
+        this.getViajeActivo = (req, res) => {
+            this.viaje.obtenerViajeActivo(Number(req.params.id), (row) => {
+                if (row) {
+                    res.json(row);
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not found' });
+                }
+            });
+        };
         this.detalle = new detalleModel_1.default();
         this.viaje = new viajeModel_1.default();
         this.flete = new fleteModel_1.default();

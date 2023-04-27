@@ -60,7 +60,7 @@ class viajeModel {
         });
         this.obtenerViajeIdUser = (id, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
-            const rows = yield this.mongo.model.find({ idCiudad: id });
+            const rows = yield this.mongo.model.find({ 'idUsusario': id });
             fn(rows);
         });
         this.cambiarEstado = (id, estado, fn) => __awaiter(this, void 0, void 0, function* () {
@@ -80,6 +80,11 @@ class viajeModel {
                 //console.log(error);
                 fn(error);
             });
+        });
+        this.obtenerViajeActivo = (id, fn) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ 'idUsuario': id, 'estado': 2 });
+            fn(rows);
         });
         this.mongo = new mongo_1.default(16);
         this.mongo2 = new mongo_1.default(14);

@@ -250,5 +250,15 @@ class viajesController {
         }
         return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
     }
+    public getViajeActivo = (req: Request, res: Response) => {
+        this.viaje.obtenerViajeActivo(Number(req.params.id), (row: any) => {
+            if (row) {
+                res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+        });
+    }
 }
 export default viajesController;

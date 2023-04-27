@@ -52,7 +52,7 @@ class viajeModel {
     }
     public obtenerViajeIdUser = async (id: number, fn: any) => {
         this.mongo.connect();
-        const rows = await this.mongo.model.find({ idCiudad: id });
+        const rows = await this.mongo.model.find({ 'idUsusario': id });
         fn(rows);
     }
     public cambiarEstado = async (id: number, estado: number, fn: any) => {
@@ -72,6 +72,11 @@ class viajeModel {
                 //console.log(error);
                 fn(error);
             })
+    }
+    public obtenerViajeActivo = async (id: number, fn: any) => {
+        this.mongo.connect();
+        const rows = await this.mongo.model.find({ 'idUsuario': id,'estado':2 });
+        fn(rows);
     }
 }
 export default viajeModel;

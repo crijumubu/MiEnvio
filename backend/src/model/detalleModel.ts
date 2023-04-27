@@ -18,7 +18,7 @@ class detalleModel {
     }
     public obtenerDetallesIdFlete = async (id: number, fn: any) => {
         this.mongo.connect();
-        const rows = await this.mongo.model.find({ idCiudad: id });
+        const rows = await this.mongo.model.find({ 'idFlete': id });
         fn(rows);
     }
 }
