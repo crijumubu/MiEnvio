@@ -23,6 +23,7 @@ class viajeRoute {
         this.router.get('/viajeIdUsr/:id', this.controller.getViaje);
         this.router.post('/resgitroViaje', this.controller.registerViaje);
         this.router.post('/registroDetalles', this.controller.registerDetalle);
+        this.router.post('/cambioEstados', this.controller.updateEstado);
     }
 }
 exports.default = viajeRoute;

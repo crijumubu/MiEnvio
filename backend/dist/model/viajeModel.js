@@ -63,6 +63,15 @@ class viajeModel {
             const rows = yield this.mongo.model.find({ idCiudad: id });
             fn(rows);
         });
+        this.cambiarEstado = (id, estado, fn) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            yield this.mongo.model.update({ 'idViaje': id }, { $set: { 'estado': estado } }, { multi: true })
+                .then((response, error) => {
+                //console.log(response);
+                //console.log(error);
+                fn(error);
+            });
+        });
         this.mongo = new mongo_1.default(16);
         this.mongo2 = new mongo_1.default(14);
     }

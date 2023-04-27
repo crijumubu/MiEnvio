@@ -55,5 +55,14 @@ class viajeModel {
         const rows = await this.mongo.model.find({ idCiudad: id });
         fn(rows);
     }
+    public cambiarEstado = async (id: number,estado:number, fn: any) => {
+        this.mongo.connect();
+        await this.mongo.model.update({'idViaje':id},{$set:{'estado':estado}},{multi:true})
+            .then((response: any, error: any) => {
+                //console.log(response);
+                //console.log(error);
+                fn(error);
+            })
+    }
 }
 export default viajeModel;

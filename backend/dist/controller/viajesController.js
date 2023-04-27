@@ -207,6 +207,19 @@ class viajesController {
             }
             return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
         });
+        this.updateEstado = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            if (req.body) {
+                yield this.viaje.cambiarEstado(req.body.idViaje, req.body.estado, (error) => {
+                    if (error) {
+                        return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+                    }
+                });
+            }
+            else {
+                return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+            }
+            return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
+        });
         this.detalle = new detalleModel_1.default();
         this.viaje = new viajeModel_1.default();
         this.flete = new fleteModel_1.default();
