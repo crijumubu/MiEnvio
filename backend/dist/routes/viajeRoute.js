@@ -21,6 +21,8 @@ class viajeRoute {
         this.router.get('/fleteId/:id', this.controller.getFlete);
         this.router.get('/detalleId/:id', this.controller.getDetalle);
         this.router.get('/viajeIdUsr/:id', this.controller.getViaje);
+        this.router.post('/resgitroViaje', this.controller.registerViaje);
+        this.router.post('/registroDetalles', this.controller.registerDetalle);
     }
 }
 exports.default = viajeRoute;
