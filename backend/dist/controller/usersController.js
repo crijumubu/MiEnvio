@@ -9,11 +9,11 @@ class usersController {
     constructor() {
         this.login = (req, res) => {
             const { email, password } = req.body;
-            this.model.login(email, password, (status, userType) => {
+            this.model.login(email, password, (status, userType, idUser) => {
                 switch (status) {
                     case 1: {
                         const token = jwt.sign({ email: email }, process.env.TOKEN_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
-                        res.header('auth-token', token).json({ error: null, data: { email, token, userType } });
+                        res.header('auth-token', token).json({ error: null, data: { email, token, userType, idUser } });
                         //console.log(userType);
                         break;
                     }
@@ -58,6 +58,16 @@ class usersController {
                 }
                 res.status(406).json({ error: true, message: 'EL token no es válido!' });
             }
+        };
+        this.getUserData = (req, res) => {
+            this.model.getNombre(Number(req.params.id), (row) => {
+                if (row) {
+                    res.json(row);
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not found' });
+                }
+            });
         };
         this.model = new usersModel_1.default();
     }

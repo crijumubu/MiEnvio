@@ -21,17 +21,17 @@ class usersModel {
             yield this.mongo.model.find({ 'email': email })
                 .then((response, error) => {
                 if (error) {
-                    fn(-1, -1);
+                    fn(-1, -1, -1);
                     return;
                 }
                 if (response.length == 1) {
                     //console.log(response[0]['password']);
                     if (bcryptjs_1.default.compareSync(password, response[0]['password'])) {
-                        fn(1, response[0]['userType']);
+                        fn(1, response[0]['userType'], response[0]['id']);
                         return;
                     }
                 }
-                fn(0, 0);
+                fn(0, 0, 0);
             });
         });
         this.register = (name, email, password, userType, fn) => __awaiter(this, void 0, void 0, function* () {
@@ -65,6 +65,11 @@ class usersModel {
             const hashedPassword = bcryptjs_1.default.hashSync(password, salt);
             return hashedPassword;
         };
+        this.getNombre = (id, fn) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ 'id': id });
+            fn(rows);
+        });
         this.mongo = new mongo_1.default(0);
     }
 }

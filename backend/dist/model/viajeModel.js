@@ -72,6 +72,15 @@ class viajeModel {
                 fn(error);
             });
         });
+        this.asignarConductor = (id, idConductor, fn) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            yield this.mongo.model.update({ 'idViaje': id }, { $set: { 'idConductor': idConductor } }, { multi: true })
+                .then((response, error) => {
+                //console.log(response);
+                //console.log(error);
+                fn(error);
+            });
+        });
         this.mongo = new mongo_1.default(16);
         this.mongo2 = new mongo_1.default(14);
     }

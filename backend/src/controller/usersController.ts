@@ -8,11 +8,11 @@ class usersController {
   }
   public login = (req: Request, res: Response) => {
     const { email, password } = req.body;
-    this.model.login(email, password, (status: number, userType: number) => {
+    this.model.login(email, password, (status: number, userType: number,idUser:number) => {
       switch (status) {
         case 1: {
           const token = jwt.sign({ email: email }, process.env.TOKEN_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
-          res.header('auth-token', token).json({ error: null, data: { email, token, userType } });
+          res.header('auth-token', token).json({ error: null, data: { email, token, userType, idUser} });
           //console.log(userType);
           break;
         }
@@ -58,5 +58,15 @@ class usersController {
       res.status(406).json({ error: true, message: 'EL token no es válido!' });
     }
   }
+  public getUserData = (req: Request, res: Response) => {
+    this.model.getNombre(Number(req.params.id), (row: any) => {
+        if (row) {
+            res.json(row);
+        }
+        else {
+            return res.status(404).json({ error: true, message: 'User not found' });
+        }
+    });
+}
 }
 export default usersController;
