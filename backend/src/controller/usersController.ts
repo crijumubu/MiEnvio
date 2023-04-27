@@ -8,11 +8,11 @@ class usersController {
   }
   public login = (req: Request, res: Response) => {
     const { email, password } = req.body;
-    this.model.login(email, password, (status: number, userType: number,idUser:number) => {
+    this.model.login(email, password, (status: number, userType: number, idUser: number) => {
       switch (status) {
         case 1: {
           const token = jwt.sign({ email: email }, process.env.TOKEN_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
-          res.header('auth-token', token).json({ error: null, data: { email, token, userType, idUser} });
+          res.header('auth-token', token).json({ error: null, data: { email, token, userType, idUser } });
           //console.log(userType);
           break;
         }
@@ -60,25 +60,25 @@ class usersController {
   }
   public getUserData = (req: Request, res: Response) => {
     this.model.getNombre(Number(req.params.id), (row: any) => {
-        if (row) {
-            res.json(row);
-        }
-        else {
-            return res.status(404).json({ error: true, message: 'User not found' });
-        }
+      if (row) {
+        res.json(row);
+      }
+      else {
+        return res.status(404).json({ error: true, message: 'User not found' });
+      }
     });
-}
-public updateUser = async (req: Request, res: Response) => {
-  if (req.body) {
-      await this.model.updateUser(req.body.id, req.body.name,req.body.email,req.body.password, (error: any) => {
-          if (error) {
-              return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
-          }
-      });
-  } else {
-      return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
   }
-  return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
-}
+  public updateUser = async (req: Request, res: Response) => {
+    if (req.body) {
+      await this.model.updateUser(req.body.id, req.body.name, req.body.email, req.body.password, (error: any) => {
+        if (error) {
+          return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+        }
+      });
+    } else {
+      return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+    }
+    return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
+  }
 }
 export default usersController;

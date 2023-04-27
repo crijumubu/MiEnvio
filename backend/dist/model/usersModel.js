@@ -53,12 +53,18 @@ class usersModel {
                 console.log(err);
                 cant = 1;
             }
-            yield this.mongo.model.create({ 'id': cant, 'name': name, 'email': email, 'password': this.cryptPassword(password), 'userType': userType })
-                .then((response, error) => {
-                //console.log(response);
-                //console.log(error);
-                fn(error);
-            });
+            try {
+                yield this.mongo.model.create({ 'id': cant, 'name': name, 'email': email, 'password': this.cryptPassword(password), 'userType': userType })
+                    .then((response, error) => {
+                    //console.log(response);
+                    //console.log(error);
+                    fn(error);
+                });
+            }
+            catch (err) {
+                console.log(err);
+                fn(err);
+            }
         });
         this.cryptPassword = (password) => {
             const salt = bcryptjs_1.default.genSaltSync(10);

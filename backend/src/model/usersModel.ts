@@ -42,12 +42,17 @@ class usersModel {
       console.log(err);
       cant = 1;
     }
+    try{
     await this.mongo.model.create({ 'id': cant, 'name': name, 'email': email, 'password': this.cryptPassword(password), 'userType': userType })
       .then((response: any, error: any) => {
         //console.log(response);
         //console.log(error);
         fn(error);
       })
+    }catch(err){
+      console.log(err);
+      fn(err);
+    }
   }
   public cryptPassword = (password: string) => {
     const salt = bcrypt.genSaltSync(10);
