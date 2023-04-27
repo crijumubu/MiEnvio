@@ -15,6 +15,7 @@ class usersRoute {
         this.router.post('/login', this.controller.login);
         this.router.post('/register', this.controller.register);
         this.router.get('/getDataUser/:id', this.controller.getUserData);
+        this.router.post('/updateUser', this.controller.updateUser);
     }
 }
 exports.default = usersRoute;

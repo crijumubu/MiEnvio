@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -69,6 +78,19 @@ class usersController {
                 }
             });
         };
+        this.updateUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            if (req.body) {
+                yield this.model.updateUser(req.body.id, req.body.name, req.body.email, req.body.password, (error) => {
+                    if (error) {
+                        return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+                    }
+                });
+            }
+            else {
+                return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+            }
+            return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
+        });
         this.model = new usersModel_1.default();
     }
 }

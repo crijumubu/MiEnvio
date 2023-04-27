@@ -68,5 +68,17 @@ class usersController {
         }
     });
 }
+public updateUser = async (req: Request, res: Response) => {
+  if (req.body) {
+      await this.model.updateUser(req.body.id, req.body.name,req.body.email,req.body.password, (error: any) => {
+          if (error) {
+              return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+          }
+      });
+  } else {
+      return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+  }
+  return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
+}
 }
 export default usersController;
