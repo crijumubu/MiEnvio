@@ -81,11 +81,11 @@ class AuthController{
 
   
   Future getUserData(context, int id) async{
-    print("gettingUser");
+    // print("gettingUser");
     var response = await http.get(Uri.parse("$_url/getDataUser/$id"));
 
     if(response.statusCode == 200){
-      print(jsonDecode(response.body));
+      // print(jsonDecode(response.body));
       var userData = jsonDecode(response.body);
       Usuario user = Usuario(userData[0]["id"], userData[0]["name"], userData[0]["email"], userData[0]["password"]);
 
@@ -95,5 +95,13 @@ class AuthController{
     }
   }
 
+  Future activeShippings(int id)async{
+    var response = await http.get(Uri.parse("$_url/viajeIdUsrActivo/$id"));
 
+    if(response.statusCode == 200){
+      // print(jsonDecode(response.body));
+      var data = jsonDecode(response.body);
+      return data;
+    }
+  }
 }

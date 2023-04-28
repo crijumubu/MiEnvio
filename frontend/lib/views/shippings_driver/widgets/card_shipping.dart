@@ -28,7 +28,7 @@ class CardShipping extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, 
                   child: Text(
-                    shipping.name, 
+                    shipping.nombre, 
                     textAlign: TextAlign.left,
                     style: GoogleFonts.rubik(fontWeight: FontWeight.w700, fontSize: 20, color: const Color(0xff344E41)),
                   )
@@ -36,7 +36,7 @@ class CardShipping extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, 
                   child: Text(
-                    shipping.origin, 
+                    shipping.origen, 
                     textAlign: TextAlign.left,
                     style: GoogleFonts.rubik(fontSize: 15),
                     
@@ -45,7 +45,7 @@ class CardShipping extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, 
                   child: Text(
-                    shipping.destination, 
+                    shipping.destino, 
                     textAlign: TextAlign.left,
                     style: GoogleFonts.rubik(fontSize: 16),
                   )

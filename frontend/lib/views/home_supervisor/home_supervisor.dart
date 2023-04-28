@@ -124,7 +124,7 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
           children: [
             // Header(),
             if(index == 0)
-              NavigatorHome(height: height, name: widget.user.name,)
+              NavigatorHome(height: height, name: widget.user.name, id: widget.user.id,)
             else if(index == 1)
               NavigatorShippings()
             else if(index == 2)

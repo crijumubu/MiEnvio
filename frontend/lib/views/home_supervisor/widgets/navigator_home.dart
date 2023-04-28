@@ -1,12 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:frontend/controller/auth_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../shippings_driver/shippings_driver.dart';
 import '../../shippings_driver/widgets/map.dart';
 
 class NavigatorHome extends StatelessWidget {
-  const NavigatorHome({super.key, required this.height, required this.name});
+  NavigatorHome({super.key, required this.height, required this.name, required this.id});
   final double height;
   final String name;
+  final int id;
+  final AuthController _authController = AuthController();
 
   GestureDetector btnIcon({required IconData icon, required String text}){
     return GestureDetector(
@@ -37,15 +42,8 @@ class NavigatorHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List enviosCard = [];
-    for(var i in envios){
-      enviosCard.add(Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: ActiveShippings(shipping: i),
-      ));
-      if(envios.last != i) enviosCard.add(SizedBox(height: 10,));
-      
-    }
+    // List<Widget> enviosCard = [];
+    
     
     return Column(
       children: [
@@ -101,8 +99,73 @@ class NavigatorHome extends StatelessWidget {
           thickness: 1,
           // indent: 8,
         ),
-        ...enviosCard,
+
+        // ? Future Builder de envios activos
+        FutureBuilder(
+          future: _authController.activeShippings(id),
+          builder: (context, snapshot) {
+            List<Widget> children;
+            // print(snapshot.data);
+            if(snapshot.hasData){
+              // print(snapshot.data[0]["nombre"]);
+              List<Shipping> enviosActivos = (snapshot.data as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e["idViaje"], idUsuario: e["idUsuario"], idFlete: e["idFlete"], origen: e["origen"], destino: e["destino"], estado: e["estado"], idConductor: e["idConductor"])).toList();
+
+              log(enviosActivos.toString());
+              if(enviosActivos.isEmpty){
+                children = [
+                  Container(
+                    decoration: BoxDecoration(color: Colors.white),
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 30),
+                    child: Center(child: Text("No hay envios activos", style: GoogleFonts.rubik(fontSize: 18),)),
+                  )
+                ];
+              }else{
+                List<Widget> enviosCard = [];
+                for(var i in enviosActivos){
+                  enviosCard.add(Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ActiveShippings(shipping: i),
+                  ));
+                  if(envios.last != i) enviosCard.add(SizedBox(height: 10,));
+                }
+
+                children = enviosCard;
+              }
+            }else if(snapshot.hasError){
+              children = <Widget>[
+                const Icon(
+                  Icons.error_outline,
+                  color: Colors.red,
+                  size: 60,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: Text('Error: ${snapshot.error}'),
+                ),
+              ];
+            }else{
+              children = const <Widget>[
+                SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: CircularProgressIndicator(),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text('Awaiting result...'),
+                ),
+              ];
+            }
+
+            return Column(children: children);
+          }
+        ),
+        // ...enviosCard,
+
+        
         Divider(thickness: 1,),
+        const SizedBox(height: 20,),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Row(
@@ -144,7 +207,7 @@ class ActiveShippings extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, 
                   child: Text(
-                    shipping.name, 
+                    shipping.nombre, 
                     textAlign: TextAlign.left,
                     style: GoogleFonts.rubik(fontWeight: FontWeight.w600, fontSize: 20, color: const Color(0xff344E41)),
                   )
@@ -152,7 +215,7 @@ class ActiveShippings extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, 
                   child: Text(
-                    shipping.origin, 
+                    shipping.origen, 
                     textAlign: TextAlign.left,
                     style: GoogleFonts.rubik(fontSize: 15, fontWeight: FontWeight.w400),
                     
@@ -161,7 +224,7 @@ class ActiveShippings extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, 
                   child: Text(
-                    shipping.destination, 
+                    shipping.destino, 
                     textAlign: TextAlign.left,
                     style: GoogleFonts.rubik(fontSize: 15, fontWeight: FontWeight.w400),
                   )

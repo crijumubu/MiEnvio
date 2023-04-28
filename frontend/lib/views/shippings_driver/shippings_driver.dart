@@ -6,21 +6,27 @@ import 'package:google_fonts/google_fonts.dart';
 import '../register/widgets/bottom.dart';
 
 class Shipping{
-  String name;
-  String origin;
-  String destination;
+  String nombre;
+  int idViaje;
+  int idUsuario;
+  int idFlete;
+  String origen;
+  String destino;
+  int estado;
+  int idConductor;
 
-
-  Shipping({required this.name, required this.destination, required this.origin});
+  Shipping({required this.nombre, required this.idViaje, required this.idUsuario, required this.idFlete, required this.origen, required this.destino, required this.estado, required this.idConductor});
 }
 
-List<Shipping> envios = [Shipping(name: "BOG-BGA", destination: "Bucaramanga", origin: "Bogota"),
-Shipping(name: "BOG-MED", destination: "Medellin", origin: "Bogota"),
-Shipping(name: "BOG-MED", destination: "Medellin", origin: "Bogota"),
-Shipping(name: "BOG-MED", destination: "Medellin", origin: "Bogota"),
-Shipping(name: "BOG-MED", destination: "Medellin", origin: "Bogota"),
-Shipping(name: "BOG-MED", destination: "Medellin", origin: "Bogota"),
-Shipping(name: "BOG-MED", destination: "Medellin", origin: "Bogota"),
+List<Shipping> envios = [Shipping(nombre: "BOG-BGA", destino: "Bucaramanga", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
+Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
+Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
+Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
+Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
+Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
+Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
+Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
+
 ];
 
 class ShippingsDriver extends StatelessWidget {
