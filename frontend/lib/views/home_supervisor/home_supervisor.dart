@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/home_supervisor/widgets/navigator_home.dart';
 import 'package:frontend/views/home_supervisor/widgets/navigator_settings.dart';
 import 'package:frontend/views/home_supervisor/widgets/navigator_shippings.dart';
 import 'widgets/navigation.dart';
 
 class HomeSupervisor extends StatefulWidget {
-  const HomeSupervisor({super.key});
+  const HomeSupervisor({super.key, required this.user});
+  final Usuario user;
 
   @override
   State<HomeSupervisor> createState() => _HomeSupervisorState();
@@ -122,11 +124,11 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
           children: [
             // Header(),
             if(index == 0)
-              NavigatorHome(height: height,)
+              NavigatorHome(height: height, name: widget.user.name,)
             else if(index == 1)
               NavigatorShippings()
             else if(index == 2)
-              NavigatorSettings()
+              NavigatorSettings(user: widget.user,)
           ],
         ),
       )
