@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class LocationListTile extends StatelessWidget {
   const LocationListTile({super.key, required this.press, required this.location});
   final String location;
-  final VoidCallback press;
+  final Function(String) press;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
-          onTap: press,
+          onTap: (){
+            press(location);
+          },
           horizontalTitleGap: 0,
-          // leading: ,
+          leading: Icon(Icons.add_location_alt_sharp),
           title: Text(
             location,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.rubik(fontSize: 14),
           ),
         ),
         Divider(

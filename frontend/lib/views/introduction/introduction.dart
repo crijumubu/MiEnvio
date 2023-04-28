@@ -54,7 +54,7 @@ class _IntroductionState extends State<Introduction> {
                   )
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 45),
+                  padding: const EdgeInsets.only(top: 40, left: 45, right: 45),
                   child: Column(
                     children: [
                       Align(
@@ -113,7 +113,7 @@ class _IntroductionState extends State<Introduction> {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 40, left: 45, right: 45),
+                  padding: const EdgeInsets.only(top: 30, left: 45, right: 45),
                   child: Column(
                     children: [
                       Align(
@@ -123,7 +123,7 @@ class _IntroductionState extends State<Introduction> {
                           style: GoogleFonts.rubik(fontSize: 30, fontWeight: FontWeight.w600),
                         ),
                       ),
-                      const SizedBox(height: 15,),
+                      const SizedBox(height: 10,),
                       Text(
                         '¡Nuestra aplicación está diseñada para ayudarte a calcular el costo de los fletes y mantener un seguimiento detallado de tus envíos. Con nuestra interfaz intuitiva y fácil de usar, podrás tener acceso a la información de tus envíos en tiempo real.',
                         style: GoogleFonts.rubik(fontSize: 15),

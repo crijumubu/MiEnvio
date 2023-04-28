@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/home.dart';
+import 'package:frontend/views/register_shipping/register_shipping.dart';
+import 'package:frontend/views/shippings_driver/shippings_driver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -22,7 +25,7 @@ class AuthController{
     if(response.statusCode == 200){
       succesfulAlert(context, "Registro Exitoso");
       Future.delayed(const Duration(seconds: 2, milliseconds: 500),(){
-        Navigator.pushNamed(context, "/initial-page").then((value) => null);
+        Navigator.pushNamed(context, "/initial-page");
       });
       
     }else if(response.statusCode == 409){
@@ -51,19 +54,19 @@ class AuthController{
 
   }
 
-  Future isLogged() async{
-    shPref = await SharedPreferences.getInstance();
-    String?  token = shPref.getString("token");
-    var response = await http.post(Uri.parse("$_url/session"), body:{
-      "token" : token,
-    });
+  // Future isLogged() async{
+  //   shPref = await SharedPreferences.getInstance();
+  //   String?  token = shPref.getString("token");
+  //   var response = await http.post(Uri.parse("$_url/session"), body:{
+  //     "token" : token,
+  //   });
 
-    if(response.statusCode == 200){
-      return Future.value(true);
-    }
+  //   if(response.statusCode == 200){
+  //     return Future.value(true);
+  //   }
 
-    return Future.value(false);
-  }
+  //   return Future.value(false);
+  // }
   
 
   Future closeSession() async{
@@ -105,7 +108,6 @@ class AuthController{
   static Future<String?> fetchUrl(Uri uri, {Map<String,String>? headers})async{
     try {
       final response = await http.get(uri, headers: headers);
-      print(response.statusCode);
       if(response.statusCode == 200){
         return response.body;
       } 
@@ -114,5 +116,68 @@ class AuthController{
       debugPrint(e.toString());
     }
     return null;
+  }
+
+  Future setDriver(context, int idViaje, int idConductor)async{
+    var response = await http.post(Uri.parse("$_url/asignar"), body:jsonEncode({
+      "idViaje": idViaje,
+      "idConductor":idConductor
+    }));
+    print(response.statusCode);
+    if(response.statusCode == 200){
+      succesfulAlert(context, "Conductor Asignado Exitosamente");
+      updateStatus( estado: 2, idViaje: idViaje);
+    }
+  }
+
+  
+  Future updateStatus({BuildContext? context, required int idViaje, required int estado})async{
+    var response = await http.post(Uri.parse("$_url/cambioEstados"), body:jsonEncode({
+      "idViaje": idViaje,
+      "estado": estado
+    }));
+
+    if(response.statusCode == 200){
+      if(context != null){
+        succesfulAlert(context, "Conductor Asignado Exitosamente");
+
+      }
+    }
+  }
+
+  Future registerShipping( NewShipping envio)async{
+    log(envio.toString());
+    // json
+    
+    // final headers = {'Content-Type': 'application/json'};
+    var response = await http.post(Uri.parse("$_url/resgitroViaje"), headers:{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },body: jsonEncode({
+      "nombre":envio.nombre, 
+      "horasEspera":envio.horasEspera ,
+      "costoTonelada":envio.costoTonelada, 
+      "toneladaKilometro":envio.toneladaKilometro,
+      "idUsuario":envio.idUsuario, 
+      "costocarga":envio.costocarga, 
+      "costoHoraadicional":envio.costoHoraadicional, 
+      "costoTiempoEspera":envio.costoTiempoEspera, 
+      "toneladaKilometroViaje":envio.toneladaKilometroViaje, 
+      "toneladaViaje":envio.toneladaViaje, 
+      "costoKilometro":envio.costoKilometro,
+      "costoKilometroViaje":envio.costoKilometroViaje,
+      "origen":envio.origen,
+      "destino":envio.destino,
+      "direccion":envio.direccion, 
+      "estado":1,
+    }));
+
+    if(response.statusCode == 200){
+      // print(response.statusCode);
+      print(response.statusCode);
+      // succesfulAlert(context, "Envio Registrado Exitosamente");
+      Future.delayed(const Duration(seconds: 2, milliseconds: 500),(){
+        // Navigator.pushNamed(context, "/home-supervisor");
+      });
+    }
   }
 }

@@ -4,13 +4,15 @@ import '../../shippings_driver/shippings_driver.dart';
 import '../../shippings_driver/widgets/map.dart';
 
 class NavigatorShippings extends StatelessWidget {
-  NavigatorShippings({super.key, required this.id, required this.enviosList, required this.filtersActive, required this.addFilter, required this.removeFilter});
+  NavigatorShippings({super.key, required this.id, required this.enviosList, required this.filtersActive, required this.addFilter, required this.removeFilter, required this.btnText, required this.btnRegister});
   final int id;
   // final AuthController _authController = AuthController();
   final List<Shipping?> enviosList;
   final List<int> filtersActive;
   final Function(int) addFilter;
   final Function(int) removeFilter;
+  final String btnText;
+  final bool btnRegister;
   // final VoidCallback filter;
 
   @override
@@ -31,9 +33,11 @@ class NavigatorShippings extends StatelessWidget {
       List<Widget> enviosCard = [];
       for(var i in enviosList){
         if(i != null){
+          if(i.estado==3) continue;
+
           enviosCard.add(Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: ShippingItem(shipping: i),
+            child: ShippingItem(shipping: i, btnText:btnText, updateStatus: !btnRegister,),
           ));
           if(enviosList.last != i) enviosCard.add(SizedBox(height: 10,));
         }        
@@ -46,21 +50,29 @@ class NavigatorShippings extends StatelessWidget {
 
     return Column(
       children: [
-        const SizedBox(height: 20,),
-        TextButton(
-          style: TextButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-            // side: BorderSide(color: Colors.white),
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            backgroundColor: Color(0xff3344E41),
-            shadowColor:Color.fromRGBO(224, 224, 224, 1)
-            
-
+        Visibility(
+          visible: btnRegister,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20,),
+              TextButton(
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                  // side: BorderSide(color: Colors.white),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  backgroundColor: Color(0xff3344E41),
+                  shadowColor:Color.fromRGBO(224, 224, 224, 1)
+                  
+        
+                ),
+                onPressed: (){
+                  Navigator.pushNamed(context, "/register-shipping", arguments: id);
+                }, 
+                child: Text("Registrar Envio", style: GoogleFonts.rubik(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500 ),)
+              ),
+            ],
           ),
-          onPressed: (){
-            Navigator.pushNamed(context, "/register-shipping");
-          }, 
-          child: Text("Registrar Envio", style: GoogleFonts.rubik(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500 ),)
         ),
         const SizedBox(height: 20,),
         Padding(
@@ -147,8 +159,10 @@ class ShippingStatus extends StatelessWidget {
 }
 
 class ShippingItem extends StatelessWidget {
-  const ShippingItem({super.key, required this.shipping});
+  const ShippingItem({super.key, required this.shipping, required this.btnText, required this.updateStatus});
   final Shipping shipping;
+  final String btnText;
+  final bool updateStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +177,11 @@ class ShippingItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const MapSample()));
+        if(updateStatus){
+          Navigator.pushNamed(context, "/temporal", arguments: shipping.idViaje);
+        }else{
+          Navigator.pushNamed(context, "/test");
+        }
       },
       child: Container(
         decoration:  BoxDecoration(
@@ -222,7 +240,7 @@ class ShippingItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children:  [
-                Text("Ver detalles", style: GoogleFonts.rubik(color:Color.fromARGB(255, 177, 184, 166)),),
+                Text("${btnText}", style: GoogleFonts.rubik(color:Color.fromARGB(255, 177, 184, 166)),),
                 const SizedBox(width: 5,),
                 const Icon(Icons.local_shipping, color: Color.fromARGB(255, 177, 184, 166),),
               ],

@@ -14,21 +14,25 @@ List<String> destino = ["Bogota"];
 
 
 class FleteForm extends StatelessWidget {
-  FleteForm({super.key});
+  FleteForm({super.key, required this.horaCargue, required this.horaDescargue, required this.horaECargue, required this.horaEDescargue, required this.conf, required this.origenVal, required this.destinoVal, required this.carga, required this.tipoTrans});
   
   // final String conf = "";
 
-  final TextEditingController horaCargue = TextEditingController();
-  final TextEditingController horaDescargue = TextEditingController();
-  final TextEditingController horaECargue = TextEditingController();
-  final TextEditingController horaEDescargue = TextEditingController();
+  final TextEditingController horaCargue ;
+  final TextEditingController horaDescargue ;
+  final TextEditingController horaECargue ;
+  final TextEditingController horaEDescargue;
+
+  final String conf;
+  final String origenVal;
+  final String destinoVal;
+  final String carga;
+  final String tipoTrans;
 
   @override
   Widget build(BuildContext context) {
     
-    String conf = "";
-    String carga = "";
-    String tipoTrans = "";
+    
 
 
     final double height = MediaQuery.of(context).size.height;
@@ -51,22 +55,12 @@ class FleteForm extends StatelessWidget {
                 Form(
                   child: Column(
                     children:  [
-                      // Row(
-                      //   children: [
-                      //     Text("Periodo:",
-                      //       style: GoogleFonts.rubik(fontSize: 18),
-                      //     ),
-                      //     // Text("$year$month",
-                      //     //   style: GoogleFonts.rubik(fontSize: 18),
-                      //     // ),
-                      //   ],
-                      // ),
-                      // DatePicker(),
+
                       SelectInput(list: origen, value: conf, label: '¿Donde se origina el viaje?',),
                       SizedBox(height: height*0.025,),
-                      SelectInput(list: destino, value: conf, label: '¿Cual es el destino?',),
+                      SelectInput(list: destino, value: destinoVal, label: '¿Cual es el destino?',),
                       SizedBox(height: height*0.025,),
-                      SelectInput(list: confVehiculo, value: conf, label: '¿Cuál es la configuración de su vehículo?',),
+                      SelectInput(list: confVehiculo, value: origenVal, label: '¿Cuál es la configuración de su vehículo?',),
                       SizedBox(height: height*0.025,),
                       SelectInput(list: tipoCarga, value: carga, label: '¿Qué tipo de carga va a transportar?',),
                       SizedBox(height: height*0.025,),
@@ -76,15 +70,15 @@ class FleteForm extends StatelessWidget {
                         children: [
                           Input(controller: horaCargue, inputText: "¿Horas para el cargue?", width: width*0.42,),
                           const Spacer(),
-                          Input(controller: horaCargue, inputText: "¿Horas para el descargue?", width: width*0.42,),
+                          Input(controller: horaDescargue, inputText: "¿Horas para el descargue?", width: width*0.42,),
                         ],
                       ),
                       SizedBox(height: height*0.025,),
                       Row(
                         children: [
-                          Input(controller: horaCargue, inputText: "¿Horas de espera en el cargue?", width: width*0.42,),
+                          Input(controller: horaECargue, inputText: "¿Horas de espera en el cargue?", width: width*0.42,),
                           const Spacer(),
-                          Input(controller: horaCargue, inputText: "¿Horas de espera en el descargue?", width: width*0.42,),
+                          Input(controller: horaEDescargue, inputText: "¿Horas de espera en el descargue?", width: width*0.42,),
                         ],
                       ),
                       // SizedBox(height: height*0.025,),

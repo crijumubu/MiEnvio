@@ -55,7 +55,7 @@ class StructuredFormatting {
   factory StructuredFormatting.fromJson(Map<String, dynamic> json){
     return StructuredFormatting(
       mainText: json["main_text"] as String?,
-      secondaryText: json["secondary_text"] as String
+      secondaryText: json["secondary_text"] as String?
     );
   }
 }
