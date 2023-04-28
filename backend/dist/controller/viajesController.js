@@ -243,6 +243,16 @@ class viajesController {
                 }
             });
         };
+        this.getViajeConductor = (req, res) => {
+            this.viaje.obtenerViajeCondustor(Number(req.params.id), (row) => {
+                if (row) {
+                    res.json(row);
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not found' });
+                }
+            });
+        };
         this.detalle = new detalleModel_1.default();
         this.viaje = new viajeModel_1.default();
         this.flete = new fleteModel_1.default();

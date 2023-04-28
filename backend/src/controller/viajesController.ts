@@ -260,5 +260,15 @@ class viajesController {
             }
         });
     }
+    public getViajeConductor = (req: Request, res: Response) => {
+        this.viaje.obtenerViajeCondustor(Number(req.params.id), (row: any) => {
+            if (row) {
+                res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+        });
+    }
 }
 export default viajesController;

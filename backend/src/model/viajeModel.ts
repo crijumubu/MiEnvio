@@ -78,5 +78,10 @@ class viajeModel {
         const rows = await this.mongo.model.find({ 'idUsuario': id,'estado':2 });
         fn(rows);
     }
+    public obtenerViajeCondustor = async (id: number, fn: any) => {
+        this.mongo.connect();
+        const rows = await this.mongo.model.find({ 'idConductor': id });
+        fn(rows);
+    }
 }
 export default viajeModel;
