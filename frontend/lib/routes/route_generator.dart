@@ -14,11 +14,11 @@ import '../views/register/register.dart';
 
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){
-    final args = settings.arguments;
+    // final args = settings.arguments;
     // settings.
     
 
-    print(args.runtimeType);
+    // print(args.runtimeType);
 
     switch (settings.name) {
       case "introduction":
@@ -34,13 +34,17 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_) => const Register());
 
       case "/home-supervisor":
-        return MaterialPageRoute(builder: (_)=> const HomeSupervisor());
+        final args = settings.arguments as Usuario;
+        return MaterialPageRoute(builder: (_)=>  HomeSupervisor(user: args,));
       
       case "/initial-page":
         return MaterialPageRoute(builder: (_)=> const InitialPage());
       
       case "/home":
-        return MaterialPageRoute(builder: (_)=> const Home());
+        final args = settings.arguments as Usuario;
+        return MaterialPageRoute(builder: (_)=> Home(user: args,));
+        
+        // return _errorRoute();
       
       case "/scan-qr":
         return MaterialPageRoute(builder: (_)=> ScanQR());

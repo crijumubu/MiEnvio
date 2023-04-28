@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:frontend/views/home/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -46,8 +47,10 @@ class AuthController{
       // log("$loginArr");
       // log("${loginArr['userType'].runtimeType}");
       // log("${loginArr['userType']=='2'}");
-      if(loginArr["data"]["userType"]==1) Navigator.pushNamed(context, "/home-supervisor");
-      if(loginArr["data"]["userType"]==2) Navigator.pushNamed(context, "/home");
+      getUserData(context, loginArr["data"]["idUser"]);
+
+      // if(loginArr["data"]["userType"]==1) Navigator.pushNamed(context, "/home-supervisor");
+      // if(loginArr["data"]["userType"]==2) Navigator.pushNamed(context, "/home");
       
     }else{
       errorAlert(context, 2, "Credenciales incorrectas");
@@ -77,7 +80,20 @@ class AuthController{
   }
 
   
+  Future getUserData(context, int id) async{
+    print("gettingUser");
+    var response = await http.get(Uri.parse("$_url/getDataUser/$id"));
 
+    if(response.statusCode == 200){
+      print(jsonDecode(response.body));
+      var userData = jsonDecode(response.body);
+      Usuario user = Usuario(userData[0]["id"], userData[0]["name"], userData[0]["email"], userData[0]["password"]);
+
+      if(userData[0]["userType"]==1) Navigator.pushNamed(context, "/home-supervisor",arguments: user);
+      if(userData[0]["userType"]==2) Navigator.pushNamed(context, "/home", arguments:  user);
+      // return jsonDecode(response.body);
+    }
+  }
 
 
 }

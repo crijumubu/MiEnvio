@@ -5,10 +5,12 @@ import 'package:frontend/views/register/widgets/bottom.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  const Home({super.key, required this.user});
+  final Usuario user;
 
   @override
   Widget build(BuildContext context) {
+    print(user);
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -50,7 +52,7 @@ class Home extends StatelessWidget {
 
                                 ),
                                 TextSpan(
-                                  text: "Username",
+                                  text: "${user.name}",
                                   style: GoogleFonts.rubik(
                                     fontSize: 32,
                                     // fontStyle: FontStyle.italic,
@@ -81,8 +83,8 @@ class Home extends StatelessWidget {
                   children:  [
                     MenuButton(text: 'Viajes', imgRoute: 'delivery2.png', btnRoute: '/shippings-driver',),
                     MenuButton(text: 'Escanear QR', imgRoute: 'camara.png', btnRoute: '/scan-qr',),
-                    MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr', args: QrGenerator(true, "QR Conductor", 1234567),) ,
-                    MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/user', args: UserView(hasAppBar: true, name: "Nombre", email: "Email", password: "Password"),),
+                    MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr', args: QrGenerator(true, "QR Conductor", user.id.toDouble()),) ,
+                    MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/user', args: UserView(hasAppBar: true, name: user.name, email: user.email, password: user.password),),
                   ],
                 ),
               )
@@ -94,4 +96,14 @@ class Home extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class Usuario{
+  final int id;
+  final String name;
+  final String email;
+  final String password;
+
+  Usuario(this.id, this.name, this.email, this.password, );
 }

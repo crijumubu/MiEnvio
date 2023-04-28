@@ -4,8 +4,9 @@ import '../../shippings_driver/shippings_driver.dart';
 import '../../shippings_driver/widgets/map.dart';
 
 class NavigatorHome extends StatelessWidget {
-  const NavigatorHome({super.key, required this.height});
+  const NavigatorHome({super.key, required this.height, required this.name});
   final double height;
+  final String name;
 
   GestureDetector btnIcon({required IconData icon, required String text}){
     return GestureDetector(
@@ -72,7 +73,7 @@ class NavigatorHome extends StatelessWidget {
                           // style: GoogleFonts.rubik(fontWeight: FontWeight.bold)  
                         ),
                         TextSpan(
-                          text: "User",
+                          text: "$name",
                           style: GoogleFonts.rubik(fontWeight: FontWeight.bold)  
                         )
                       ],

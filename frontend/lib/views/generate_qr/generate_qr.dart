@@ -15,27 +15,13 @@ class GenerateQR extends StatefulWidget {
 }
 
 class _GenerateQRState extends State<GenerateQR> {
-  Widget? qr;
-
-   
-  void generar(String p) {
-    setState(() {
-      qr = QrImage(
-        data: widget.qrData.toString(),
-        version: QrVersions.auto,
-        size: 200.0,
-      );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    // if(hasAppbar is bool) final 
     return (widget.hasAppbar) ? Scaffold(
       appBar: headerBack(context) ,
       body: Center(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               flex: 2,
