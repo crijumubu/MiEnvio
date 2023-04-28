@@ -33,6 +33,10 @@ const viajeSchema = new Schema({
     idConductor: {
         type: Number,
         required: false
+    },
+    direccion: {
+        type: String,
+        required: false
     }
 },
     {

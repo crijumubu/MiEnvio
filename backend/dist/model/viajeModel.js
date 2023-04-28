@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongo_1 = __importDefault(require("../database/mongo"));
 class viajeModel {
     constructor() {
-        this.registroViaje = (idUsuario, nombre, origen, destino, estado, fn) => __awaiter(this, void 0, void 0, function* () {
+        this.registroViaje = (idUsuario, nombre, origen, destino, estado, direccion, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
             let cantviajes = -1;
             try {
@@ -51,7 +51,7 @@ class viajeModel {
                 console.log(err);
                 cantf = 1;
             }
-            yield this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'origen': origen, 'destino': destino, 'estado': estado, 'idConductor': 0 })
+            yield this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'origen': origen, 'destino': destino, 'estado': estado, 'idConductor': 0, 'direccion': direccion })
                 .then((response, error) => {
                 //console.log(response);
                 //console.log(error);

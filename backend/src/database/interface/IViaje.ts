@@ -9,4 +9,5 @@ export default interface IViaje extends Document {
     destino:string;
     estado:number;
     idConductor: number;
+    direccion: string;
 }

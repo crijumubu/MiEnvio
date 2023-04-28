@@ -6,7 +6,7 @@ class viajeModel {
         this.mongo = new mongo(16);
         this.mongo2 = new mongo(14);
     }
-    public registroViaje = async (idUsuario: number, nombre: string, origen: string, destino: string, estado: number, fn: any) => {
+    public registroViaje = async (idUsuario: number, nombre: string, origen: string, destino: string, estado: number, direccion:string,fn: any) => {
         this.mongo.connect();
         let cantviajes = -1
         try {
@@ -43,7 +43,7 @@ class viajeModel {
             console.log(err);
             cantf = 1;
         }
-        await this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'origen': origen, 'destino': destino, 'estado': estado, 'idConductor': 0 })
+        await this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'origen': origen, 'destino': destino, 'estado': estado, 'idConductor': 0 ,'direccion':direccion})
             .then((response: any, error: any) => {
                 //console.log(response);
                 //console.log(error);

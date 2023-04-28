@@ -33,6 +33,10 @@ const viajeSchema = new mongoose_1.Schema({
     idConductor: {
         type: Number,
         required: false
+    },
+    direccion: {
+        type: String,
+        required: false
     }
 }, {
     versionKey: false

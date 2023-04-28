@@ -187,7 +187,7 @@ class viajesController {
                     return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
                 }
             });
-            yield this.viaje.registroViaje(req.body.idUsuario, req.body.nombre, req.body.origen, req.body.destino, req.body.estado, (error) => {
+            yield this.viaje.registroViaje(req.body.idUsuario, req.body.nombre, req.body.origen, req.body.destino, req.body.estado, req.body.direccion, (error) => {
                 if (error) {
                     return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
                 }
