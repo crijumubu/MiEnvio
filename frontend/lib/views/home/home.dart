@@ -12,14 +12,9 @@ class Home extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      bottomSheet: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, "/home-supervisor");
-        },
-        child: const SizedBox(
-          height: 90,
-          child: Center(child: Bottom())
-        ),
+      bottomSheet: const SizedBox(
+        height: 100,
+        child: Center(child: Bottom())
       ),
       body: WillPopScope(
         onWillPop: () async => false ,
@@ -87,7 +82,7 @@ class Home extends StatelessWidget {
                     MenuButton(text: 'Viajes', imgRoute: 'delivery2.png', btnRoute: '/shippings-driver',),
                     MenuButton(text: 'Escanear QR', imgRoute: 'camara.png', btnRoute: '/scan-qr',),
                     MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr', args: QrGenerator(true, "QR Conductor", 1234567),) ,
-                    MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/test',),
+                    MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/user', args: UserView(hasAppBar: true, name: "Nombre", email: "Email", password: "Password"),),
                   ],
                 ),
               )

@@ -5,6 +5,7 @@ import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/scan_qr/scan_qr.dart';
 import 'package:frontend/views/shippings_driver/shippings_driver.dart';
 import 'package:frontend/views/test/test.dart';
+import 'package:frontend/views/user/user.dart';
 import '../views/home_supervisor/home_supervisor.dart';
 import '../views/initial_page/initial_page.dart';
 import '../views/introduction/introduction.dart';
@@ -58,6 +59,10 @@ class RouteGenerator{
       case "/test":
         return MaterialPageRoute(builder: (_)=> const Test());
 
+      case "/user":
+        final args = settings.arguments as UserView;
+        return MaterialPageRoute(builder: (_)=> User(hasAppbar: args.hasAppBar, email: args.email, name: args.name, password: args.password,));
+
       default:
         return _errorRoute();
     }
@@ -87,4 +92,16 @@ class QrGenerator{
 
   QrGenerator(this.hasAppBar, this.title, this.qrData);
 
+}
+
+class UserView{
+  final bool hasAppBar;
+  final String name;
+  final String email;
+  final String password;
+
+
+
+  UserView({required this.hasAppBar, required this.name, required this.email, required this.password});
+  
 }
