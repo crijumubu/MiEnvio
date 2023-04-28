@@ -1,20 +1,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:frontend/controller/auth_controller.dart';
+import 'package:frontend/views/update_state.dart/update_status.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../shippings_driver/shippings_driver.dart';
 import '../../shippings_driver/widgets/map.dart';
 
 class NavigatorHome extends StatelessWidget {
-  NavigatorHome({super.key, required this.height, required this.name, required this.id});
+  NavigatorHome({super.key, required this.height, required this.name, required this.id, required this.enviosShow});
   final double height;
   final String name;
   final int id;
+  final List<Shipping?> enviosShow;
   final AuthController _authController = AuthController();
 
-  GestureDetector btnIcon({required IconData icon, required String text}){
+  GestureDetector btnIcon(context, {required IconData icon, required String text, required ruta}){
     return GestureDetector(
-      onTap: (){},
+      onTap: (){
+        if(ruta is String){
+          Navigator.pushNamed(context, "$ruta", arguments: id);
+        }else{
+          ruta();
+        }
+      },
       child: Center(
         child: Container(
           width: 120,
@@ -181,9 +189,9 @@ class NavigatorHome extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Row(
             children: [
-              btnIcon(icon: Icons.local_shipping_outlined, text: "Registrar"),
+              btnIcon(context, icon: Icons.local_shipping_outlined, text: "Registrar", ruta: '/register-shipping'),
                Spacer(),
-              btnIcon(icon: Icons.change_circle_outlined, text: "Actualizar"),
+              btnIcon(context, icon: Icons.change_circle_outlined, text: "Actualizar", ruta:() {Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateStatus(id: id, enviosList: enviosShow, filtersActive: [1,2])));}),
             ],
           ),
         )
@@ -200,7 +208,7 @@ class ActiveShippings extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const MapSample()));
+        Navigator.pushNamed(context, "/test");
       },
       child: Container(
         decoration:  BoxDecoration(

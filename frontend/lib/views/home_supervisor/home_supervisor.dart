@@ -23,7 +23,7 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
   bool scrolled = true;
   List<Shipping> enviosList = [];
   List<int> filterList = [1,2,3];
-  late List<Shipping?> enviosShow;
+  late List<Shipping?> enviosShow = [];
   final AuthController _authController = AuthController();
 
 
@@ -71,26 +71,37 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
     });
   }
 
-  void filter(){
-    List<Shipping?> newList = enviosList.map((e){
-      if(filterList.contains(e.estado)){
-        return e;
-      }
+  List<Shipping?>? filter(List<int>? filtro){
+    if(filtro == null){
+      List<Shipping?> newList = enviosList.map((e){
+        if(filterList.contains(e.estado)){
+          return e;
+        }
+        return null;
+      }).toList();
+      setState(() {
+        enviosShow = newList;
+      });
       return null;
-    }).toList();
-    setState(() {
-      enviosShow = newList;
-    });
+    }else{
+      List<Shipping?> newList = enviosList.map((e){
+        if(filtro.contains(e.estado)){
+          return e;
+        }
+        return null;
+      }).toList();
+      return newList;
+    }
   }
 
   void addFilter(int number){
     filterList.add(number);
-    filter();
+    filter(null);
   }
 
   void deleteFilter(int number){
     filterList.remove(number);
-    filter();
+    filter(null);
   }
 
 
@@ -163,9 +174,9 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
             children: [
               // Header(),
               if(index == 0)
-                NavigatorHome(height: height, name: widget.user.name, id: widget.user.id,)
+                NavigatorHome(height: height, name: widget.user.name, id: widget.user.id, enviosShow: enviosShow,)
               else if(index == 1)
-                NavigatorShippings(id: widget.user.id, enviosList: enviosShow, filtersActive: filterList, addFilter: addFilter, removeFilter: deleteFilter,)
+                NavigatorShippings(id: widget.user.id, enviosList: enviosShow, filtersActive: filterList, addFilter: addFilter, removeFilter: deleteFilter, btnText: 'Ver detalles', btnRegister: true,)
               else if(index == 2)
                 NavigatorSettings(user: widget.user,)
             ],
