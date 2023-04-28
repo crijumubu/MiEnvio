@@ -117,7 +117,7 @@ class NavigatorHome extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.white),
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(vertical: 30),
-                    child: Center(child: Text("No hay envios activos", style: GoogleFonts.rubik(fontSize: 18),)),
+                    child: Center(child: Text("No hay envios activos\nRecuerde asignar conductor a los envios pendientes", style: GoogleFonts.rubik(fontSize: 18),)),
                   )
                 ];
               }else{

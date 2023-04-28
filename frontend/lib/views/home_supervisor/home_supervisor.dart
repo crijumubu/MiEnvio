@@ -3,6 +3,8 @@ import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/home_supervisor/widgets/navigator_home.dart';
 import 'package:frontend/views/home_supervisor/widgets/navigator_settings.dart';
 import 'package:frontend/views/home_supervisor/widgets/navigator_shippings.dart';
+import '../../controller/auth_controller.dart';
+import '../shippings_driver/shippings_driver.dart';
 import 'widgets/navigation.dart';
 
 class HomeSupervisor extends StatefulWidget {
@@ -19,7 +21,11 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
   late double height = 0;
   final ScrollController _scrollController = ScrollController();
   bool scrolled = true;
-  // double? _scrolledUnderElevation;
+  List<Shipping> enviosList = [];
+  List<int> filterList = [1,2,3];
+  late List<Shipping?> enviosShow;
+  final AuthController _authController = AuthController();
+
 
   @override
   void initState() {
@@ -44,17 +50,49 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
         }
       }
     );
+    _authController.allShippings(widget.user.id).then(
+      (value){
+        List<Shipping> envios = (value as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e["idViaje"], idUsuario: e["idUsuario"], idFlete: e["idFlete"], origen: e["origen"], destino: e["destino"], estado: e["estado"], idConductor: e["idConductor"])).toList();
+
+        enviosList = envios;
+        setState(() {
+          enviosShow = enviosList.toList();
+        });
+      }
+    );
     super.initState();
     
   }
 
   void listenScroll() {
     final bool isTop = _scrollController.position.pixels <= 0;
-    // print(_scrollController.position.pixels);
     setState(() {
       scrolled = isTop;
     });
   }
+
+  void filter(){
+    List<Shipping?> newList = enviosList.map((e){
+      if(filterList.contains(e.estado)){
+        return e;
+      }
+      return null;
+    }).toList();
+    setState(() {
+      enviosShow = newList;
+    });
+  }
+
+  void addFilter(int number){
+    filterList.add(number);
+    filter();
+  }
+
+  void deleteFilter(int number){
+    filterList.remove(number);
+    filter();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +113,7 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
             color: (scrolled ? Colors.white : Color(0xff3344E41))
             
           ),
-          // foregroundDecoration: BoxDecoration(
-          //   color: Colors.red
-          // ),
+
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.only(bottom: 10),
@@ -126,7 +162,7 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
             if(index == 0)
               NavigatorHome(height: height, name: widget.user.name, id: widget.user.id,)
             else if(index == 1)
-              NavigatorShippings()
+              NavigatorShippings(id: widget.user.id, enviosList: enviosShow, filtersActive: filterList, addFilter: addFilter, removeFilter: deleteFilter,)
             else if(index == 2)
               NavigatorSettings(user: widget.user,)
           ],
