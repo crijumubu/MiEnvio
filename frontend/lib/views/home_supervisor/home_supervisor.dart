@@ -99,75 +99,79 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
     if(height == 0) height = MediaQuery.of(context).size.height;
     // print(index);    
 
-    return Scaffold(
-      bottomNavigationBar: navigation,
-      extendBody: true,
-      backgroundColor: Colors.grey[100],      
-      appBar: AppBar(
-        backgroundColor: (scrolled ? Colors.white : Colors.black),
-        leading: SizedBox(width: 0, height: 0,),
-        
-        flexibleSpace: AnimatedContainer(
-          duration: Duration(milliseconds: 200),
-          decoration: BoxDecoration(
-            color: (scrolled ? Colors.white : Color(0xff3344E41))
-            
-          ),
-
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+    return WillPopScope(
+      onWillPop: () async => false ,
+      child: Scaffold(
+        bottomNavigationBar: navigation,
+        extendBody: true,
+        backgroundColor: Colors.grey[100],      
+        appBar: AppBar(
+          backgroundColor: (scrolled ? Colors.white : Colors.black),
+          leading: SizedBox(width: 0, height: 0,),
+          
+          flexibleSpace: AnimatedContainer(
+            duration: Duration(milliseconds: 200),
+            decoration: BoxDecoration(
+              color: (scrolled ? Colors.white : Color(0xff3344E41))
+              
+            ),
+    
+            width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment:  Alignment.bottomCenter,
-                    child: Image.asset(
-                      "assets/images/logobl.png",
-                      scale: 2.3,
-                      color: (scrolled ? Color.fromARGB(190, 0, 0, 0) : Colors.white),
-                    ),
-                  ),
-            
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: Image.asset("assets/images/logout.png", scale: 18, color: (scrolled ? Color.fromARGB(190, 0, 0, 0) : Colors.white),),
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment:  Alignment.bottomCenter,
+                      child: Image.asset(
+                        "assets/images/logobl.png",
+                        scale: 2.3,
+                        color: (scrolled ? Color.fromARGB(190, 0, 0, 0) : Colors.white),
                       ),
                     ),
-                  )
-                        
-                ],
+              
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                        // Navigator.pushNamed(context, "initial-page");
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: Image.asset("assets/images/logout.png", scale: 18, color: (scrolled ? Color.fromARGB(190, 0, 0, 0) : Colors.white),),
+                        ),
+                      ),
+                    )
+                          
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        // title: 
-        // scrolledUnderElevation: _scrolledUnderElevation,
-        shadowColor: Colors.transparent,
-      ),    
-      body: SafeArea(
-        bottom: false,
-        child: ListView(
-          controller: _scrollController,
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Header(),
-            if(index == 0)
-              NavigatorHome(height: height, name: widget.user.name, id: widget.user.id,)
-            else if(index == 1)
-              NavigatorShippings(id: widget.user.id, enviosList: enviosShow, filtersActive: filterList, addFilter: addFilter, removeFilter: deleteFilter,)
-            else if(index == 2)
-              NavigatorSettings(user: widget.user,)
-          ],
-        ),
-      )
+          // title: 
+          // scrolledUnderElevation: _scrolledUnderElevation,
+          shadowColor: Colors.transparent,
+        ),    
+        body: SafeArea(
+          bottom: false,
+          child: ListView(
+            controller: _scrollController,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Header(),
+              if(index == 0)
+                NavigatorHome(height: height, name: widget.user.name, id: widget.user.id,)
+              else if(index == 1)
+                NavigatorShippings(id: widget.user.id, enviosList: enviosShow, filtersActive: filterList, addFilter: addFilter, removeFilter: deleteFilter,)
+              else if(index == 2)
+                NavigatorSettings(user: widget.user,)
+            ],
+          ),
+        )
+      ),
     );
   }
 }

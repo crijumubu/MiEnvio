@@ -101,4 +101,18 @@ class AuthController{
       return data;
     }
   }
+
+  static Future<String?> fetchUrl(Uri uri, {Map<String,String>? headers})async{
+    try {
+      final response = await http.get(uri, headers: headers);
+      print(response.statusCode);
+      if(response.statusCode == 200){
+        return response.body;
+      } 
+  
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return null;
+  }
 }

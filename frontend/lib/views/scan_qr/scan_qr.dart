@@ -74,21 +74,6 @@ class _ScanQRState extends State<ScanQR> {
               },
               // scanWindow: ,
             ),
-            // GestureDetector(
-            //   onTap: (){
-                      
-            //   }, 
-            //   child: Container(
-            //     padding: EdgeInsets.all(10),
-            //     decoration: BoxDecoration(
-            //       // border: (),
-            //       shape: BoxShape.circle,
-            //       color: Colors.white
-            //     ),
-            //     child: Icon(Icons.flash_off, size: 30,)
-            //   )
-            // ),
-            // SizedBox(height: 10,)
           ],
         ),
     );

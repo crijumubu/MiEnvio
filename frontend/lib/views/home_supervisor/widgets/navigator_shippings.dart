@@ -24,7 +24,7 @@ class NavigatorShippings extends StatelessWidget {
           decoration: BoxDecoration(color: Colors.white),
           width: double.infinity,
           padding: EdgeInsets.symmetric(vertical: 30),
-          child: Center(child: Text("No hay envios activos", style: GoogleFonts.rubik(fontSize: 18),)),
+          child: Center(child: Text("No hay envios registrados.", style: GoogleFonts.rubik(fontSize: 18),)),
         )
       ];
     }else{
@@ -38,12 +38,30 @@ class NavigatorShippings extends StatelessWidget {
           if(enviosList.last != i) enviosCard.add(SizedBox(height: 10,));
         }        
       }
+      // if(enviosCard =)
+
       children = enviosCard;
     }
 
 
     return Column(
       children: [
+        const SizedBox(height: 20,),
+        TextButton(
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+            // side: BorderSide(color: Colors.white),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            backgroundColor: Color(0xff3344E41),
+            shadowColor:Color.fromRGBO(224, 224, 224, 1)
+            
+
+          ),
+          onPressed: (){
+            Navigator.pushNamed(context, "/register-shipping");
+          }, 
+          child: Text("Registrar Envio", style: GoogleFonts.rubik(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500 ),)
+        ),
         const SizedBox(height: 20,),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -66,66 +84,15 @@ class NavigatorShippings extends StatelessWidget {
           ),
         ),
         Divider(),
-        Column(children: children),
-        // FutureBuilder(
-        //   future: _authController.allShippings(id),
-        //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-        //     List<Widget> children;
-        //     // print(snapshot.data);
-        //     if(snapshot.hasData){
-        //       List<Shipping> envios = (snapshot.data as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e["idViaje"], idUsuario: e["idUsuario"], idFlete: e["idFlete"], origen: e["origen"], destino: e["destino"], estado: e["estado"], idConductor: e["idConductor"])).toList();
-
-
-        //       if(envios.isEmpty){
-        //         children = [
-        //           Container(
-        //             decoration: BoxDecoration(color: Colors.white),
-        //             width: double.infinity,
-        //             padding: EdgeInsets.symmetric(vertical: 30),
-        //             child: Center(child: Text("No hay envios activos", style: GoogleFonts.rubik(fontSize: 18),)),
-        //           )
-        //         ];
-        //       }else{
-        //         List<Widget> enviosCard = [];
-        //         for(var i in envios){
-        //           enviosCard.add(Padding(
-        //             padding: const EdgeInsets.symmetric(horizontal: 10),
-        //             child: ShippingItem(shipping: i),
-        //           ));
-        //           if(envios.last != i) enviosCard.add(SizedBox(height: 10,));
-        //         }
-
-        //         children = enviosCard;
-        //       }
-        //     }else if(snapshot.hasError){
-        //       children = <Widget>[
-        //         const Icon(
-        //           Icons.error_outline,
-        //           color: Colors.red,
-        //           size: 60,
-        //         ),
-        //         Padding(
-        //           padding: const EdgeInsets.only(top: 16),
-        //           child: Text('Error: ${snapshot.error}'),
-        //         ),
-        //       ];
-        //     }else{
-        //       children = const <Widget>[
-        //         SizedBox(
-        //           width: 60,
-        //           height: 60,
-        //           child: CircularProgressIndicator(),
-        //         ),
-        //         Padding(
-        //           padding: EdgeInsets.only(top: 16),
-        //           child: Text('Awaiting result...'),
-        //         ),
-        //       ];
-        //     }
-
-        //     return Column(children: children);
-        //   },
-        // ),
+        if(children.isEmpty)
+          Container(
+            decoration: BoxDecoration(color: Colors.white),
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 30),
+            child: Center(child: Text("No hay envios en este estado", style: GoogleFonts.rubik(fontSize: 18),)),
+          )
+        else
+          Column(children: children),
       ],
     );
   }
@@ -255,9 +222,9 @@ class ShippingItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children:  [
-                Text("Ver detalles", style: GoogleFonts.rubik(color:const Color(0xffA3B18A)),),
+                Text("Ver detalles", style: GoogleFonts.rubik(color:Color.fromARGB(255, 177, 184, 166)),),
                 const SizedBox(width: 5,),
-                const Icon(Icons.not_listed_location_rounded, color: Color(0xff588157),),
+                const Icon(Icons.local_shipping, color: Color.fromARGB(255, 177, 184, 166),),
               ],
             )
           ],

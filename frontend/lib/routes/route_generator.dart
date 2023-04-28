@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/views/flete_form/flete_form.dart';
 import 'package:frontend/views/generate_qr/generate_qr.dart';
 import 'package:frontend/views/home/home.dart';
+import 'package:frontend/views/register_shipping/register_shipping.dart';
 import 'package:frontend/views/scan_qr/scan_qr.dart';
 import 'package:frontend/views/shippings_driver/shippings_driver.dart';
 import 'package:frontend/views/test/test.dart';
@@ -43,8 +44,6 @@ class RouteGenerator{
       case "/home":
         final args = settings.arguments as Usuario;
         return MaterialPageRoute(builder: (_)=> Home(user: args,));
-        
-        // return _errorRoute();
       
       case "/scan-qr":
         return MaterialPageRoute(builder: (_)=> ScanQR());
@@ -52,7 +51,6 @@ class RouteGenerator{
       case "/generate-qr":
         final args = settings.arguments as QrGenerator;
         return MaterialPageRoute(builder: (_)=>  GenerateQR(hasAppbar: args.hasAppBar, title: args.title, qrData: args.qrData, ));
-        
 
       case "/shippings-driver":
         return MaterialPageRoute(builder: (_)=> ShippingsDriver());
@@ -66,6 +64,9 @@ class RouteGenerator{
       case "/user":
         final args = settings.arguments as UserView;
         return MaterialPageRoute(builder: (_)=> User(hasAppbar: args.hasAppBar, email: args.email, name: args.name, password: args.password,));
+
+      case "/register-shipping":
+        return MaterialPageRoute(builder: (_)=> const RegisterShipping());
 
       default:
         return _errorRoute();

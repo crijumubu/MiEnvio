@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:frontend/controller/auth_controller.dart';
@@ -110,14 +109,26 @@ class NavigatorHome extends StatelessWidget {
               // print(snapshot.data[0]["nombre"]);
               List<Shipping> enviosActivos = (snapshot.data as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e["idViaje"], idUsuario: e["idUsuario"], idFlete: e["idFlete"], origen: e["origen"], destino: e["destino"], estado: e["estado"], idConductor: e["idConductor"])).toList();
 
-              log(enviosActivos.toString());
               if(enviosActivos.isEmpty){
                 children = [
-                  Container(
-                    decoration: BoxDecoration(color: Colors.white),
+                  SizedBox(
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 30),
-                    child: Center(child: Text("No hay envios activos\nRecuerde asignar conductor a los envios pendientes", style: GoogleFonts.rubik(fontSize: 18),)),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(text: "No hay envios activos."),
+                              TextSpan( text: "\nRecuerde asignar conductor a los envios pendientes.",style: GoogleFonts.rubik(fontWeight: FontWeight.bold))
+                            ],
+                            style: GoogleFonts.rubik(fontSize: 18, color: Colors.black)
+                          ),
+                          textAlign: TextAlign.center
+                        ),
+                      ),
+                    )
                   )
                 ];
               }else{
@@ -153,7 +164,7 @@ class NavigatorHome extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 16),
-                  child: Text('Awaiting result...'),
+                  child: Text('Consultando...'),
                 ),
               ];
             }
