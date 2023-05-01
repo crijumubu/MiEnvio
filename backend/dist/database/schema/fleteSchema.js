@@ -6,6 +6,10 @@ const fleteSchema = new mongoose_1.Schema({
         type: Number,
         required: true
     },
+    idViaje: {
+        type: Number,
+        required: true
+    },
     toneladaKilometro: {
         type: Number,
         required: true

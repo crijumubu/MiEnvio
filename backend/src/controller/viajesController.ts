@@ -201,19 +201,7 @@ class viajesController {
             }
         });
     }
-    public registerViaje = async (req: Request, res: Response) => {
-        await this.flete.registroFlete(req.body.toneladaKilometro, req.body.costoTonelada, req.body.costocarga, req.body.costoHoraadicional, req.body.horasEspera, req.body.costoTiempoEspera, req.body.toneladaKilometroViaje, req.body.toneladaViaje, req.body.costoKilometro, req.body.costoKilometroViaje, (error: any) => {
-            if (error) {
-                return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
-            }
-        });
-        await this.viaje.registroViaje(req.body.idUsuario, req.body.nombre, req.body.origen, req.body.destino, req.body.estado,req.body.direccion, (error: any) => {
-            if (error) {
-                return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
-            }
-        });
-        return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
-    }
+    
     public registerDetalle = async (req: Request, res: Response) => {
         if (req.body) {
             await this.detalle.registroDetalles(req.body.idFlete, req.body.tipoCosto, req.body.concepto, req.body.mes, req.body.viaje, req.body.tonelada, req.body.participacion, (error: any) => {
@@ -279,6 +267,24 @@ class viajesController {
                 return res.status(404).json({ error: true, message: 'User not found' });
             }
         });
+    }
+    public registerViaje = async (req: Request, res: Response) => {
+        const { idUsuario, nombre, origen, destino,estado,direccion } = req.body;
+        await this.viaje.registroViaje(idUsuario, nombre, origen, destino, estado,direccion, (error: any) => {
+            if (error) {
+                return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+            }
+        });
+        return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
+    }
+    public registerFlete = async (req: Request, res: Response) => {
+        const { idViaje, toneladaKilometro, costoTonelada, costocarga,costoHoraadicional,horasEspera,costoTiempoEspera, toneladaKilometroViaje,toneladaViaje,costoKilometro,costoKilometroViaje} = req.body;
+        await this.flete.registroFlete(idViaje, toneladaKilometro, costoTonelada, costocarga,costoHoraadicional,horasEspera,costoTiempoEspera, toneladaKilometroViaje,toneladaViaje,costoKilometro,costoKilometroViaje, (error: any) => {
+            if (error) {
+                return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+            }
+        });
+        return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
     }
 }
 export default viajesController;

@@ -26,24 +26,8 @@ class viajeModel {
             console.log(err);
             cantviajes = 1;
         }
-        let cantf = -1
-        try {
-            await this.mongo2.model.aggregate([
-                {
-                    $group:
-                    {
-                        '_id': null,
-                        'nid': { $max: '$id' },
-                    }
-                }
-            ]).then((response: any, error: any) => {
-                cantf = response[0].nid;
-            });
-        } catch (err) {
-            console.log(err);
-            cantf = 1;
-        }
-        await this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'idFlete': cantf, 'origen': origen, 'destino': destino, 'estado': estado, 'idConductor': 0 ,'direccion':direccion})
+        
+        await this.mongo.model.create({ 'idViaje': cantviajes, 'idUsuario': idUsuario, 'nombre': nombre, 'origen': origen, 'destino': destino, 'estado': estado, 'idConductor': 0 ,'direccion':direccion})
             .then((response: any, error: any) => {
                 //console.log(response);
                 //console.log(error);

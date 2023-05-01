@@ -2,6 +2,7 @@ import { Document } from 'mongoose';
 
 export default interface IFlete extends Document {
     id: number;
+	idViaje: number;
     toneladaKilometro: number;
 	costoTonelada: number;
 	costocarga: number;

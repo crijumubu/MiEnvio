@@ -14,10 +14,6 @@ const viajeSchema = new Schema({
         type: String,
         required: true
     },
-    idFlete: {
-        type: Number,
-        required: true
-    },
     origen: {
         type: String,
         required: true

@@ -5,6 +5,10 @@ const fleteSchema = new Schema({
         type: Number,
         required: true
     },
+    idViaje: {
+        type: Number,
+        required: true
+    },
     toneladaKilometro: {
         type: Number,
         required: true

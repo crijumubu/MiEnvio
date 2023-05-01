@@ -4,7 +4,7 @@ class fleteModel {
   constructor() {
     this.mongo = new mongo(14);
   }
-  public registroFlete = async (toneladaKilometro: number, costoTonelada: number, costocarga: number, costoHoraadicional: number, horasEspera: number, costoTiempoEspera: number, toneladaKilometroViaje: number, toneladaViaje: number, costoKilometro: number, costoKilometroViaje: number, fn: any) => {
+  public registroFlete = async (idViaje:number,toneladaKilometro: number, costoTonelada: number, costocarga: number, costoHoraadicional: number, horasEspera: number, costoTiempoEspera: number, toneladaKilometroViaje: number, toneladaViaje: number, costoKilometro: number, costoKilometroViaje: number, fn: any) => {
     this.mongo.connect();
     let cant = 0;
     try {
@@ -24,7 +24,7 @@ class fleteModel {
       cant = 1;
       console.log(err);
     }
-    await this.mongo.model.create({ 'id': cant, 'toneladaKilometro': toneladaKilometro, 'costoTonelada': costoTonelada, 'costocarga': costocarga, 'costoHoraadicional': costoHoraadicional, 'horasEspera': horasEspera, 'costoTiempoEspera': costoTiempoEspera, 'toneladaKilometroViaje': toneladaKilometroViaje, 'toneladaViaje': toneladaViaje, 'costoKilometro': costoKilometro, 'costoKilometroViaje': costoKilometroViaje })
+    await this.mongo.model.create({ 'id': cant,'idViaje':idViaje, 'toneladaKilometro': toneladaKilometro, 'costoTonelada': costoTonelada, 'costocarga': costocarga, 'costoHoraadicional': costoHoraadicional, 'horasEspera': horasEspera, 'costoTiempoEspera': costoTiempoEspera, 'toneladaKilometroViaje': toneladaKilometroViaje, 'toneladaViaje': toneladaViaje, 'costoKilometro': costoKilometro, 'costoKilometroViaje': costoKilometroViaje })
       .then((response: any, error: any) => {
         //console.log(response);
         //console.log(error);

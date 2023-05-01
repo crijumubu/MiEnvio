@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongo_1 = __importDefault(require("../database/mongo"));
 class fleteModel {
     constructor() {
-        this.registroFlete = (toneladaKilometro, costoTonelada, costocarga, costoHoraadicional, horasEspera, costoTiempoEspera, toneladaKilometroViaje, toneladaViaje, costoKilometro, costoKilometroViaje, fn) => __awaiter(this, void 0, void 0, function* () {
+        this.registroFlete = (idViaje, toneladaKilometro, costoTonelada, costocarga, costoHoraadicional, horasEspera, costoTiempoEspera, toneladaKilometroViaje, toneladaViaje, costoKilometro, costoKilometroViaje, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
             let cant = 0;
             try {
@@ -34,7 +34,7 @@ class fleteModel {
                 cant = 1;
                 console.log(err);
             }
-            yield this.mongo.model.create({ 'id': cant, 'toneladaKilometro': toneladaKilometro, 'costoTonelada': costoTonelada, 'costocarga': costocarga, 'costoHoraadicional': costoHoraadicional, 'horasEspera': horasEspera, 'costoTiempoEspera': costoTiempoEspera, 'toneladaKilometroViaje': toneladaKilometroViaje, 'toneladaViaje': toneladaViaje, 'costoKilometro': costoKilometro, 'costoKilometroViaje': costoKilometroViaje })
+            yield this.mongo.model.create({ 'id': cant, 'idViaje': idViaje, 'toneladaKilometro': toneladaKilometro, 'costoTonelada': costoTonelada, 'costocarga': costocarga, 'costoHoraadicional': costoHoraadicional, 'horasEspera': horasEspera, 'costoTiempoEspera': costoTiempoEspera, 'toneladaKilometroViaje': toneladaKilometroViaje, 'toneladaViaje': toneladaViaje, 'costoKilometro': costoKilometro, 'costoKilometroViaje': costoKilometroViaje })
                 .then((response, error) => {
                 //console.log(response);
                 //console.log(error);
