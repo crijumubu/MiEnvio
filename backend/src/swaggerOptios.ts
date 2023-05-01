@@ -12,6 +12,6 @@ export const options = {
         },
       ],
     },
-    apis: ['./routes/*.js'],
+    apis: ['dist/routes/*.js'],
     
   };

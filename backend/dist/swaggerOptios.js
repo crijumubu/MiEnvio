@@ -15,5 +15,5 @@ exports.options = {
             },
         ],
     },
-    apis: ['./routes/*.js'],
+    apis: ['dist/routes/*.js'],
 };
