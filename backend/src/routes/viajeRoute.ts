@@ -25,6 +25,7 @@ class viajeRoute {
     this.router.post('/asignar',this.controller.asignarConductor);
     this.router.get('/viajeIdUsrActivo/:id', this.controller.getViajeActivo);
     this.router.get('/viajeIdConductor/:id', this.controller.getViajeConductor);
+    this.router.get('/viajeId/:id', this.controller.getViajeId);
   }
 }
 export default viajeRoute;

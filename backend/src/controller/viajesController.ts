@@ -1,4 +1,4 @@
-import { Request, Response, json } from 'express';
+import { Request, Response, application, json } from 'express';
 import ciudadModel from '../model/ciudadModel';
 import configuracionModel from '../model/configuracionModel';
 import promedioConsumoModel from '../model/promedioConsumoModel';
@@ -262,6 +262,16 @@ class viajesController {
     }
     public getViajeConductor = (req: Request, res: Response) => {
         this.viaje.obtenerViajeCondustor(Number(req.params.id), (row: any) => {
+            if (row) {
+                res.json(row);
+            }
+            else {
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+        });
+    }
+    public getViajeId = (req: Request, res: Response) => {
+        this.viaje.obtenerViajeId(Number(req.params.id), (row: any) => {
             if (row) {
                 res.json(row);
             }

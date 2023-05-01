@@ -91,6 +91,11 @@ class viajeModel {
             const rows = yield this.mongo.model.find({ 'idConductor': id });
             fn(rows);
         });
+        this.obtenerViajeId = (id, fn) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ 'idViaje': id });
+            fn(rows);
+        });
         this.mongo = new mongo_1.default(16);
         this.mongo2 = new mongo_1.default(14);
     }
