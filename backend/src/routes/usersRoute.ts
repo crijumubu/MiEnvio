@@ -9,6 +9,49 @@ class usersRoute {
     this.config();
   }
   public config() {
+     /**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: inicio de sesion del usuario.
+ *     description: permite al usuario iniciar sesion con el correo y contraseña.
+ *     parameters:
+ *       - in: query
+ *         name: email
+ *         description: email del usuario que se loguea.
+ *         schema:
+ *           type: varchar
+ *           minimum: 1
+ *           example: 123
+ *       - in: query
+ *         name: email
+ *         description: email del usuario que se loguea.
+ *         schema:
+ *           type: varchar
+ *           minimum: 1
+ *           example: 123
+ *     responses:
+ *       200:
+ *         description: Datos del usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 123
+ *                 name:
+ *                   type: string
+ *                   example: "Juan Pérez"
+ *                 email:
+ *                   type: string
+ *                   example: "juan.perez@example.com"
+ *       404:
+ *         description: Usuario no encontrado.
+ *       500:
+ *         description: Error interno del servidor.
+ */
     this.router.post('/login', this.controller.login);
     this.router.post('/register', this.controller.register);
     /**

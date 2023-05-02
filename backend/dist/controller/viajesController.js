@@ -252,21 +252,25 @@ class viajesController {
         };
         this.registerViaje = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { idUsuario, nombre, origen, destino, estado, direccion } = req.body;
-            yield this.viaje.registroViaje(idUsuario, nombre, origen, destino, estado, direccion, (error) => {
-                if (error) {
-                    return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+            yield this.viaje.registroViaje(idUsuario, nombre, origen, destino, estado, direccion, (error, id) => {
+                if (!error) {
+                    return res.json({ error: false, message: 'Registro  exitóso!', idViaje: id });
+                }
+                else {
+                    return res.json({ error: true, message: 'Algo ha salido mal al realizar el registro!' });
                 }
             });
-            return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
         });
         this.registerFlete = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { idViaje, toneladaKilometro, costoTonelada, costocarga, costoHoraadicional, horasEspera, costoTiempoEspera, toneladaKilometroViaje, toneladaViaje, costoKilometro, costoKilometroViaje } = req.body;
             yield this.flete.registroFlete(idViaje, toneladaKilometro, costoTonelada, costocarga, costoHoraadicional, horasEspera, costoTiempoEspera, toneladaKilometroViaje, toneladaViaje, costoKilometro, costoKilometroViaje, (error) => {
-                if (error) {
-                    return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
+                if (!error) {
+                    return res.json({ error: false, message: 'Registro  exitóso!' });
+                }
+                else {
+                    return res.json({ error: true, message: 'Algo ha salido mal al realizar el registro!' });
                 }
             });
-            return res.status(200).json({ error: false, message: 'Algo ha salido bien al realizar el registro!' });
         });
         this.detalle = new detalleModel_1.default();
         this.viaje = new viajeModel_1.default();

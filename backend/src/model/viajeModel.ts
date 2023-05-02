@@ -31,7 +31,7 @@ class viajeModel {
             .then((response: any, error: any) => {
                 //console.log(response);
                 //console.log(error);
-                fn(error);
+                fn(error,cantviajes);
             })
     }
     public obtenerViajeIdUser = async (id: number, fn: any) => {

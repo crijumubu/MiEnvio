@@ -38,7 +38,7 @@ class viajeModel {
                 .then((response, error) => {
                 //console.log(response);
                 //console.log(error);
-                fn(error);
+                fn(error, cantviajes);
             });
         });
         this.obtenerViajeIdUser = (id, fn) => __awaiter(this, void 0, void 0, function* () {
