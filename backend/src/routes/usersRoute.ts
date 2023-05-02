@@ -137,7 +137,7 @@ class usersRoute {
     /**
  * @swagger
  * /updateUser:
- *   post:
+ *   put:
  *     summary: inicio de sesion del usuario.
  *     description: permite al usuario iniciar sesion con el correo y contraseña.
  *     parameters:

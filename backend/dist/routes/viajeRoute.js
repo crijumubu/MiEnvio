@@ -14,8 +14,16 @@ class viajeRoute {
     config() {
         /**
      * @swagger
+     * tags:
+      - name: pet
+        description: Everything about your Pets
+        externalDocs:
+          description: Find out more
+          url: http://swagger.io
      * /dataInicial:
      *   get:
+     *     tags:
+            - pet
      *     summary: inicio de sesion del usuario.
      *     description: permite al usuario iniciar sesion con el correo y contraseña.
      *     parameters:
@@ -499,7 +507,7 @@ class viajeRoute {
         /**
      * @swagger
      * /updateEstado:
-     *   post:
+     *   put:
      *     summary: inicio de sesion del usuario.
      *     description: permite al usuario iniciar sesion con el correo y contraseña.
      *     parameters:
@@ -543,7 +551,7 @@ class viajeRoute {
         /**
      * @swagger
      * /updateConductor:
-     *   post:
+     *   put:
      *     summary: inicio de sesion del usuario.
      *     description: permite al usuario iniciar sesion con el correo y contraseña.
      *     parameters:
