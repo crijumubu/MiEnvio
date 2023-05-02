@@ -145,39 +145,31 @@ class AuthController{
     }
   }
 
-  Future registerShipping( NewShipping envio)async{
-    log(envio.toString());
-    // json
-    
-    // final headers = {'Content-Type': 'application/json'};
-    var response = await http.post(Uri.parse("$_url/resgitroViaje"), headers:{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },body: jsonEncode({
-      "nombre":envio.nombre, 
-      "horasEspera":envio.horasEspera ,
-      "costoTonelada":envio.costoTonelada, 
-      "toneladaKilometro":envio.toneladaKilometro,
-      "idUsuario":envio.idUsuario, 
-      "costocarga":envio.costocarga, 
-      "costoHoraadicional":envio.costoHoraadicional, 
-      "costoTiempoEspera":envio.costoTiempoEspera, 
-      "toneladaKilometroViaje":envio.toneladaKilometroViaje, 
-      "toneladaViaje":envio.toneladaViaje, 
-      "costoKilometro":envio.costoKilometro,
-      "costoKilometroViaje":envio.costoKilometroViaje,
-      "origen":envio.origen,
-      "destino":envio.destino,
-      "direccion":envio.direccion, 
-      "estado":1,
-    }));
+  Future registerShipping(NewShipping envio)async{
+    Uri urlT = Uri.parse("http://mienvio.bucaramanga.upb.edu.co:1802/mienvio/api/registroViaje");
+    final headers = {"Content-type":'application/json'};
+    final body = '{"idUsuario":${envio.idUsuario}, "nombre":"${envio.nombre}","origen":"${envio.origen}","destino":"${envio.destino}","estado":${1},"direccion":"${envio.direccion}" }';
+    log(body);
+    var response = await http.post(urlT, headers: headers, body: body);
 
+    log("Registro envio: ${response.statusCode}");
     if(response.statusCode == 200){
-      // print(response.statusCode);
-      print(response.statusCode);
-      // succesfulAlert(context, "Envio Registrado Exitosamente");
-      Future.delayed(const Duration(seconds: 2, milliseconds: 500),(){
-        // Navigator.pushNamed(context, "/home-supervisor");
-      });
+      registerFlete(envio, 1);
+
+    }
+  }
+
+  Future registerFlete(NewShipping envio, int idViaje)async{
+    Uri urlT = Uri.parse("$_url/registroFlete");
+    final headers = {"Content-type":'application/json'};
+    final body = '{"idViaje":$idViaje,"toneladaKilometro":${envio.toneladaKilometro}, "costoTonelada":${envio.costoTonelada}, "costocarga":${envio.costocarga}, "costoHoraadicional":${envio.costoHoraadicional}, "horasEspera":${envio.horasEspera}, "costoTiempoEspera":${envio.costoTiempoEspera}, "toneladaKilometroViaje":${envio.toneladaKilometroViaje}, "toneladaViaje":${envio.toneladaViaje}, "costoKilometro":${envio.costoKilometro}, "costoKilometroViaje":${envio.costoKilometroViaje}}';
+    log(body);
+    var response = await http.post(urlT,headers: headers,body: body);
+    print("Registro flete: ${response.statusCode}");
+    if(response.statusCode == 200){
+      // print("");
+      // Future.delayed(const Duration(seconds: 2, milliseconds: 500),(){
+      // });
     }
   }
 }

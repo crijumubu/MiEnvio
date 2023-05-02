@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Input extends StatelessWidget {
-  const Input({super.key, required this.controller, required this.inputText, this.width, this.onChange, this.direction});
+  const Input({super.key, required this.controller, required this.inputText, this.width, this.onChange, this.direction, required this.numbers});
   final TextEditingController controller;
   final String inputText;
   final double? width;
   final Function? onChange;
   final String? direction;
+  final bool numbers;
   
 
   @override
@@ -26,7 +27,7 @@ class Input extends StatelessWidget {
           const SizedBox(height:  10,),
           TextFormField(
             controller: controller,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            keyboardType: numbers ? (const TextInputType.numberWithOptions(decimal: true)) : null,
             onChanged: (value){
               if(onChange != null){
                 onChange!(value);

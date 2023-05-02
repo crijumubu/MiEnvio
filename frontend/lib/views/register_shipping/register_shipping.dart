@@ -28,15 +28,14 @@ class _RegisterShippingState extends State<RegisterShipping> {
   final TextEditingController horaECargue = TextEditingController() ;
   final TextEditingController horaEDescargue = TextEditingController();
 
-  final String conf = "";
-  final String origenVal = "";
-  final String destinoVal = "";
-  final String carga = "";
-  final String tipoTrans = "";
-
   final AuthController _authController = AuthController();
 
-  
+  void sendForm(String origen, String destino){
+    final int horasEspera = int.parse(horaCargue.text) + int.parse(horaDescargue.text) + int.parse(horaECargue.text) + int.parse(horaEDescargue.text) ;
+
+    final envio = NewShipping(_nombre.text, horasEspera, 1111, 1111, widget.userId, 1111, 1111, 1111, 1111, 1111, 1111, 1111,origen,destino,_direccion.text, 1,);
+    _authController.registerShipping(envio);
+  }
 
   SizedBox title(String title){
     return SizedBox(
@@ -86,9 +85,7 @@ class _RegisterShippingState extends State<RegisterShipping> {
           TextPosition(offset: location.length),
         ),
       );
-      // _direccion.new
       
-
       placePredictions = [];
     });
   }
@@ -115,9 +112,9 @@ class _RegisterShippingState extends State<RegisterShipping> {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                  Input(controller: _nombre, inputText: "Nombre:"),
+                  Input(controller: _nombre, inputText: "Nombre:", numbers: false,),
                   const SizedBox(height: 15,),
-                  Input(controller: _direccion, inputText: "Dirección:", onChange: placeAutocomplete),
+                  Input(controller: _direccion, inputText: "Dirección:", onChange: placeAutocomplete, numbers: false,),
 
                   AnimatedContainer(
                     height: (placePredictions.length == 0)? 0:predictionsHeight,
@@ -140,33 +137,9 @@ class _RegisterShippingState extends State<RegisterShipping> {
             const SizedBox(height: 20,),
             title("Flete"),
             Divider(),
-            FleteForm(carga: carga, conf: conf, destinoVal: destinoVal, horaCargue: horaCargue, horaDescargue: horaDescargue, horaECargue: horaECargue, horaEDescargue: horaEDescargue, origenVal: origenVal, tipoTrans: tipoTrans, ),
-            const SizedBox(height: 20,),
-            Column(
-              children: [
-                SizedBox(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                      // side: BorderSide(color: Colors.white),
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      backgroundColor: Color(0xff3344E41),
-                      shadowColor:Color.fromRGBO(224, 224, 224, 1)
-                    ),
-                    onPressed: (){
-                      // print(widget.userId);
-                      final int horasEspera = int.parse(horaCargue.text) + int.parse(horaDescargue.text) + int.parse(horaECargue.text) + int.parse(horaEDescargue.text) ;
-                      final envio = NewShipping(_nombre.text, horasEspera.toDouble(), 1111, 1111, widget.userId, 1111, 1111, 1111, 1111, 1111, 1111, 1111,origenVal, destinoVal,_direccion.text, 1,
-                  );
-                      _authController.registerShipping(envio);
-                      // print(envio);
-                    }, 
-                    child: Text("Registrar Envio", style: GoogleFonts.rubik(color: Colors.white, fontSize: 18, fontWeight:    FontWeight.w500 ),
-                    )
-                  ),
-                ),
-              ],
-            ),
+            FleteForm( horaCargue: horaCargue, horaDescargue: horaDescargue, horaECargue: horaECargue, horaEDescargue: horaEDescargue, callback: sendForm,  ),
+            // const SizedBox(height: 20,),
+            
             const SizedBox(height: 20,),
 
         ],
@@ -177,17 +150,17 @@ class _RegisterShippingState extends State<RegisterShipping> {
 
 class NewShipping{
   final String nombre;
-  final double horasEspera;
-  final double costoTonelada;
-  final double toneladaKilometro;
+  final int horasEspera;
+  final int costoTonelada;
+  final int toneladaKilometro;
   final int idUsuario;
-  final double costocarga;
-  final double costoHoraadicional;
-  final double costoTiempoEspera;
-  final double toneladaKilometroViaje;
-  final double toneladaViaje;
-  final double costoKilometro;
-  final double costoKilometroViaje;
+  final int costocarga;
+  final int costoHoraadicional;
+  final int costoTiempoEspera;
+  final int toneladaKilometroViaje;
+  final int toneladaViaje;
+  final int costoKilometro;
+  final int costoKilometroViaje;
   final String origen;
   final String destino;
   final String direccion;
