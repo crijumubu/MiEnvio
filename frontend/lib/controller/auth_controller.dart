@@ -154,7 +154,8 @@ class AuthController{
 
     log("Registro envio: ${response.statusCode}");
     if(response.statusCode == 200){
-      registerFlete(envio, 1);
+      var data = jsonDecode(response.body);
+      registerFlete(envio, data["idViaje"]);
 
     }
   }
@@ -163,9 +164,8 @@ class AuthController{
     Uri urlT = Uri.parse("$_url/registroFlete");
     final headers = {"Content-type":'application/json'};
     final body = '{"idViaje":$idViaje,"toneladaKilometro":${envio.toneladaKilometro}, "costoTonelada":${envio.costoTonelada}, "costocarga":${envio.costocarga}, "costoHoraadicional":${envio.costoHoraadicional}, "horasEspera":${envio.horasEspera}, "costoTiempoEspera":${envio.costoTiempoEspera}, "toneladaKilometroViaje":${envio.toneladaKilometroViaje}, "toneladaViaje":${envio.toneladaViaje}, "costoKilometro":${envio.costoKilometro}, "costoKilometroViaje":${envio.costoKilometroViaje}}';
-    log(body);
+    
     var response = await http.post(urlT,headers: headers,body: body);
-    print("Registro flete: ${response.statusCode}");
     if(response.statusCode == 200){
       // print("");
       // Future.delayed(const Duration(seconds: 2, milliseconds: 500),(){
