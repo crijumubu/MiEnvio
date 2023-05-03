@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:frontend/views/register/widgets/header_back.dart';
@@ -7,11 +7,13 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../controller/auth_controller.dart';
 
 class User extends StatefulWidget {
-  User({super.key, required this.hasAppbar, required this.name, required this.email, required this.password});
+  User({super.key, required this.hasAppbar, required this.name, required this.email, required this.password, required this.id, required this.updateUser});
   final bool hasAppbar;
   final String name;
   final String email;
   final String password;
+  final int id;
+  final Function updateUser;
 
   @override
   State<User> createState() => _UserState();
@@ -50,98 +52,122 @@ class _UserState extends State<User> {
 
     return (widget.hasAppbar) ?  Scaffold(
       appBar: headerBack(context),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 25),
-        child: Column(
-          children: [
-            // Icon(Icons.user)
-            // Text("Usuario", style: GoogleFonts.rubik(fontSize: 32),)
-            const SizedBox(height: 30,),
-            CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 233, 233, 233),
-              radius: 80,
-              child: CircleAvatar(
-                radius: 70,
-                backgroundColor: Color.fromARGB(255, 209, 209, 209),
-                backgroundImage: AssetImage("assets/images/profile.png",)
-              )
-            ),
-            const SizedBox(height: 30,),
-            SizedBox(
-              width: double.infinity,
-              child: Text("Datos almacenados:", style: GoogleFonts.rubik(fontSize: 26, fontWeight: FontWeight.w600),)
-            ),
-            const SizedBox(height: 15,),
-            Visibility(
-              visible: editable,
-              child: Column(
-                children: [
-                  SizedBox(
-                    // width: double.infinity,
-                    child: Text("*Solo ingrese los campos que desee actualizar*", style: GoogleFonts.rubik(fontSize: 16, color: Colors.red[400]),),
-                  ),
-                  const SizedBox(height: 15,),
-                ],
-              ),
-            ),
-            Form(
-              key: _key,
-              child: Column(
-                children: [
-                  Field(placeholder: "Usuario:", initialValue: widget.name, controller: _username, editable: !editable, placeholder2: 'Nuevo usuario:', inputType: 'text',),
-                  const SizedBox(height: 10,),
-                  Field(placeholder: "Email:", initialValue: widget.email, controller: _email, editable: !editable, placeholder2: 'Nuevo email:', inputType: 'text',),
-                  const SizedBox(height: 10,),
-                  Field(placeholder: "Contraseña:", initialValue: widget.email, controller: _password, hiden: true, editable: !editable, placeholder2: 'Nueva contraseña:', inputType: 'password',),
-                  Visibility(
-                    visible: editable,
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 10,),
-                        Field(placeholder: "Confirmar nueva contraseña:", controller: _passwordConf, editable: !editable, placeholder2: 'Confirmar nueva contraseña:', inputType: 'passwordChecker',checkPasswords: _password,),
-                      ],
-                    )
-                  ),
-                  const SizedBox(height: 20,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              children: [
+                // Icon(Icons.user)
+                // Text("Usuario", style: GoogleFonts.rubik(fontSize: 32),)
+                const SizedBox(height: 30,),
+                CircleAvatar(
+                  backgroundColor: Color.fromARGB(255, 233, 233, 233),
+                  radius: 80,
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundColor: Color.fromARGB(255, 209, 209, 209),
+                    backgroundImage: AssetImage("assets/images/profile.png",)
+                  )
+                ),
+                const SizedBox(height: 30,),
+                SizedBox(
+                  width: double.infinity,
+                  child: Text("Datos almacenados:", style: GoogleFonts.rubik(fontSize: 26, fontWeight: FontWeight.w600),)
+                ),
+                const SizedBox(height: 15,),
+                Visibility(
+                  visible: editable,
+                  child: Column(
                     children: [
-                      button(text: "Guardar datos", text2: "Actualizar datos", callback: (){
-                        if(editable){
-                          
-                        }else{
-                          setState(() {
-                              editable = !editable;
-                          });
-                        }
-                        
-
-                        if(_key.currentState!.validate()){
-                          _key.currentState!.save();
-
-                          _authController.allShippings(1);
-                          return(false);
-                        }
-                      }),
-                      Visibility(visible: editable, child: const SizedBox(width: 10,)),
+                      SizedBox(
+                        // width: double.infinity,
+                        child: Text("*Solo ingrese los campos que desee actualizar*", style: GoogleFonts.rubik(fontSize: 16, color: Colors.red[400]),),
+                      ),
+                      const SizedBox(height: 15,),
+                    ],
+                  ),
+                ),
+                Form(
+                  key: _key,
+                  child: Column(
+                    children: [
+                      Field(placeholder: "Usuario/Nombre:", initialValue: widget.name, controller: _username, editable: !editable, placeholder2: 'Nuevo usuario/nombre:', inputType: 'text',),
+                      const SizedBox(height: 10,),
+                      Field(placeholder: "Email:", initialValue: widget.email, controller: _email, editable: !editable, placeholder2: 'Nuevo email:', inputType: 'email',),
+                      const SizedBox(height: 10,),
+                      Field(placeholder: "Contraseña:", initialValue: "•••••••••••", controller: _password, hiden: true, editable: !editable, placeholder2: 'Nueva contraseña:', inputType: 'password',),
                       Visibility(
                         visible: editable,
-                        child: button(text: "Cancelar", callback: (){
-                          setState(() {
-                              editable = false;
-                          });
-                        }),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 10,),
+                            Field(placeholder: "Confirmar nueva contraseña:", controller: _passwordConf, editable: !editable, placeholder2: 'Confirmar nueva contraseña:', inputType: 'passwordChecker',checkPasswords: _password,),
+                          ],
+                        )
                       ),
+                      const SizedBox(height: 20,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          button(text: "Guardar datos", text2: "Actualizar datos", callback: (){
+                            if(editable){
+                              if(_key.currentState!.validate()){
+                                _key.currentState!.save();
+                                if(_email.text.isEmpty && _username.text.isEmpty && _password.text.isEmpty){
+                                  setState(() {
+                                    editable = false;
+                                  });
+                                  return;
+                                }
+                                final String email = (_email.text.isNotEmpty) ? _email.text : widget.email;
+                                final String username = (_username.text.isNotEmpty) ? _username.text : widget.name;
+                                final String password = (_password.text.isNotEmpty) ? _password.text : widget.password;
+
+                                _authController.updateUser(context, email, username, password, widget.id).then(
+                                  (value){
+                                    widget.updateUser();
+                                  });
+
+                                setState(() {
+                                  editable = !editable;
+                                });
+                                // _authController.allShippings(1);
+                                // return(false);
+                              }
+                            }else{
+                              setState(() {
+                                  editable = !editable;
+                              });
+                            }
+                            // if(_email.te)
+                            // _email.text = widget.email;
+                            // _username.
+                            
+                          }),
+                          Visibility(visible: editable, child: const SizedBox(width: 10,)),
+                          Visibility(
+                            visible: editable,
+                            child: button(text: "Cancelar", callback: (){
+                              setState(() {
+                                  editable = false;
+                              });
+                              _key.currentState!.reset();
+                              _email.clear();
+                              _password.clear();
+                              _passwordConf.clear();
+                              _username.clear();
+                            }),
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),                        
+              ],
             ),
-            
-            
-            // Field(placeholder: "Usuario:", value: "usuario", controller: _username),
-          ],
-        ),
+          ),
+        ],
       ),
     ):
     Padding(
@@ -208,11 +234,20 @@ class _UserState extends State<User> {
                               setState(() {
                                 editable = false;
                               });
+                              return;
                             }
                             final String email = (_email.text.isNotEmpty) ? _email.text : widget.email;
                             final String username = (_username.text.isNotEmpty) ? _username.text : widget.name;
                             final String password = (_password.text.isNotEmpty) ? _password.text : widget.password;
 
+                            _authController.updateUser(context, email, username, password, widget.id).then(
+                              (value){
+                                widget.updateUser();
+                              });
+
+                            setState(() {
+                              editable = !editable;
+                            });
                             // _authController.allShippings(1);
                             // return(false);
                           }
