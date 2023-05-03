@@ -117,6 +117,7 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
         extendBody: true,
         backgroundColor: Colors.grey[100],      
         appBar: AppBar(
+          toolbarHeight: height*0.09,
           backgroundColor: (scrolled ? Colors.white : Colors.black),
           leading: SizedBox(width: 0, height: 0,),
           
@@ -128,14 +129,16 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
             ),
     
             width: double.infinity,
+            // height: 300,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Stack(
                   children: [
+                    // SizedBox(height: 0),
                     Align(
-                      alignment:  Alignment.bottomCenter,
+                      alignment: Alignment.bottomCenter,
                       child: Image.asset(
                         "assets/images/logobl.png",
                         scale: 2.3,
@@ -149,7 +152,7 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
                         // Navigator.pushNamed(context, "initial-page");
                       },
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 5),
+                        padding: const EdgeInsets.only(bottom: 10),
                         child: Align(
                           alignment: Alignment.bottomRight,
                           child: Image.asset("assets/images/logout.png", scale: 18, color: (scrolled ? Color.fromARGB(190, 0, 0, 0) : Colors.white),),
