@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/controller/auth_controller.dart';
 import 'package:frontend/views/flete_form/flete_form.dart';
