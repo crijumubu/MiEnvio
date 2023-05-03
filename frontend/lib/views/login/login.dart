@@ -25,18 +25,18 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: headerBack(context),
-      bottomSheet: const SizedBox(
-        height: 100,
-        width: double.infinity,
-        child: Bottom(),
-      ) ,
-      body: 
-        ModalProgressHUD(
-          inAsyncCall: _loading,
-          child: Center(
+    return ModalProgressHUD(
+      inAsyncCall: _loading,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: headerBack(context),
+        bottomSheet: const SizedBox(
+          height: 100,
+          width: double.infinity,
+          child: Bottom(),
+        ) ,
+        body: 
+          Center(
             child: Padding(
               // color: Colors.red,
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
@@ -56,10 +56,13 @@ class _LoginState extends State<Login> {
                       if(_key.currentState!.validate()){
                         setState(() {
                           _loading = true;
-                          
                         });
                         _key.currentState!.save();
-                        _authController.login(context, _userController.text, _passwordController.text);
+                        _authController.login(context, _userController.text, _passwordController.text).then((value){
+                            setState(() {
+                            _loading = false;
+                          });
+                        });
                         // return(true);
                       }
                     }
@@ -68,7 +71,7 @@ class _LoginState extends State<Login> {
               ),
             )),
           ),
-        ),
+      ),
     );
   }
 }
