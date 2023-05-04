@@ -107,9 +107,9 @@ class _FleteFormState extends State<FleteForm> {
                                 shadowColor:Color.fromRGBO(224, 224, 224, 1)
                               ),
                               onPressed: (){
-                                widget.callback(origenVal, destinoVal,);
+                                // widget.callback(origenVal, destinoVal,);
                               }, 
-                              child: Text("Registrar Envio", style: GoogleFonts.rubik(color: Colors.white, fontSize: 18, fontWeight:    FontWeight.w500 ),
+                              child: Text("Calcular flete", style: GoogleFonts.rubik(color: Colors.white, fontSize: 18, fontWeight:    FontWeight.w500 ),
                               )
                             ),
                           ),

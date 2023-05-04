@@ -9,23 +9,24 @@ class Shipping{
   String nombre;
   int idViaje;
   int idUsuario;
-  int idFlete;
+  // int idFlete;
   String origen;
   String destino;
   int estado;
   int idConductor;
+  String direccion;
 
-  Shipping({required this.nombre, required this.idViaje, required this.idUsuario, required this.idFlete, required this.origen, required this.destino, required this.estado, required this.idConductor});
+
+  Shipping({required this.nombre, required this.idViaje, required this.idUsuario,required this.origen, required this.destino, required this.estado, required this.idConductor, required this.direccion});
 }
 
-List<Shipping> envios = [Shipping(nombre: "BOG-BGA", destino: "Bucaramanga", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
-Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
-Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
-Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
-Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
-Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
-Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
-Shipping(nombre: "BOG-MED", destino: "Medellin", origen: "Bogota", estado: 1, idFlete: 2, idConductor: 3, idUsuario: 1, idViaje: 1,),
+List<Shipping> envios = [Shipping(nombre: "BOG-BGA", destino: "Bucaramanga", origen: "Bogota", estado: 1, idConductor: 3, idUsuario: 1, idViaje: 1, direccion: 'Calle',),
+Shipping(nombre: "BOG-BGA", destino: "Bucaramanga", origen: "Bogota", estado: 1, idConductor: 3, idUsuario: 1, idViaje: 1, direccion: 'Calle',),
+Shipping(nombre: "BOG-BGA", destino: "Bucaramanga", origen: "Bogota", estado: 1, idConductor: 3, idUsuario: 1, idViaje: 1, direccion: 'Calle',),
+Shipping(nombre: "BOG-BGA", destino: "Bucaramanga", origen: "Bogota", estado: 1, idConductor: 3, idUsuario: 1, idViaje: 1, direccion: 'Calle',),
+Shipping(nombre: "BOG-BGA", destino: "Bucaramanga", origen: "Bogota", estado: 1, idConductor: 3, idUsuario: 1, idViaje: 1, direccion: 'Calle',),
+Shipping(nombre: "BOG-BGA", destino: "Bucaramanga", origen: "Bogota", estado: 1, idConductor: 3, idUsuario: 1, idViaje: 1, direccion: 'Calle',),
+Shipping(nombre: "BOG-BGA", destino: "Bucaramanga", origen: "Bogota", estado: 1, idConductor: 3, idUsuario: 1, idViaje: 1, direccion: 'Calle',),
 
 ];
 

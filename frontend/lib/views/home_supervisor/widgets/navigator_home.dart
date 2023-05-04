@@ -115,7 +115,7 @@ class NavigatorHome extends StatelessWidget {
             // print(snapshot.data);
             if(snapshot.hasData){
               // print(snapshot.data[0]["nombre"]);
-              List<Shipping> enviosActivos = (snapshot.data as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e["idViaje"], idUsuario: e["idUsuario"], idFlete: e["idFlete"], origen: e["origen"], destino: e["destino"], estado: e["estado"], idConductor: e["idConductor"])).toList();
+              List<Shipping> enviosActivos = (snapshot.data as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e["idViaje"], idUsuario: e["idUsuario"], origen: e["origen"], destino: e["destino"], estado: e["estado"], idConductor: e["idConductor"], direccion: e["direccion"])).toList();
 
               if(enviosActivos.isEmpty){
                 children = [

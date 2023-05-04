@@ -9,7 +9,6 @@ import 'widgets/navigation.dart';
 
 class HomeSupervisor extends StatefulWidget {
   const HomeSupervisor({super.key, required this.id});
-  // final Usuario user;
   final int id;
 
   @override
@@ -38,13 +37,26 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
     });
   }
 
+  void getShippings(){
+    // print()
+    _authController.allShippings(widget.id).then(
+      (value){
+        print(value);
+        List<Shipping> envios = (value as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e  ["idViaje"], idUsuario: e["idUsuario"], origen: e["origen"], destino: e["destino"],  estado: e["estado"], idConductor: e["idConductor"], direccion: e["direccion"])).toList();
+        enviosList = envios;
+        setState(() {
+          enviosShow = enviosList.toList();
+          // print(enviosShow);
+        });
+      }
+    );
+  }
+
   @override
   void initState(){
-    // usuario = Usuario(usuario.id, usuario.name, usuario.email, usuario.)
     _scrollController.addListener(listenScroll);
     navigation = Navigation(
       currentIndex: (i){
-        // print(_scrollController.position.pixels);
         if(!(_scrollController.position.pixels <= 0)){
           _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
 
@@ -62,22 +74,14 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
       }
     );
     getUser().then((value){
-      _authController.allShippings(usuario.id).then(
-        (value){
-          List<Shipping> envios = (value as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e  ["idViaje"], idUsuario: e["idUsuario"], idFlete: e["idFlete"], origen: e["origen"], destino: e["destino"],  estado: e["estado"], idConductor: e["idConductor"])).toList();
-
-          enviosList = envios;
-          setState(() {
-            enviosShow = enviosList.toList();
-          });
-        }
-      );
+      getShippings();
     });
 
     
     super.initState();
     
   }
+
 
   void listenScroll() {
     final bool isTop = _scrollController.position.pixels <= 0;
