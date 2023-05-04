@@ -8,8 +8,9 @@ import '../shippings_driver/shippings_driver.dart';
 import 'widgets/navigation.dart';
 
 class HomeSupervisor extends StatefulWidget {
-  const HomeSupervisor({super.key, required this.user});
-  final Usuario user;
+  const HomeSupervisor({super.key, required this.id});
+  // final Usuario user;
+  final int id;
 
   @override
   State<HomeSupervisor> createState() => _HomeSupervisorState();
@@ -25,11 +26,21 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
   List<int> filterList = [1,2,3];
   late List<Shipping?> enviosShow = [];
   final AuthController _authController = AuthController();
+  late Usuario usuario = Usuario(0, "", "", "");
 
+  Future getUser()async{
+    _authController.getUserData(widget.id).then((value) {
+      if(value != null){
+        setState(() {
+          usuario = Usuario(value.id, value.name, value.email, value.password);
+        });
+      }
+    });
+  }
 
   @override
-  void initState() {
-
+  void initState(){
+    // usuario = Usuario(usuario.id, usuario.name, usuario.email, usuario.)
     _scrollController.addListener(listenScroll);
     navigation = Navigation(
       currentIndex: (i){
@@ -50,16 +61,20 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
         }
       }
     );
-    _authController.allShippings(widget.user.id).then(
-      (value){
-        List<Shipping> envios = (value as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e["idViaje"], idUsuario: e["idUsuario"], idFlete: e["idFlete"], origen: e["origen"], destino: e["destino"], estado: e["estado"], idConductor: e["idConductor"])).toList();
+    getUser().then((value){
+      _authController.allShippings(usuario.id).then(
+        (value){
+          List<Shipping> envios = (value as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e  ["idViaje"], idUsuario: e["idUsuario"], idFlete: e["idFlete"], origen: e["origen"], destino: e["destino"],  estado: e["estado"], idConductor: e["idConductor"])).toList();
 
-        enviosList = envios;
-        setState(() {
-          enviosShow = enviosList.toList();
-        });
-      }
-    );
+          enviosList = envios;
+          setState(() {
+            enviosShow = enviosList.toList();
+          });
+        }
+      );
+    });
+
+    
     super.initState();
     
   }
@@ -177,11 +192,11 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
             children: [
               // Header(),
               if(index == 0)
-                NavigatorHome(height: height, name: widget.user.name, id: widget.user.id, enviosShow: enviosShow,)
+                NavigatorHome(height: height, name: usuario.name, id: usuario.id, enviosShow: enviosShow,)
               else if(index == 1)
-                NavigatorShippings(id: widget.user.id, enviosList: enviosShow, filtersActive: filterList, addFilter: addFilter, removeFilter: deleteFilter, btnText: 'Ver detalles', btnRegister: true,)
+                NavigatorShippings(id: usuario.id, enviosList: enviosShow, filtersActive: filterList, addFilter: addFilter, removeFilter: deleteFilter, btnText: 'Ver detalles', btnRegister: true,)
               else if(index == 2)
-                NavigatorSettings(user: widget.user,)
+                NavigatorSettings(user: usuario, updateUser: getUser,)
             ],
           ),
         )

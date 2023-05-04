@@ -36,15 +36,15 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_) => const Register());
 
       case "/home-supervisor":
-        final args = settings.arguments as Usuario;
-        return MaterialPageRoute(builder: (_)=>  HomeSupervisor(user: args,));
+        final args = settings.arguments as int;
+        return MaterialPageRoute(builder: (_)=> HomeSupervisor(id: args,));
       
       case "/initial-page":
         return MaterialPageRoute(builder: (_)=> const InitialPage());
       
       case "/home":
-        final args = settings.arguments as Usuario;
-        return MaterialPageRoute(builder: (_)=> Home(user: args,));
+        final args = settings.arguments as int;
+        return MaterialPageRoute(builder: (_)=> Home(id: args,));
       
       case "/scan-qr":
         return MaterialPageRoute(builder: (_)=> ScanQR());
@@ -68,7 +68,7 @@ class RouteGenerator{
 
       case "/user":
         final args = settings.arguments as UserView;
-        return MaterialPageRoute(builder: (_)=> User(hasAppbar: args.hasAppBar, email: args.email, name: args.name, password: args.password,));
+        return MaterialPageRoute(builder: (_)=> User(hasAppbar: args.hasAppBar, email: args.email, name: args.name, password: args.password, id: args.id, updateUser: args.updateUser,));
 
       case "/register-shipping":
         int arg = settings.arguments as int;
@@ -110,9 +110,10 @@ class UserView{
   final String name;
   final String email;
   final String password;
+  final int id;
+  final Function updateUser;
 
 
-
-  UserView({required this.hasAppBar, required this.name, required this.email, required this.password});
+  UserView({required this.hasAppBar, required this.name, required this.email, required this.password, required this.id, required this.updateUser});
   
 }

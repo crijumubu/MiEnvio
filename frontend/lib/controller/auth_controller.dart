@@ -43,10 +43,14 @@ class AuthController{
 
     if(response.statusCode == 200){
       var loginArr = json.decode(response.body);
-      shPref.setString("token", loginArr["data"]["token"]);
-      shPref.setString("usename", loginArr["data"]["token"]);
+      // shPref.setString("token", loginArr["data"]["token"]);
+      // shPref.setString("usename", loginArr["data"]["token"]);
+      var userData = jsonDecode(response.body);
+      
+      if(userData["data"]["userType"]==1) Navigator.pushNamed(context, "/home-supervisor", arguments: loginArr["data"]["idUser"]);
+      if(userData["data"]["userType"]==2) Navigator.pushNamed(context, "/home", arguments: loginArr["data"]["idUser"]);
 
-      getUserData(context, loginArr["data"]["idUser"]);
+      // getUserData(context, loginArr["data"]["idUser"]);
       
     }else{
       errorAlert(context, 2, "Credenciales incorrectas");
@@ -75,16 +79,16 @@ class AuthController{
   }
 
   
-  Future getUserData(context, int id) async{
+  Future<Usuario?> getUserData( int id) async{
     var response = await http.get(Uri.parse("$_url/getDataUser/$id"));
 
     if(response.statusCode == 200){
       var userData = jsonDecode(response.body);
       Usuario user = Usuario(userData[0]["id"], userData[0]["name"], userData[0]["email"], userData[0]["password"]);
-
-      if(userData[0]["userType"]==1) Navigator.pushNamed(context, "/home-supervisor",arguments: user);
-      if(userData[0]["userType"]==2) Navigator.pushNamed(context, "/home", arguments:  user);
+      return user;
+     
     }
+    return null;
   }
 
   Future activeShippings(int id)async{
@@ -170,6 +174,21 @@ class AuthController{
       // print("");
       // Future.delayed(const Duration(seconds: 2, milliseconds: 500),(){
       // });
+    }
+  }
+
+  Future updateUser(context, String email, String username, String password, int id)async{
+    final headers = {"Content-type":'application/json'};
+
+    var response = await http.post(Uri.parse("$_url/updateUser"),headers: headers, body: '{"id":$id, "name":"$username", "email":"$email", "password":"$password"}');
+
+    print(response.body);
+    print(response.statusCode);
+    if(response.statusCode == 200){
+      succesfulAlert(context, "Datos actualizados.");
+      // Future.delayed(const Duration(seconds: 2, milliseconds: 500),(){
+        // Navigator.pushNamed(context, "/initial-page");
+      // }); 
     }
   }
 }

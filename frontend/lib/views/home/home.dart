@@ -1,16 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/controller/auth_controller.dart';
 import 'package:frontend/routes/route_generator.dart';
 import 'package:frontend/views/home/widgets/menu_button.dart';
 import 'package:frontend/views/register/widgets/bottom.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key, required this.user});
-  final Usuario user;
+class Home extends StatefulWidget {
+  Home({super.key, required this.id});
+  final int id;
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  // final Usuario user;
+  late Usuario usuario = Usuario(0, "", "", "");
+  final AuthController _authController = AuthController();
+
+  @override
+  void initState(){
+    getUser();
+    super.initState();
+  }
+
+  Future getUser()async{
+    _authController.getUserData(widget.id).then((value) {
+      if(value != null){
+        setState(() {
+          usuario = Usuario(value.id, value.name, value.email, value.password);
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(user);
+    // print(user);
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -52,7 +78,7 @@ class Home extends StatelessWidget {
 
                                 ),
                                 TextSpan(
-                                  text: "${user.name}",
+                                  text: "${usuario.name}",
                                   style: GoogleFonts.rubik(
                                     fontSize: 32,
                                     // fontStyle: FontStyle.italic,
@@ -83,8 +109,8 @@ class Home extends StatelessWidget {
                   children:  [
                     MenuButton(text: 'Viajes', imgRoute: 'delivery2.png', btnRoute: '/shippings-driver',),
                     MenuButton(text: 'Escanear QR', imgRoute: 'camara.png', btnRoute: '/scan-qr',),
-                    MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr', args: QrGenerator(true, "QR Conductor", user.id.toDouble()),) ,
-                    MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/user', args: UserView(hasAppBar: true, name: user.name, email: user.email, password: user.password),),
+                    MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr', args: QrGenerator(true, "QR Conductor", usuario.id.toDouble()),) ,
+                    MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/user', args: UserView(hasAppBar: true, name: usuario.name, email: usuario.email, password: usuario.password, id:usuario.id, updateUser: getUser),),
                   ],
                 ),
               )

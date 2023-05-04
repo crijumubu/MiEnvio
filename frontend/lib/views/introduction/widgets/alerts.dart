@@ -9,8 +9,11 @@ void succesfulAlert(context, text){
     type: QuickAlertType.success,
     title: "Completado!",
     text: text,
-    autoCloseDuration: const Duration(seconds:2 ),
-    confirmBtnColor: const Color(0xff588157)
+    autoCloseDuration: const Duration(seconds:1, milliseconds: 500),
+    confirmBtnColor: const Color(0xff588157),
+    onConfirmBtnTap: (){
+      
+    }
   );
 }
 
