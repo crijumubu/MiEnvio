@@ -25,6 +25,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
     return ModalProgressHUD(
       inAsyncCall: _loading,
       child: Scaffold(
@@ -36,40 +37,43 @@ class _LoginState extends State<Login> {
           child: Bottom(),
         ) ,
         body: 
-          Center(
-            child: Padding(
-              // color: Colors.red,
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-            child: Form(
-              key: _key,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Iniciar Sesion", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
-                  const SizedBox(height: 30,),
-                  TextInput(fieldController: _userController, placeholder: "Email",  inputType: 'email'),
-                  const SizedBox(height: 20,),
-                  TextInput(fieldController: _passwordController, placeholder:  "Contraseña", inputType: 'password',),
-                  const SizedBox(height: 20,),
-                  RoutingButton(text: "Iniciar Sesion", route: "/home", btnStyle: null, 
-                    callback: (){
-                      if(_key.currentState!.validate()){
-                        setState(() {
-                          _loading = true;
-                        });
-                        _key.currentState!.save();
-                        _authController.login(context, _userController.text, _passwordController.text).then((value){
-                            setState(() {
-                            _loading = false;
+          ListView(
+            children: [
+              SizedBox(height: height*0.19,),
+              Padding(
+                // color: Colors.red,
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+              child: Form(
+                key: _key,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Iniciar Sesion", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
+                    const SizedBox(height: 30,),
+                    TextInput(fieldController: _userController, placeholder: "Email",  inputType: 'email'),
+                    const SizedBox(height: 20,),
+                    TextInput(fieldController: _passwordController, placeholder:  "Contraseña", inputType: 'password',),
+                    const SizedBox(height: 20,),
+                    RoutingButton(text: "Iniciar Sesion", route: "/home", btnStyle: null, 
+                      callback: (){
+                        if(_key.currentState!.validate()){
+                          setState(() {
+                            _loading = true;
                           });
-                        });
-                        // return(true);
+                          _key.currentState!.save();
+                          _authController.login(context, _userController.text, _passwordController.text).then((value){
+                              setState(() {
+                              _loading = false;
+                            });
+                          });
+                          // return(true);
+                        }
                       }
-                    }
-                  ),
-                ],
-              ),
-            )),
+                    ),
+                  ],
+                ),
+              )),
+            ],
           ),
       ),
     );
