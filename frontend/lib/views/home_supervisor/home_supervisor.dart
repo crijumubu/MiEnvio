@@ -38,15 +38,12 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
   }
 
   void getShippings(){
-    // print()
     _authController.allShippings(widget.id).then(
       (value){
-        print(value);
         List<Shipping> envios = (value as List<dynamic>).map((e) => Shipping(nombre: e["nombre"], idViaje: e  ["idViaje"], idUsuario: e["idUsuario"], origen: e["origen"], destino: e["destino"],  estado: e["estado"], idConductor: e["idConductor"], direccion: e["direccion"])).toList();
         enviosList = envios;
         setState(() {
           enviosShow = enviosList.toList();
-          // print(enviosShow);
         });
       }
     );
@@ -127,7 +124,6 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
   @override
   Widget build(BuildContext context) {
     if(height == 0) height = MediaQuery.of(context).size.height;
-    // print(index);    
 
     return WillPopScope(
       onWillPop: () async => false ,

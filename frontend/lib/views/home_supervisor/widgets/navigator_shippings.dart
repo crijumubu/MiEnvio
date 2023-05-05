@@ -56,8 +56,8 @@ class NavigatorShippings extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20,),
-              TextButton(
-                style: TextButton.styleFrom(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                   // side: BorderSide(color: Colors.white),
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -180,7 +180,7 @@ class ShippingItem extends StatelessWidget {
         if(updateStatus){
           Navigator.pushNamed(context, "/temporal", arguments: shipping.idViaje);
         }else{
-          Navigator.pushNamed(context, "/test");
+          Navigator.pushNamed(context, "/flete", arguments: shipping);
         }
       },
       child: Container(

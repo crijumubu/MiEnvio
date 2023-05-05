@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/views/flete_form/flete_form.dart';
 import 'package:frontend/views/generate_qr/generate_qr.dart';
 import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/register_shipping/register_shipping.dart';
@@ -13,15 +12,11 @@ import '../views/initial_page/initial_page.dart';
 import '../views/introduction/introduction.dart';
 import '../views/login/login.dart';
 import '../views/register/register.dart';
+import '../views/flete/flete.dart';
 
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){
-    // final args = settings.arguments;
-    // settings.
     
-
-    // print(args.runtimeType);
-
     switch (settings.name) {
       case "introduction":
         return MaterialPageRoute(builder: (_) => const Introduction());
@@ -74,6 +69,9 @@ class RouteGenerator{
         int arg = settings.arguments as int;
         return MaterialPageRoute(builder: (_)=> RegisterShipping(userId: arg,));
 
+      case "/flete":
+        Shipping envio = settings.arguments as Shipping;
+        return MaterialPageRoute(builder: (_) => Flete(envio: envio,));
       default:
         return _errorRoute();
     }

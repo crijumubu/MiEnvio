@@ -153,10 +153,9 @@ class AuthController{
     Uri urlT = Uri.parse("http://mienvio.bucaramanga.upb.edu.co:1802/mienvio/api/registroViaje");
     final headers = {"Content-type":'application/json'};
     final body = '{"idUsuario":${envio.idUsuario}, "nombre":"${envio.nombre}","origen":"${envio.origen}","destino":"${envio.destino}","estado":${1},"direccion":"${envio.direccion}" }';
-    log(body);
+    
     var response = await http.post(urlT, headers: headers, body: body);
 
-    log("Registro envio: ${response.statusCode}");
     if(response.statusCode == 200){
       var data = jsonDecode(response.body);
       registerFlete(envio, data["idViaje"]);
