@@ -35,14 +35,14 @@ jobs:
 
     steps:
     
-      - name: Where am i
-        run: pwd
-    
       - name: Download android artifact
         uses: actions/download-artifact@v3
         with:
           name: MiEnvio_android 
           path: ${{ secrets.ARTIFACT_PATH_ANDROID }}
+      
+      - name: Where am i
+        run: pwd
       
       - name: What is here
         run: ls -l
