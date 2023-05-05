@@ -52,5 +52,10 @@ class fleteModel {
     });
     return cant;
   }
+  public obtenerFleteIdViaje = async (id: number, fn: any) => {
+    this.mongo.connect();
+    const rows = await this.mongo.model.find({ idViaje: id });
+    fn(rows);
+  }
 }
 export default fleteModel;

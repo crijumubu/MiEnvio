@@ -477,6 +477,7 @@ class viajeRoute {
        *         description: Error interno del servidor.
        */
         this.router.get('/fleteId/:id', this.controller.getFlete);
+        this.router.get('/fleteIdViaje/:id', this.controller.getFleteViaje);
         /**
       * @swagger
       * /mienvio/api/detalleId/{id}:

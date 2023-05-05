@@ -481,6 +481,7 @@ class viajeRoute {
  */
 
     this.router.get('/fleteId/:id', this.controller.getFlete);
+    this.router.get('/fleteIdViaje/:id', this.controller.getFleteViaje);
    /**
  * @swagger
  * /mienvio/api/detalleId/{id}:

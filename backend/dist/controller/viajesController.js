@@ -161,6 +161,16 @@ class viajesController {
                 }
             });
         };
+        this.getFleteViaje = (req, res) => {
+            this.flete.obtenerFleteIdViaje(Number(req.params.id), (row) => {
+                if (row) {
+                    res.json(row);
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not found' });
+                }
+            });
+        };
         this.getDetalle = (req, res) => {
             this.detalle.obtenerDetallesIdFlete(Number(req.params.id), (row) => {
                 if (row) {

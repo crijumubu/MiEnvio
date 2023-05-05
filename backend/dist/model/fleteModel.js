@@ -46,6 +46,11 @@ class fleteModel {
             const rows = yield this.mongo.model.find({ id: id });
             fn(rows);
         });
+        this.obtenerFleteIdViaje = (id, fn) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ idViaje: id });
+            fn(rows);
+        });
         this.mongo = new mongo_1.default(14);
     }
     idflete() {
