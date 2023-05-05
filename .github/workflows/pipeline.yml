@@ -121,6 +121,9 @@ jobs:
 
       - name: Delete unused folders
         run: rm -rf ./build/
+        
+      - name: Create ios artifact folder and grant privileges for user
+        run: sudo mkdir /Users && sudo chmod u+rw /Users
       
       - name: Download ios artifact
         uses: actions/download-artifact@v3
@@ -164,7 +167,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ secrets.ASSET_PATH_IOS }}
+          asset_path: ${{ secrets.ARTIFACT_PATH_IOS }}
           asset_name: MiEnvio.app
           asset_content_type: application/zip
   
