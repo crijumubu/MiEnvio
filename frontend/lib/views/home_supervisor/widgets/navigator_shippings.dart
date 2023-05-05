@@ -33,11 +33,11 @@ class NavigatorShippings extends StatelessWidget {
       List<Widget> enviosCard = [];
       for(var i in enviosList){
         if(i != null){
-          if(i.estado==3) continue;
+          if(i.estado==3 && !btnRegister) continue;
 
           enviosCard.add(Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: ShippingItem(shipping: i, btnText:btnText, updateStatus: !btnRegister,),
+            child: ShippingItem(shipping: i, btnText:btnText, updateStatus: !btnRegister, idUser: id,),
           ));
           if(enviosList.last != i) enviosCard.add(SizedBox(height: 10,));
         }        
@@ -159,9 +159,10 @@ class ShippingStatus extends StatelessWidget {
 }
 
 class ShippingItem extends StatelessWidget {
-  const ShippingItem({super.key, required this.shipping, required this.btnText, required this.updateStatus});
+  const ShippingItem({super.key, required this.shipping, required this.btnText, required this.updateStatus, required this.idUser});
   final Shipping shipping;
   final String btnText;
+  final int idUser;
   final bool updateStatus;
 
   @override
@@ -178,7 +179,7 @@ class ShippingItem extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         if(updateStatus){
-          Navigator.pushNamed(context, "/temporal", arguments: shipping.idViaje);
+          Navigator.pushNamed(context, "/scan-qr", arguments: [shipping.idViaje, idUser, shipping.estado]);
         }else{
           Navigator.pushNamed(context, "/flete", arguments: shipping);
         }
