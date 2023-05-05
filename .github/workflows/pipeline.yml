@@ -48,15 +48,12 @@ jobs:
 
       - name: Build application
         run: flutter build apk
-        
-      - name: Where am i
-        run: pwd
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: MiEnvio
-          path: ${{ secrets.ARTIFACT_PATH }}
+          name: MiEnvio_android
+          path: ${{ secrets.ARTIFACT_PATH_ANDROID }}
   
   build_ios_artifact:
   
@@ -65,8 +62,12 @@ jobs:
     defaults:
       run:
         working-directory: ./frontend
-
+    
     steps:
+    
+      - name: Working directory
+        run: pwd
+        
       - name: Check out the repo
         uses: actions/checkout@v3
 
@@ -86,6 +87,12 @@ jobs:
 
       - name: Build application
         run: flutter build ios --release --no-codesign
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MiEnvio_ios
+          path: ${{ secrets.ARTIFACT_PATH_IOS }}
   
   release:
   
@@ -99,14 +106,23 @@ jobs:
         working-directory: ./frontend
 
     steps:
-      - name: Download artifact
+      - name: Download android artifact
         uses: actions/download-artifact@v3
         with:
-          name: MiEnvio
-          path: ${{ secrets.ARTIFACT_PATH }}
+          name: MiEnvio_android 
+          path: ${{ secrets.ARTIFACT_PATH_ANDROID }}
       
-      - name: Move apk to home
-        run: mv ${{ secrets.ARTIFACT_PATH }} ./MiEnvio
+      - name: Move android artifact to home
+        run: mv ${{ secrets.ARTIFACT_PATH_ANDROID }} ./MiEnvio
+        
+      - name: Download ios artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: MiEnvio_ios 
+          path: ${{ secrets.ARTIFACT_PATH_IOS }}
+      
+      - name: Move ios artifact to home
+        run: mv ${{ secrets.ARTIFACT_PATH_IOS }} ./MiEnvio
 
       - name: Delete unused folders
         run: rm -rf ./build/
@@ -120,8 +136,8 @@ jobs:
           tag_name: ${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
 
-      - name: Update file to release
-        id: upload_release_asset
+      - name: Update android artifact to release
+        id: upload_android_release_asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -129,4 +145,15 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ secrets.ASSET_PATH}}
           asset_name: MiEnvio.apk
+          asset_content_type: application/zip
+          
+      - name: Update ios artifact to release
+        id: upload_ios_release_asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ secrets.app}}
+          asset_name: MiEnvio.app
           asset_content_type: application/zip
