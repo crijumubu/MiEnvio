@@ -8,7 +8,7 @@ export const options = {
       },
       servers: [
         {
-          url: 'http://localhost:1802',
+          url: 'http://mienvio.bucaramanga.upb.edu.co:1802/',
         },
       ],
     },
