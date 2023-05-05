@@ -55,6 +55,45 @@ jobs:
           name: MiEnvio_android
           path: ${{ secrets.ARTIFACT_PATH_ANDROID }}  
   
+  build_ios_artifact:
+  
+    name: Build ios artifact
+    runs-on: macOS-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    
+    steps:
+        
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Set up java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Set up flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.12'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build application
+        run: flutter build ios --release --no-codesign
+        
+      - name: What is here
+        run: ls -l ./build/ios/iphoneos/
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MiEnvio_ios
+          path: ${{ secrets.ARTIFACT_PATH_IOS }}
+  
   release:
   
     needs: [build_android_artifact] 
@@ -79,13 +118,25 @@ jobs:
       
       - name: What is here
         run: ls -l
-      
-      - name: Move android artifact to home
-        run: mv ${{ secrets.ARTIFACT_PATH_ANDROID }} ./MiEnvio
 
       - name: Delete unused folders
         run: rm -rf ./build/
+      
+      - name: Download ios artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: MiEnvio_ios 
+          path: ${{ secrets.ARTIFACT_PATH_IOS }}
+          
+      - name: Where am i
+        run: pwd
+      
+      - name: What is here
+        run: ls -l
 
+      - name: Delete unused folders
+        run: rm -rf ./build/
+          
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -102,7 +153,18 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ secrets.ASSET_PATH}}
+          asset_path: ${{ secrets.ARTIFACT_PATH_ANDROID }}
           asset_name: MiEnvio.apk
+          asset_content_type: application/zip
+          
+      - name: Update ios artifact to release
+        id: upload_ios_release_asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ secrets.ASSET_PATH_IOS }}
+          asset_name: MiEnvio.app
           asset_content_type: application/zip
   
