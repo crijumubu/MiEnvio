@@ -32,7 +32,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
       
-      - run: ${{ secrets.ASSET_PATH}}
+      - run: echo ${{ secrets.ASSET_PATH}}
           
       - name: Set up java
         uses: actions/setup-java@v2
