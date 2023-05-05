@@ -8,7 +8,7 @@ class GenerateQR extends StatefulWidget {
   const GenerateQR({super.key, required this.hasAppbar, required this.title, required this.qrData});
   final bool hasAppbar;
   final String title;
-  final double qrData;
+  final int qrData;
 
   @override
   State<GenerateQR> createState() => _GenerateQRState();

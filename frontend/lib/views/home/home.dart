@@ -109,7 +109,7 @@ class _HomeState extends State<Home> {
                   children:  [
                     MenuButton(text: 'Viajes', imgRoute: 'delivery2.png', btnRoute: '/shippings-driver',),
                     MenuButton(text: 'Escanear QR', imgRoute: 'camara.png', btnRoute: '/scan-qr',),
-                    MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr', args: QrGenerator(true, "QR Conductor", usuario.id.toDouble()),) ,
+                    MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr', args: QrGenerator(true, "QR Conductor", usuario.id),) ,
                     MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/user', args: UserView(hasAppBar: true, name: usuario.name, email: usuario.email, password: usuario.password, id:usuario.id, updateUser: getUser),),
                   ],
                 ),
