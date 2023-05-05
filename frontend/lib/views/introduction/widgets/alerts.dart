@@ -18,14 +18,14 @@ void succesfulAlert(context, text){
 }
 
 
-void errorAlert(context, time,  text){
+void errorAlert(context,  text){
   
   QuickAlert.show(
     context: context,
     type: QuickAlertType.error,
     title: "Error!",
     text: text,
-    autoCloseDuration: Duration(seconds:time),
+    autoCloseDuration: Duration(seconds:1, milliseconds: 500),
     confirmBtnColor: const Color(0xff588157),
 
     onConfirmBtnTap: (){},

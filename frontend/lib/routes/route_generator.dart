@@ -42,7 +42,8 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_)=> Home(id: args,));
       
       case "/scan-qr":
-        return MaterialPageRoute(builder: (_)=> ScanQR());
+        final args = settings.arguments as List<int>;
+        return MaterialPageRoute(builder: (_)=> ScanQR(idEnvio: args[0], idUser: args[1], estado: args[2],));
 
       case "/generate-qr":
         final args = settings.arguments as QrGenerator;
@@ -50,9 +51,6 @@ class RouteGenerator{
 
       case "/shippings-driver":
         return MaterialPageRoute(builder: (_)=> ShippingsDriver());
-
-      // case "/flete-form":
-      //   return MaterialPageRoute(builder: (_)=> FleteForm());
 
       case "/test":
         return MaterialPageRoute(builder: (_)=> const Test());
@@ -97,7 +95,7 @@ class RouteGenerator{
 class QrGenerator{
   final bool hasAppBar;
   final String title;
-  final double qrData;
+  final int qrData;
 
   QrGenerator(this.hasAppBar, this.title, this.qrData);
 

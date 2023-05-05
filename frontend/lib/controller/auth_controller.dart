@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class AuthController{
       });
       
     }else if(response.statusCode == 409){
-      errorAlert(context, 2, "El usuario ya se encuentra en uso!");
+      errorAlert(context, "El usuario ya se encuentra en uso!");
     }
   }
 
@@ -53,7 +54,7 @@ class AuthController{
       // getUserData(context, loginArr["data"]["idUser"]);
       
     }else{
-      errorAlert(context, 2, "Credenciales incorrectas");
+      errorAlert(context, "Credenciales incorrectas");
     }
 
   }
@@ -123,20 +124,29 @@ class AuthController{
   }
 
   Future setDriver(context, int idViaje, int idConductor)async{
-    var response = await http.post(Uri.parse("$_url/asignar"), body:jsonEncode({
-      "idViaje": idViaje,
-      "idConductor":idConductor
-    }));
+    final body = '{"idViaje": ${idViaje},"idConductor":${idConductor}}';
+    final headers = {"Content-type":'application/json'};
+
+    print(body);
+    var response = await http.post(Uri.parse("$_url/asignar"), headers: headers,body:body);
+    print(response.body);
     print(response.statusCode);
     if(response.statusCode == 200){
-      succesfulAlert(context, "Conductor Asignado Exitosamente");
-      updateStatus( estado: 2, idViaje: idViaje);
+      return updateStatus(context: context, estado: 2, idViaje: idViaje).then((value) { 
+        log(value.toString());
+        return value;
+      });
     }
+    errorAlert(context,"Error al actualizar el estado.");
+
+    return false;
   }
 
   
   Future updateStatus({BuildContext? context, required int idViaje, required int estado})async{
-    var response = await http.post(Uri.parse("$_url/cambioEstados"), body:jsonEncode({
+    final headers = {"Content-type":'application/json'};
+
+    var response = await http.post(Uri.parse("$_url/cambioEstados"), headers: headers, body:jsonEncode({
       "idViaje": idViaje,
       "estado": estado
     }));
@@ -144,9 +154,10 @@ class AuthController{
     if(response.statusCode == 200){
       if(context != null){
         succesfulAlert(context, "Conductor Asignado Exitosamente");
-
+        return true;
       }
     }
+    return false;
   }
 
   Future registerShipping(context, NewShipping envio)async{
@@ -187,13 +198,8 @@ class AuthController{
 
     var response = await http.post(Uri.parse("$_url/updateUser"),headers: headers, body: '{"id":$id, "name":"$username", "email":"$email", "password":"$password"}');
 
-    print(response.body);
-    print(response.statusCode);
     if(response.statusCode == 200){
       succesfulAlert(context, "Datos actualizados.");
-      // Future.delayed(const Duration(seconds: 2, milliseconds: 500),(){
-        // Navigator.pushNamed(context, "/initial-page");
-      // }); 
     }
   }
 }
