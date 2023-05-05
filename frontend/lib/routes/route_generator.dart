@@ -4,7 +4,6 @@ import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/register_shipping/register_shipping.dart';
 import 'package:frontend/views/scan_qr/scan_qr.dart';
 import 'package:frontend/views/shippings_driver/shippings_driver.dart';
-import 'package:frontend/views/test/temporal.dart';
 import 'package:frontend/views/test/test.dart';
 import 'package:frontend/views/user/user.dart';
 import '../views/home_supervisor/home_supervisor.dart';
@@ -54,10 +53,6 @@ class RouteGenerator{
 
       case "/test":
         return MaterialPageRoute(builder: (_)=> const Test());
-
-      case "/temporal":
-        final int args = settings.arguments as int;
-        return MaterialPageRoute(builder: (_)=> Temporal(idEnvio: args,));
 
       case "/user":
         final args = settings.arguments as UserView;
