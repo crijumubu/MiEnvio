@@ -48,9 +48,9 @@ jobs:
 
       - name: Build application
         run: flutter build apk
-  
-      - name: Move android artifact
-        run: mv ${{ secrets.ARTIFACT_PATH_ANDROID }} .
+        
+      - name: Where am I
+        run: pwd
         
       - name: What is here
         run: ls -l
@@ -59,7 +59,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: MiEnvio_android
-          path: ./app-release.apk 
+          path: /home/runner/work/MiEnvio/MiEnvio/frontend/build/app/outputs/flutter-apk/app-release.apk
   
   build_ios_artifact:
   
@@ -90,10 +90,10 @@ jobs:
 
       - name: Build application
         run: flutter build ios --release --no-codesign
-        
-      - name: Move android artifact
-        run: mv ${{ secrets.ARTIFACT_PATH_IOS }} .
-        
+  
+      - name: Where am I
+        run: pwd
+  
       - name: What is here
         run: ls -l
         
@@ -101,7 +101,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: MiEnvio_ios
-          path: ./Runner.app
+          path: /Users/runner/work/MiEnvio/MiEnvio/frontend/build/ios/iphoneos/Runner.app
   
   release:
   
