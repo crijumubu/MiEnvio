@@ -48,9 +48,12 @@ jobs:
 
       - name: Build application
         run: flutter build apk
-
+  
       - name: Move android artifact
         run: mv ${{ secrets.ARTIFACT_PATH_ANDROID }} .
+        
+      - name: What is here
+        run: ls -l
         
       - name: Upload artifact
         uses: actions/upload-artifact@v3
@@ -92,7 +95,7 @@ jobs:
         run: mv ${{ secrets.ARTIFACT_PATH_IOS }} .
         
       - name: What is here
-        run: ls -l ./build/ios/iphoneos/
+        run: ls -l
         
       - name: Upload artifact
         uses: actions/upload-artifact@v3
