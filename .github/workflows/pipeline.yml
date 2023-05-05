@@ -121,16 +121,10 @@ jobs:
         with:
           name: MiEnvio_android 
       
-      - name: What is here
-        run: ls -l
-      
       - name: Download ios artifact
         uses: actions/download-artifact@v3
         with:
           name: MiEnvio_ios
-      
-      - name: What is here
-        run: ls -l
           
       - name: Create release
         id: create_release
