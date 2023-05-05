@@ -78,12 +78,23 @@ class usersModel {
         });
         this.updateUser = (id, nombre, email, pass, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mongo.connect();
-            yield this.mongo.model.update({ 'id': id }, { $set: { 'name': nombre, 'email': email, 'password': this.cryptPassword(pass) } }, { multi: true })
-                .then((response, error) => {
-                //console.log(response);
-                //console.log(error);
-                fn(error);
-            });
+            const rows = yield this.mongo.model.find({ 'id': id });
+            if (rows[0].password == pass) {
+                yield this.mongo.model.update({ 'id': id }, { $set: { 'name': nombre, 'email': email } }, { multi: true })
+                    .then((response, error) => {
+                    //console.log(response);
+                    //console.log(error);
+                    fn(error);
+                });
+            }
+            else {
+                yield this.mongo.model.update({ 'id': id }, { $set: { 'name': nombre, 'email': email, 'password': this.cryptPassword(pass) } }, { multi: true })
+                    .then((response, error) => {
+                    //console.log(response);
+                    //console.log(error);
+                    fn(error);
+                });
+            }
         });
         this.mongo = new mongo_1.default(0);
     }

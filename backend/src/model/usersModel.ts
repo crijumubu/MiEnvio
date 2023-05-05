@@ -66,12 +66,23 @@ class usersModel {
   }
   public updateUser = async (id: number, nombre: string, email: string, pass: string, fn: any) => {
     this.mongo.connect();
-    await this.mongo.model.update({ 'id': id }, { $set: { 'name': nombre, 'email': email, 'password': this.cryptPassword(pass) } }, { multi: true })
+    const rows = await this.mongo.model.find({ 'id': id });
+    if(rows[0].password==pass){
+      await this.mongo.model.update({ 'id': id }, { $set: { 'name': nombre, 'email': email } }, { multi: true })
       .then((response: any, error: any) => {
         //console.log(response);
         //console.log(error);
         fn(error);
       })
+    }else{
+      await this.mongo.model.update({ 'id': id }, { $set: { 'name': nombre, 'email': email, 'password': this.cryptPassword(pass) } }, { multi: true })
+      .then((response: any, error: any) => {
+        //console.log(response);
+        //console.log(error);
+        fn(error);
+      })
+    }
+   
   }
 }
 export default usersModel;
