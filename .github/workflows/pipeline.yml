@@ -59,9 +59,6 @@ jobs:
   
     name: Build ios artifact
     runs-on: macOS-latest
-    defaults:
-      run:
-        working-directory: /Users/runner/work/MiEnvio/MiEnvio/frontend
     
     steps:
     
