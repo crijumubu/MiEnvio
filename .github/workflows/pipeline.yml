@@ -49,11 +49,14 @@ jobs:
       - name: Build application
         run: flutter build apk
 
+      - name: Move android artifact
+        run: mv ${{ secrets.ARTIFACT_PATH_ANDROID }} .
+        
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: MiEnvio_android
-          path: ${{ secrets.ARTIFACT_PATH_ANDROID }}  
+          path: ./app-release.apk 
   
   build_ios_artifact:
   
@@ -85,6 +88,9 @@ jobs:
       - name: Build application
         run: flutter build ios --release --no-codesign
         
+      - name: Move android artifact
+        run: mv ${{ secrets.ARTIFACT_PATH_IOS }} .
+        
       - name: What is here
         run: ls -l ./build/ios/iphoneos/
         
@@ -92,7 +98,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: MiEnvio_ios
-          path: ${{ secrets.ARTIFACT_PATH_IOS }}
+          path: ./Runner.app
   
   release:
   
@@ -111,34 +117,23 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: MiEnvio_android 
-          path: ${{ secrets.ARTIFACT_PATH_ANDROID }}
       
       - name: Where am i
         run: pwd
       
       - name: What is here
         run: ls -l
-
-      - name: Delete unused folders
-        run: rm -rf ./build/
-        
-      - name: Create ios artifact folder and grant privileges for user
-        run: sudo mkdir -p ${{ secrets.PATH_IOS }} && sudo chmod -R u+rw /Users
       
       - name: Download ios artifact
         uses: actions/download-artifact@v3
         with:
-          name: MiEnvio_ios 
-          path: ${{ secrets.ARTIFACT_PATH_IOS }}
+          name: MiEnvio_ios
           
       - name: Where am i
         run: pwd
       
       - name: What is here
         run: ls -l
-
-      - name: Delete unused folders
-        run: rm -rf ./build/
           
       - name: Create release
         id: create_release
@@ -156,7 +151,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ secrets.ARTIFACT_PATH_ANDROID }}
+          asset_path: ./app-release.apk 
           asset_name: MiEnvio.apk
           asset_content_type: application/zip
           
@@ -167,7 +162,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ secrets.ARTIFACT_PATH_IOS }}
+          asset_path: ./Runner.app
           asset_name: MiEnvio.app
           asset_content_type: application/zip
   
