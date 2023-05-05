@@ -52,44 +52,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: MiEnvio
-          path: ${{ secrets.ARTIFACT_PATH }}
-  
-  build_ios_artifact:
-  
-    name: Build ios artifact
-    runs-on: macOS-latest
-    defaults:
-      run:
-        working-directory: ./frontend
-
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
-
-      - name: Set up java
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'zulu'
-          java-version: '11'
-
-      - name: Set up flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.7.12'
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Build application
-        run: flutter build ios --release --no-codesign
-
-      - name: List
-        run: ls -l
-        
-      - name: List
-        run: ls -l build
-  
+          name: MiEnvio_android
+          path: ${{ secrets.ARTIFACT_PATH_ANDROID }}
   
   release:
   
@@ -103,14 +67,17 @@ jobs:
         working-directory: ./frontend
 
     steps:
-      - name: Download artifact
+      - name: Download android artifact
         uses: actions/download-artifact@v3
         with:
-          name: MiEnvio
-          path: ${{ secrets.ARTIFACT_PATH }}
+          name: MiEnvio_android 
+          path: ${{ secrets.ARTIFACT_PATH_ANDROID }}
       
-      - name: Move apk to home
-        run: mv ${{ secrets.ARTIFACT_PATH }} ./MiEnvio
+      - name: What is here
+        run: ls -l
+      
+      - name: Move android artifact to home
+        run: mv ${{ secrets.ARTIFACT_PATH_ANDROID }} ./MiEnvio
 
       - name: Delete unused folders
         run: rm -rf ./build/
@@ -124,8 +91,8 @@ jobs:
           tag_name: ${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
 
-      - name: Update file to release
-        id: upload_release_asset
+      - name: Update android artifact to release
+        id: upload_android_release_asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -134,3 +101,4 @@ jobs:
           asset_path: ${{ secrets.ASSET_PATH}}
           asset_name: MiEnvio.apk
           asset_content_type: application/zip
+  
