@@ -48,6 +48,9 @@ jobs:
 
       - name: Build application
         run: flutter build apk
+        
+      - name: Where am i
+        run: pwd
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
@@ -83,17 +86,10 @@ jobs:
 
       - name: Build application
         run: flutter build ios --release --no-codesign
-
-      - name: List
-        run: ls -l
-        
-      - name: List
-        run: ls -l build
-  
   
   release:
   
-    needs: [build_android_artifact] 
+    needs: [build_android_artifact, build_ios_artifact] 
     permissions: write-all
 
     name: Create Release
