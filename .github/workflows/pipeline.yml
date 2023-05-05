@@ -123,7 +123,7 @@ jobs:
         run: rm -rf ./build/
         
       - name: Create ios artifact folder and grant privileges for user
-        run: sudo mkdir /Users && sudo chmod u+rw /Users
+        run: sudo mkdir -p ${{ secrets.PATH_IOS }} && sudo chmod -R u+rw /Users
       
       - name: Download ios artifact
         uses: actions/download-artifact@v3
