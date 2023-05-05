@@ -128,7 +128,7 @@ class usersRoute {
  *       500:
  *         description: Error interno del servidor.
  */
-
+this.router.post('/register', this.controller.register);
 /**
  * @swagger
  * /mienvio/api/getDataUser/{id}:
@@ -178,6 +178,7 @@ class usersRoute {
    *       500:
    *         description: Error interno del servidor.
  */
+this.router.get('/getDataUser/:id', this.controller.getUserData);
   /**
  * @swagger
  * /mienvio/api/updateUser:
