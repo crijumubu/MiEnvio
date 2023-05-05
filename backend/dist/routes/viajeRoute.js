@@ -827,58 +827,40 @@ class viajeRoute {
         this.router.post('/cambioEstados', this.controller.updateEstado);
         /**
       * @swagger
-      * /mienvio/api/viajeIdUsrActivo/{ID}:
-      *   get:
-      *     summary: Obtener el viaje activo de un usuario.
-      *     description: Permite obtener la información del viaje activo de un usuario dado su ID.
+      * /mienvio/api/asignar:
+      *   put:
+      *     summary: Asigna un conductor a un viaje.
+      *     description: Asigna un conductor a un viaje específico.
       *     parameters:
-      *       - in: path
-      *         name: ID
-      *         description: ID del usuario cuyo viaje se quiere obtener.
+      *       - in: body
+      *         name: body
+      *         description: Objeto JSON que contiene la información del viaje y del conductor a asignar.
       *         required: true
       *         schema:
-      *           type: integer
-      *           minimum: 1
-      *           example: 123
+      *           type: object
+      *           properties:
+      *             idViaje:
+      *               type: integer
+      *               example: 2
+      *             idConductor:
+      *               type: integer
+      *               example: 3
       *     responses:
       *       200:
-      *         description: Información del viaje activo del usuario.
+      *         description: Mensaje de éxito al asignar un conductor.
       *         content:
       *           application/json:
       *             schema:
-      *               type: array
-      *               items:
-      *                 type: object
-      *                 properties:
-      *                   _id:
-      *                     type: string
-      *                     example: "6452f32067e5500c33a29c8d"
-      *                   idViaje:
-      *                     type: integer
-      *                     example: 1
-      *                   idUsuario:
-      *                     type: integer
-      *                     example: 1
-      *                   nombre:
-      *                     type: string
-      *                     example: "Viaje1"
-      *                   origen:
-      *                     type: string
-      *                     example: "Bogota"
-      *                   destino:
-      *                     type: string
-      *                     example: "Bucaramanga"
-      *                   estado:
-      *                     type: integer
-      *                     example: 2
-      *                   idConductor:
-      *                     type: integer
-      *                     example: 2
-      *                   direccion:
-      *                     type: string
-      *                     example: "Autopista Piedecuesta Kilómetro 7,, Floridablanca, Santander"
+      *               type: object
+      *               properties:
+      *                 error:
+      *                   type: boolean
+      *                   example: false
+      *                 message:
+      *                   type: string
+      *                   example: "Se actualizó el conductor"
       *       401:
-      *         description: El usuario no tiene ningún viaje activo.
+      *         description: Mensaje de error al no encontrar al conductor.
       *         content:
       *           application/json:
       *             schema:
@@ -889,9 +871,9 @@ class viajeRoute {
       *                   example: true
       *                 message:
       *                   type: string
-      *                   example: "El usuario no tiene ningún viaje activo"
+      *                   example: "No se encontró el conductor"
       *       500:
-      *         description: Error interno del servidor.
+      *         description: Mensaje de error interno del servidor.
       *         content:
       *           application/json:
       *             schema:
@@ -905,6 +887,7 @@ class viajeRoute {
       *                   example: "Error interno"
       */
         this.router.get('/viajeIdUsrActivo/:id', this.controller.getViajeActivo);
+        this.router.get('/viajeIdConductor/:id', this.controller.getViajeConductor);
         /**
        * @swagger
        * /mienvio/api/viajeId/{IdViaje}:
