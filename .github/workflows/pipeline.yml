@@ -121,9 +121,6 @@ jobs:
         with:
           name: MiEnvio_android 
       
-      - name: Where am i
-        run: pwd
-      
       - name: What is here
         run: ls -l
       
@@ -131,9 +128,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: MiEnvio_ios
-          
-      - name: Where am i
-        run: pwd
       
       - name: What is here
         run: ls -l
