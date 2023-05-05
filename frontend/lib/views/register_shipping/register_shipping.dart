@@ -41,7 +41,7 @@ class _RegisterShippingState extends State<RegisterShipping> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Text(title,
-          style: GoogleFonts.rubik(fontSize: 22, fontWeight: FontWeight.w500),
+          style: GoogleFonts.rubik(fontSize: 24, fontWeight: FontWeight.w500),
         ),
       ),
     );
@@ -101,9 +101,9 @@ class _RegisterShippingState extends State<RegisterShipping> {
       appBar: headerBack(context),
       body: ListView(
         children: [
-            const SizedBox(height: 20,),
-            Center(child: Text("Registrar Envio", style: GoogleFonts.rubik(fontSize: 28, fontWeight: FontWeight.w700),)),
             const SizedBox(height: 30,),
+            Center(child: Text("Registrar Envio", style: GoogleFonts.rubik(fontSize: 34, fontWeight: FontWeight.w700),)),
+            const SizedBox(height: 20,),
             title("Informacion General"),
             Divider(),
             Padding(
@@ -138,7 +138,7 @@ class _RegisterShippingState extends State<RegisterShipping> {
             FleteForm( horaCargue: horaCargue, horaDescargue: horaDescargue, horaECargue: horaECargue, horaEDescargue: horaEDescargue, callback: sendForm,  ),
             // const SizedBox(height: 20,),
             
-            const SizedBox(height: 20,),
+            const SizedBox(height: 50,),
 
         ],
       ),

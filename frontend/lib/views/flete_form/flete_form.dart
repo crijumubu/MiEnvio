@@ -93,7 +93,7 @@ class _FleteFormState extends State<FleteForm> {
                           Input(controller: widget.horaEDescargue, inputText: "¿Horas de espera en el descargue?", width: width*0.42, numbers: true,),
                         ],
                       ),
-                      SizedBox(height: height*0.025,),
+                      SizedBox(height: height*0.05,),
 
                       Column(
                         children: [
