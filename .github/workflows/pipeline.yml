@@ -96,7 +96,7 @@ jobs:
   
   release:
   
-    needs: [build_android_artifact] 
+    needs: [build_android_artifact, build_ios_artifact] 
     permissions: write-all
 
     name: Create Release
