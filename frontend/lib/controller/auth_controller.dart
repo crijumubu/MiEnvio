@@ -149,7 +149,7 @@ class AuthController{
     }
   }
 
-  Future registerShipping(NewShipping envio)async{
+  Future registerShipping(context, NewShipping envio)async{
     Uri urlT = Uri.parse("http://mienvio.bucaramanga.upb.edu.co:1802/mienvio/api/registroViaje");
     final headers = {"Content-type":'application/json'};
     final body = '{"idUsuario":${envio.idUsuario}, "nombre":"${envio.nombre}","origen":"${envio.origen}","destino":"${envio.destino}","estado":${1},"direccion":"${envio.direccion}" }';
@@ -157,8 +157,14 @@ class AuthController{
     var response = await http.post(urlT, headers: headers, body: body);
 
     if(response.statusCode == 200){
-      var data = jsonDecode(response.body);
-      registerFlete(envio, data["idViaje"]);
+      // var data = jsonDecode(response.body);
+      succesfulAlert(context, "Envío registrado.");
+      Future.delayed(const Duration(seconds: 1, milliseconds: 600),(){
+        // ! Calcular flete
+        // ! Pasar flete calculado a la ruta
+        Navigator.pushNamed(context, "/flete");
+      }); 
+      // registerFlete(envio, data["idViaje"]);
 
     }
   }

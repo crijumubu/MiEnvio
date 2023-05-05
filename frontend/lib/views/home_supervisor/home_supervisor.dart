@@ -163,8 +163,8 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
               
                     GestureDetector(
                       onTap: (){
-                        Navigator.pop(context);
-                        // Navigator.pushNamed(context, "initial-page");
+                        // Navigator.pop(context);
+                        Navigator.pushNamed(context, "initial-page");
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 10),
