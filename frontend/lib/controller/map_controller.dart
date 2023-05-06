@@ -1,15 +1,26 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapController{
+  MapController( { required this.initialPos, required this.controller,}){
+    MarkerId markerId =  MarkerId("initialPos");
+    _markers[markerId] = Marker(markerId:markerId, position: initialPos);
+  }
+
+  final Completer<GoogleMapController> controller;
+
   final mapStyle = [
     {
         "featureType": "administrative",
-        "elementType": "labels.text.fill",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#444444"
+                "saturation": "16"
+            },
+            {
+                "visibility": "on"
             }
         ]
     },
@@ -18,85 +29,28 @@ class MapController{
         "elementType": "all",
         "stylers": [
             {
-                "color": "#f2f2f2"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
+                "hue": "#FFBB00"
             },
             {
-                "hue": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry",
-        "stylers": [
+                "saturation": 43.400000000000006
+            },
             {
-                "lightness": "100"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.man_made",
-        "elementType": "labels",
-        "stylers": [
+                "lightness": 37.599999999999994
+            },
             {
-                "visibility": "off"
+                "gamma": 1
             }
         ]
     },
     {
         "featureType": "landscape.natural",
-        "elementType": "geometry.fill",
+        "elementType": "all",
         "stylers": [
             {
-                "lightness": "100"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.landcover",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.terrain",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "lightness": "100"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.terrain",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "off"
+                "saturation": "30"
             },
             {
-                "lightness": "23"
+                "lightness": "0"
             }
         ]
     },
@@ -105,42 +59,81 @@ class MapController{
         "elementType": "all",
         "stylers": [
             {
+                "hue": "#00ff6a"
+            },
+            {
+                "saturation": "3"
+            },
+            {
+                "lightness": "12"
+            },
+            {
+                "gamma": "1"
+            },
+            {
+                "weight": "1"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels",
+        "stylers": [
+            {
                 "visibility": "off"
             }
         ]
     },
     {
-        "featureType": "road",
+        "featureType": "poi.attraction",
         "elementType": "all",
         "stylers": [
             {
-                "saturation": -100
-            },
-            {
-                "lightness": 45
+                "visibility": "off"
             }
         ]
     },
     {
-        "featureType": "road.highway",
+        "featureType": "poi.attraction",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.business",
         "elementType": "all",
         "stylers": [
             {
-                "visibility": "simplified"
+                "visibility": "off"
             }
         ]
     },
     {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
+        "featureType": "poi.park",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#ffd900"
+                "visibility": "on"
             }
         ]
     },
     {
-        "featureType": "road.arterial",
+        "featureType": "poi.park",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
         "elementType": "labels.icon",
         "stylers": [
             {
@@ -149,8 +142,62 @@ class MapController{
         ]
     },
     {
-        "featureType": "transit",
+        "featureType": "road.highway",
         "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#FFC200"
+            },
+            {
+                "saturation": -61.8
+            },
+            {
+                "lightness": 45.599999999999994
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#FF0300"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 51.19999999999999
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#FF0300"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 52
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "transit.station.bus",
+        "elementType": "labels.icon",
         "stylers": [
             {
                 "visibility": "off"
@@ -162,37 +209,44 @@ class MapController{
         "elementType": "all",
         "stylers": [
             {
-                "color": "#ffd900"
+                "hue": "#0078FF"
             },
             {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
+                "saturation": -13.200000000000003
             },
             {
-                "color": "#cccccc"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "labels",
-        "stylers": [
+                "lightness": 2.4000000000000057
+            },
             {
-                "visibility": "off"
+                "gamma": 1
             }
         ]
     }
 ];
 
+  final Map<MarkerId, Marker> _markers = {};
+
+  final LatLng initialPos;
+
+  CameraPosition cameraPosition(){
+    CameraPosition cameraPosition = CameraPosition(
+      target: initialPos,
+      zoom: 17
+    );
+    return cameraPosition;
+  }
+  
+  Set<Marker> get markers => _markers.values.toSet();
+
   void onMapCreated(GoogleMapController controller ){
     controller.setMapStyle(jsonEncode(mapStyle));
+    this.controller.complete(controller);
+    
+  }
+
+  Future<void> backToInitial() async {
+    final GoogleMapController controller = await this.controller.future;
+    // _controller.
+    controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition()));
   }
 }
