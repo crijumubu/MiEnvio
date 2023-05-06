@@ -13,6 +13,7 @@ class CardShipping extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       onTap: ()async{
         final String apiKey = "AIzaSyD72vikPUNNUwfZwPGqU_PYPvC9QnsmBl8";
@@ -43,7 +44,7 @@ class CardShipping extends StatelessWidget {
       },
       child: Container(
         decoration: const BoxDecoration(
-            color: Color(0xffDAD7CD),
+            color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(8))
     
         ),
@@ -55,10 +56,22 @@ class CardShipping extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.centerLeft, 
-                  child: Text(
-                    shipping.nombre, 
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: shipping.nombre,
+                          style: GoogleFonts.rubik(fontWeight: FontWeight.w700, fontSize: 20, color: Color(0xff344E41)),
+                        ),
+                        TextSpan(
+                          text: (shipping.estado == 2) ? " (Activo)": " (Finalizado)",
+                          style: GoogleFonts.rubik(fontWeight: FontWeight.w600, fontSize: 20, color: (shipping.estado == 2) ? Colors.green : Colors.grey),
+                        )
+                      ],
+                    ), 
                     textAlign: TextAlign.left,
-                    style: GoogleFonts.rubik(fontWeight: FontWeight.w700, fontSize: 20, color: const Color(0xff344E41)),
+                    
+                    
                   )
                 ),
                 Align(

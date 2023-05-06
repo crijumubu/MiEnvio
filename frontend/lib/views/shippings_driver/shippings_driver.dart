@@ -43,14 +43,15 @@ class ShippingsDriver extends StatelessWidget {
     
     late double height = 0;
     if(height == 0) height = MediaQuery.of(context).size.height;
-    List enviosCard = [];
-    for(var i in envios){
-      enviosCard.add(CardShipping(shipping: i));
-      enviosCard.add(const SizedBox(height: 10));
-    }
+    // List enviosCard = [];
+    // for(var i in envios){
+    //   enviosCard.add(CardShipping(shipping: i));
+    //   enviosCard.add(const SizedBox(height: 10));
+    // }
     
     return Scaffold(
       appBar: headerBack(context),
+      backgroundColor: Colors.grey[100],
       body: ListView(
         
         children: [
