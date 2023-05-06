@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:frontend/controller/auth_controller.dart';
 import 'package:frontend/views/shippings_driver/shippings_driver.dart';
-import 'package:frontend/views/shippings_driver/widgets/map.dart';
+import 'package:frontend/views/shippings_driver/widgets/shipping_detailed.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CardShipping extends StatelessWidget {
   const CardShipping({super.key, required this.shipping});
@@ -10,8 +14,32 @@ class CardShipping extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const MapSample()));
+      onTap: ()async{
+        final String apiKey = "AIzaSyD72vikPUNNUwfZwPGqU_PYPvC9QnsmBl8";
+        print(shipping.direccion);
+        Uri uri = Uri.https(
+          "maps.googleapis.com",
+          "maps/api/geocode/json",
+          {
+            "address": shipping.direccion,
+            "key": apiKey
+          }
+        );
+        String? response = await AuthController.addressToLatLn(uri);
+        if(response!= null){
+          var data = jsonDecode(response);
+          
+          // print(data['results'][0]["geometry"]["location"]);
+          double lat = data['results'][0]["geometry"]["location"]["lat"];
+          double lng = data['results'][0]["geometry"]["location"]["lng"];
+          log("$lat $lng");
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ShippingDetailed(initialPos: LatLng( lat, lng), envio: shipping,)));
+
+        }
+
+
+        // log((response ?? "no hay na"));
+
       },
       child: Container(
         decoration: const BoxDecoration(

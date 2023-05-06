@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../shippings_driver/shippings_driver.dart';
-import '../../shippings_driver/widgets/map.dart';
 
 class NavigatorShippings extends StatelessWidget {
   NavigatorShippings({super.key, required this.id, required this.enviosList, required this.filtersActive, required this.addFilter, required this.removeFilter, required this.btnText, required this.btnRegister});

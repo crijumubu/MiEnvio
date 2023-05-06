@@ -4,7 +4,6 @@ import 'package:frontend/controller/auth_controller.dart';
 import 'package:frontend/views/update_state.dart/update_status.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../shippings_driver/shippings_driver.dart';
-import '../../shippings_driver/widgets/map.dart';
 
 class NavigatorHome extends StatelessWidget {
   NavigatorHome({super.key, required this.height, required this.name, required this.id, required this.enviosShow});
