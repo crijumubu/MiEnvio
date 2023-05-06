@@ -64,7 +64,7 @@ jobs:
   build_ios_artifact:
   
     name: Build ios artifact
-    runs-on: macOS-latest
+    runs-on: macos-latest
     defaults:
       run:
         working-directory: ./frontend
@@ -90,7 +90,7 @@ jobs:
 
       - name: Build application
         run: flutter build ios --release --no-codesign
-  
+
       - name: Where am I
         run: pwd
   
@@ -119,16 +119,6 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
     
-      - name: Download android artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: MiEnvio_android 
-      
-      - name: Download ios artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: MiEnvio_ios
-          
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -138,6 +128,11 @@ jobs:
           tag_name: ${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
 
+      - name: Download android artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: MiEnvio_android 
+      
       - name: Update android artifact to release
         id: upload_android_release_asset
         uses: actions/upload-release-asset@v1
@@ -148,12 +143,30 @@ jobs:
           asset_path: ./app-release.apk 
           asset_name: MiEnvio.apk
           asset_content_type: application/zip
+
+      - name: Make directory
+        run: mkdir /home/runner/work/MiEnvio/MiEnvio/frontend/ipa
+
+      - name: Download ios artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: MiEnvio_ios
+          path: /home/runner/work/MiEnvio/MiEnvio/frontend/ipa
+
+      - name: Zip artifact
+        run: zip -r Mienvio.zip /home/runner/work/MiEnvio/MiEnvio/frontend/ipa/
       
+      - name: Move zip to ipa
+        run: mv Mienvio.zip Mienvio.ipa
+
+      - name: Where is the ipa file
+        run: readlink -f Mienvio.ipa
+
       - name: What is here
-        run: |
-          ls
-          pwd
-          find /home/runner/work/MiEnvio/MiEnvio -name *.app
+        run: ls -l
+
+      - name: Where am I
+        run: pwd
       
       - name: Update ios artifact to release
         id: upload_ios_release_asset
@@ -162,7 +175,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Runner.app
-          asset_name: MiEnvio.app
+          asset_path: /home/runner/work/MiEnvio/MiEnvio/frontend/Mienvio.ipa
+          asset_name: MiEnvio.ipa
           asset_content_type: application/zip
   
