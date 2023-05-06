@@ -116,6 +116,9 @@ jobs:
 
     steps:
     
+      - name: Check out the repo
+        uses: actions/checkout@v3
+    
       - name: Download android artifact
         uses: actions/download-artifact@v3
         with:
