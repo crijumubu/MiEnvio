@@ -127,10 +127,8 @@ class AuthController{
     final body = '{"idViaje": ${idViaje},"idConductor":${idConductor}}';
     final headers = {"Content-type":'application/json'};
 
-    print(body);
     var response = await http.post(Uri.parse("$_url/asignar"), headers: headers,body:body);
-    print(response.body);
-    print(response.statusCode);
+    
     if(response.statusCode == 200){
       return updateStatus(context: context, estado: 2, idViaje: idViaje).then((value) { 
         log(value.toString());
@@ -201,5 +199,16 @@ class AuthController{
     if(response.statusCode == 200){
       succesfulAlert(context, "Datos actualizados.");
     }
+  }
+
+  Future getShippingsDriver(int idConductor)async{
+    
+    var response = await http.get(Uri.parse("$_url/viajeIdConductor/$idConductor"));
+
+    if(response.statusCode == 200){
+      var data = jsonDecode(response.body);
+      return data;
+    }
+
   }
 }

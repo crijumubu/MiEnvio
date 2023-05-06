@@ -49,7 +49,8 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_)=>  GenerateQR(hasAppbar: args.hasAppBar, title: args.title, qrData: args.qrData, ));
 
       case "/shippings-driver":
-        return MaterialPageRoute(builder: (_)=> ShippingsDriver());
+        int arg = settings.arguments as int;
+        return MaterialPageRoute(builder: (_)=> ShippingsDriver(idConductor: arg,));
 
       case "/test":
         return MaterialPageRoute(builder: (_)=> const Test());
