@@ -116,6 +116,9 @@ jobs:
 
     steps:
     
+      - name: Check out the repo
+        uses: actions/checkout@v3
+    
       - name: Download android artifact
         uses: actions/download-artifact@v3
         with:
@@ -145,7 +148,13 @@ jobs:
           asset_path: ./app-release.apk 
           asset_name: MiEnvio.apk
           asset_content_type: application/zip
-          
+      
+      - name: What is here
+        run: |
+          ls
+          pwd
+          find /home/runner/work/MiEnvio/MiEnvio -name *.app
+      
       - name: Update ios artifact to release
         id: upload_ios_release_asset
         uses: actions/upload-release-asset@v1
