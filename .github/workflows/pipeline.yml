@@ -128,7 +128,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ secrets.RELEASE_ANDROID_ARTIFACT }}
+          asset_path: ./app-release.apk
           asset_name: MiEnvio.apk
           asset_content_type: application/zip
 
