@@ -175,7 +175,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Mienvio.ipa
+          asset_path: /home/runner/work/MiEnvio/MiEnvio/frontend/Mienvio.ipa
           asset_name: MiEnvio.ipa
           asset_content_type: application/zip
   
