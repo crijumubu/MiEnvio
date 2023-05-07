@@ -1,4 +1,4 @@
- ## PASO A PASO DE CONFIGURACIÓN DE LAS COPIAS DE SEGURIDAD DE LA BASE DE DATOS
+ ## PASO A PASO PARA LA CONFIGURACIÓN DE LAS COPIAS DE SEGURIDAD DE LA BASE DE DATOS
 
 
 En el proceso de la realización de las copias de seguridad se ven involucradas dos máquinas, la primera, corresponde al nodo manager del swarm de docker el cual corre el servicio de mongodb; la segunda, corresponde a una máquina externa a lo que sería la infraestructura del proyecto en sí, la cual se encarga de alojar las copias de seguridad. Una vez claro esto, a continuación se detallará el paso a paso que se llevó a cabo en cada una de las máquinas.

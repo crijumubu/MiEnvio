@@ -1,4 +1,4 @@
-## PASO A PASO DE CONFIGURACIÓN DEL SERVICIO DE MONGODB
+## PASO A PASO PARA LA CONFIGURACIÓN DEL SERVICIO DE MONGODB
 
 En el proceso de configuración del servicio de MongoDB hay que tener en cuenta que este fue desplegado mediante un cluster de docker swarm, el cual cuenta con un nodo manager y un nodo worker para este caso en particular. Además, hay que tener en cuenta que para compartir los datos entre cada una de las instancias fue necesaria la configuración de un replica set en MongoDB el cual facilita este trabajo. Por ultimo, cabe mencionar que el servicio de MongoDB se configuró para que la comunicación se de a través del protocolo TLS/SSL, garantizando así, la autenticidad de los servidores y permitiendo a su vez el cifrado de los datos transmitidos. Con esto claro, a continuación se detalla el paso a paso que se llevó para la configuración de este servicio.
 
