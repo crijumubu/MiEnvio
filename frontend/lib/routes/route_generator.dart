@@ -3,6 +3,7 @@ import 'package:frontend/views/generate_qr/generate_qr.dart';
 import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/register_shipping/register_shipping.dart';
 import 'package:frontend/views/scan_qr/scan_qr.dart';
+import 'package:frontend/views/shipping_details/shipping_details.dart';
 import 'package:frontend/views/shippings_driver/shippings_driver.dart';
 import 'package:frontend/views/test/test.dart';
 import 'package:frontend/views/user/user.dart';
@@ -66,6 +67,11 @@ class RouteGenerator{
       case "/flete":
         Shipping envio = settings.arguments as Shipping;
         return MaterialPageRoute(builder: (_) => Flete(envio: envio,));
+
+      case "/shippings-details":
+        Shipping envio = settings.arguments as Shipping;
+        return MaterialPageRoute(builder: (_) => ShippingDetails(envios: envio));
+
       default:
         return _errorRoute();
     }

@@ -49,7 +49,10 @@ class FleteContent extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text("Flete", style: GoogleFonts.rubik(fontSize: 34, fontWeight: FontWeight.bold),),
+          child: SizedBox(
+            width: double.infinity,
+            child: Text("Flete", style: GoogleFonts.rubik(fontSize: 34, fontWeight: FontWeight.bold),)
+          ),
         ),
 
         Divider(color: Colors.grey, thickness: 0.8,),

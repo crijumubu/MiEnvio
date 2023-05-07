@@ -180,7 +180,7 @@ class ShippingItem extends StatelessWidget {
         if(updateStatus){
           Navigator.pushNamed(context, "/scan-qr", arguments: [shipping.idViaje, idUser, shipping.estado]);
         }else{
-          Navigator.pushNamed(context, "/flete", arguments: shipping);
+          Navigator.pushNamed(context, "/shippings-details", arguments: shipping);
         }
       },
       child: Container(
