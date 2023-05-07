@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/views/shippings_driver/shippings_driver.dart';
 import 'package:frontend/views/test/mymap.dart';
 // import 'package:google_map_live/mymap.dart';
 import 'package:location/location.dart' as loc;
@@ -82,7 +83,7 @@ class _TestState extends State<Test> {
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
-                                  MyMap(snapshot.data!.docs[index].id)));
+                                  MyMap(snapshot.data!.docs[index].id, envio: Shipping(nombre: "", idViaje: 1, idUsuario: 1, origen: "origen", destino: "destino", estado: 2, idConductor: 2, direccion: "direccion"),)));
                         },
                       ),
                     );
@@ -100,6 +101,7 @@ class _TestState extends State<Test> {
       print("try");
       final loc.LocationData locationResult = await location.getLocation();
       print(locationResult.latitude);
+      
       await FirebaseFirestore.instance.collection('location').doc('user1').set({
         'latitude': locationResult.latitude,
         'longitude': locationResult.longitude,
