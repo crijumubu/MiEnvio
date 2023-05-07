@@ -1,54 +1,14 @@
 version: "3.8"
 
 services:
-  mienvio_mongodb-1:
-    image: mongo:latest
-    command: ["mongod", "--replSet", "rs", "--tlsAllowInvalidCertificates", "--tlsMode", "requireTLS", "--tlsCertificateKeyFile", "/data/mongodb_node_1.pem", "--tlsCAFile", "/data/ca.pem"]
-    ports:
-      - '27017:27017'
-    networks:
-      - mienvio_net
+  mongodb:
+    image: mongo_mienvio
+    container_name: monguito
+    environment:
+      - PUID=1000
+      - PGID=1000
     volumes:
-      - mienvio_data:/data/db
-      - mienvio_config:/data/configdb
-      - "/home/Mienvio/mongodb/docker/certificates/mongodb_node_1.pem:/data/mongodb_node_1.pem"
-      - "/home/Mienvio/mongodb/docker/certificates/ca.pem:/data/ca.pem"
-    deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 15s
-      placement:
-        constraints:
-          - node.role == manager
-
-  mienvio_mongodb-2:
-    image: mongo:latest
-    command: ["mongod", "--replSet", "rs", "--tlsAllowInvalidCertificates", "--tlsMode", "requireTLS", "--tlsCertificateKeyFile", "/data/mongodb_node_2.pem", "--tlsCAFile", "/data/ca.pem"]
+      - /home/mienvio2-admin/mongodb/database:/data/db
     ports:
-      - '27018:27017'
-    networks:
-      - mienvio_net
-    volumes:
-      - mienvio_data:/data/db
-      - mienvio_config:/data/configdb
-      - "/home/Mienvio/mongodb/docker/certificates/mongodb_node_2.pem:/data/mongodb_node_2.pem"
-      - "/home/Mienvio/mongodb/docker/certificates/ca.pem:/data/ca.pem"
-    deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 15s
-      placement:
-        constraints:
-          - node.role == worker
-
-networks:
-  mienvio_net:
-    external: true
-
-volumes:
-  mienvio_data:
-  mienvio_config:
+      - "27017:27017"
+    restart: unless-stopped

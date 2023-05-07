@@ -1,0 +1,4 @@
+Paso a paso para la puesta en marcha del servidor de la aplicación
+
+1.) docker build -t mienvio .
+2.) docker compose up -d
