@@ -1,7 +1,0 @@
-Paso a paso para la puesta en marcha de la base de datos
-
-1.) docker build -t mongo_mienvio .
-2.) docker compose up -d
-3.) docker exec mongodb bash
-4.) ./etc/main.sh
-5.) systemctl restart mongodb
