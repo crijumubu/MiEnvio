@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import ciudadModel from '../model/tipoVehiculoModel';
 import viajesController from '../controller/viajesController';
 class viajeRoute {
   public router: Router;
@@ -615,7 +614,7 @@ class viajeRoute {
      *                   type: string
      *                   example: "Error interno"
      */
-    this.router.get('/mienvio/api/viajeIdUsr/:idcliente', this.controller.getViaje);
+    this.router.get('/viajeIdUsr/:idcliente', this.controller.getViaje);
 
     /**
    * @swagger
