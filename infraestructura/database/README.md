@@ -23,7 +23,7 @@ docker swarm join --token ${token} 192.168.0.4:2377
 - #### Puesta en marcha del gestor grafico del swarm de docker
 
 ```
-docker service create -d --name vizualizer -p 8080:8080 --constraint=node.role==manager --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock dockersamples/visualizer
+docker service create -d --name vizualizer -p 80:8080 --constraint=node.role==manager --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock dockersamples/visualizer
 ```
 
 &nbsp;
