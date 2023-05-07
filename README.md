@@ -1,41 +1,11 @@
-# Infraestructura del sistema MiEnvio
+# MiEnvio
 
-Este rama contiene las guias de configuración indispensables para la puesta en marcha de los servicios necesarios para el correcto funcionamiento del sistema.
+### Descripción del producto
 
-La infraestructura consta de cinco (5) servidores, dos (2) de estos alojados en las instalaciones de la Universidad Pontificia Bolivariana Seccional Bucaramanga y tres (3) alojados en la nube a través del servicio de azure. La distribución de los servicios a través de los servidores es de la siguiente manera:
+En Colombia, el número de usuarios conectados a internet es de 35.50 millones; de estos, se tiene que el 97.7% se conecta a esta red mediante un teléfono inteligente o smartphone. Debido a que los dispositivos móviles se han vuelto más accesibles y portátiles, las organizaciones y los usuarios han preferido comprarlos y usarlos en lugar de las computadoras, es por esto que se plantea en este proyecto el desarrollo de una aplicación móvil la cual integre las múltiples variables a tener en cuenta a la hora de realizar un envío de carga pesada y a su vez facilite la gestión de este proceso desde la contratación hasta la entrega del cargamento. 
 
-&nbsp;
-
-#### 1.  Servidor manager de base de datos
-Este servidor se encuentra alojado en la nube mediante el servicio de azure y es el encargado de administrar el cluster de docker swarm para el servicio de la base de datos, y a su vez, es el encargado de administrar el replica set del servicio de mongo.
+El proposito del siguiente repositorio es llevar un registro del desarrollo del proyecto integrador 3. A continuación, se listan las herramientas y tecnologías que se utilizaron para desarrollar este proyecto.
 
 &nbsp;
 
-#### 2.  Servidor worker de base de datos
-Este servidor se encuentra alojado en la nube mediante el servicio de azure y es el encargado de ejecutar tareas delegados por el nodo manager.
-
-&nbsp;
-
-#### 3.  Servidor manager de la aplicación
-Este servidor se encuentra alojado en las instalaciondes de la universidad y es el encargado de administrar el cluster de docker swarm para el servicio de la aplicación (API).
-
-&nbsp;
-
-#### 4.  Servidor worker de la aplicación
-Este servidor se encuentra alojado en las instalaciondes de la universidad  y es el encargado de ejecutar tareas delegados por el nodo manager.
-
-&nbsp;
-
-#### 5.  Servidor de backup
-
-Este servidor se encuentra alojado en la nube mediante el servicio de azure y es quien se encarga de salvaguardar la información de la base de datos.
-
-&nbsp;
-
-Finalmente, con todo esto claro, la infraestructura del proyecto se vería de la siguiente manera:
-
-&nbsp;
-
-<p align="center">
-  <img src="https://i.ibb.co/kxnp7tx/Diagrama-de-infraestructura-drawio.png"/>
-</p>
+![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white) ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white) ![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white) ![Ubuntu](https://img.shields.io/badge/Ubuntu%20Server-E95420?style=for-the-badge&logo=ubuntu&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
