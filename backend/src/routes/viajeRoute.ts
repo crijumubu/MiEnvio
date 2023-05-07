@@ -615,7 +615,7 @@ class viajeRoute {
      *                   type: string
      *                   example: "Error interno"
      */
-    this.router.get('/mienvio/api/viajeIdUsr/:idcliente', this.controller.getViaje);
+    this.router.get('/mienvio/api/viajeIdUsr/:id', this.controller.getViaje);
 
     /**
    * @swagger
