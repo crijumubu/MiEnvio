@@ -4,6 +4,7 @@ import 'package:frontend/controller/auth_controller.dart';
 import 'package:frontend/views/update_state.dart/update_status.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../shippings_driver/shippings_driver.dart';
+import '../../test/mymap.dart';
 
 class NavigatorHome extends StatelessWidget {
   NavigatorHome({super.key, required this.height, required this.name, required this.id, required this.enviosShow});
@@ -207,7 +208,7 @@ class ActiveShippings extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, "/test");
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyMap("conductor${shipping.idConductor}", envio: shipping,)));
       },
       child: Container(
         decoration:  BoxDecoration(

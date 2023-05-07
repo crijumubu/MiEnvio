@@ -73,6 +73,7 @@ class _ScanQRState extends State<ScanQR> {
                 final Uint8List? image = capture.image;
                 print("Barcodes: ${barcodes[0].rawValue}");
                 print(widget.estado);
+                if(widget.idUser == 0) return;
                 if(widget.estado == 2){
                   _authController.updateStatus(idViaje: widget.idEnvio, estado: 3, context: context).then((value){
                     Navigator.pushNamedAndRemoveUntil(context, "/home-supervisor", (route) => false, arguments: widget.idUser);

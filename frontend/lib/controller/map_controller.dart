@@ -3,15 +3,7 @@ import 'dart:convert';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapController{
-  MapController( { required this.initialPos, required this.controller,}){
-    MarkerId markerId =  MarkerId("initialPos");
-    _markers[markerId] = Marker(markerId:markerId, position: initialPos);
-  }
-
-  final Completer<GoogleMapController> controller;
-
-  final mapStyle = [
+final mapStyle = [
     {
         "featureType": "administrative",
         "elementType": "all",
@@ -224,6 +216,14 @@ class MapController{
     }
 ];
 
+class MapController{
+  MapController( { required this.initialPos, required this.controller,}){
+    MarkerId markerId =  MarkerId("initialPos");
+    _markers[markerId] = Marker(markerId:markerId, position: initialPos);
+  }
+
+  final Completer<GoogleMapController> controller;
+
   final Map<MarkerId, Marker> _markers = {};
 
   final LatLng initialPos;
@@ -231,7 +231,7 @@ class MapController{
   CameraPosition cameraPosition(){
     CameraPosition cameraPosition = CameraPosition(
       target: initialPos,
-      zoom: 17
+      zoom: 18
     );
     return cameraPosition;
   }
