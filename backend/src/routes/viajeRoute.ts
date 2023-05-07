@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import ciudadModel from '../model/tipoVehiculoModel';
 import viajesController from '../controller/viajesController';
 class viajeRoute {
   public router: Router;
