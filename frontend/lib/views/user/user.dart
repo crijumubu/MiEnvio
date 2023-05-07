@@ -1,8 +1,13 @@
+import 'dart:async';
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/views/register/widgets/header_back.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:location/location.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../controller/auth_controller.dart';
 
@@ -25,11 +30,14 @@ class _UserState extends State<User> {
   final TextEditingController _password = TextEditingController();
   final TextEditingController _passwordConf = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  final Location location = Location();
+  StreamSubscription<LocationData>? _locationSubscription;
 
   
   final AuthController _authController = AuthController();
   
   bool editable = false;
+  bool locationActive = false;
 
   ElevatedButton button({required String text, required Function callback, String? text2}){
     return ElevatedButton(
@@ -45,6 +53,79 @@ class _UserState extends State<User> {
     );
   }
 
+  void _getLocation() async {
+    try {
+      print("try");
+      final LocationData locationResult = await location.getLocation();
+      print(locationResult.latitude);
+      
+      await FirebaseFirestore.instance.collection('location').doc('conductor${widget.id}').set({
+        'latitude': locationResult.latitude,
+        'longitude': locationResult.longitude,
+        'name': '${widget.name}'
+      }, SetOptions(merge: true));
+
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool("location", true);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<bool?> checkLocationStatus()async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return await prefs.getBool("location");
+  }
+
+  void _requestPermission() async {
+    var status = await Permission.location.request();
+    if (status.isGranted) {
+      print('done');
+    } else if (status.isDenied) {
+      _requestPermission();
+    } else if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
+  }
+
+  Future<void> _listenLocation() async {
+    _locationSubscription = location.onLocationChanged.handleError((onError) {
+      print(onError);
+      _locationSubscription?.cancel();
+      setState(() {
+        _locationSubscription = null;
+      });
+    }).listen((LocationData currentlocation) async {
+      await FirebaseFirestore.instance.collection('location').doc('conductor${widget.id}').set({
+        'latitude': currentlocation.latitude,
+        'longitude': currentlocation.longitude,
+        'name': '${widget.name}'
+      }, SetOptions(merge: true));
+    });
+  }
+
+  void _stopListening() {
+    _locationSubscription?.cancel();
+    setState(() {
+      _locationSubscription = null;
+    });
+  }
+
+  @override
+  void initState() {
+    checkLocationStatus().then((value){
+      if(value != null){
+        setState(() {
+          locationActive = value;
+        });
+      }
+    });
+    _requestPermission();
+    location.changeSettings(interval: 300, accuracy: LocationAccuracy.high);
+    location.enableBackgroundMode(enable: true);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     
@@ -58,8 +139,7 @@ class _UserState extends State<User> {
             padding: EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: [
-                // Icon(Icons.user)
-                // Text("Usuario", style: GoogleFonts.rubik(fontSize: 32),)
+
                 const SizedBox(height: 30,),
                 CircleAvatar(
                   backgroundColor: Color.fromARGB(255, 233, 233, 233),
@@ -132,17 +212,13 @@ class _UserState extends State<User> {
                                 setState(() {
                                   editable = !editable;
                                 });
-                                // _authController.allShippings(1);
-                                // return(false);
+
                               }
                             }else{
                               setState(() {
                                   editable = !editable;
                               });
                             }
-                            // if(_email.te)
-                            // _email.text = widget.email;
-                            // _username.
                             
                           }),
                           Visibility(visible: editable, child: const SizedBox(width: 10,)),
@@ -163,7 +239,66 @@ class _UserState extends State<User> {
                       )
                     ],
                   ),
-                ),                        
+                ),  
+                const SizedBox(height: 10,),
+                const Divider(color: Colors.black54,),
+                const SizedBox(height: 10,),
+                SizedBox(
+                  width: double.infinity,
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Ubicación: ", 
+                          style: GoogleFonts.rubik(fontWeight: FontWeight.w600),
+                        ),
+                        (locationActive) ? 
+                        TextSpan(text: "Activa",
+                        style: GoogleFonts.rubik(color: Colors.green)
+                        ) :
+                        TextSpan(
+                          text: "Inactiva",
+                        style: GoogleFonts.rubik(color: Colors.red)
+                        )
+                      ],
+                      style: GoogleFonts.rubik(color: Colors.black, fontSize: 26, fontWeight: FontWeight.w400),
+                    ),
+                  )
+                ),
+                const SizedBox(height: 10,),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    // side: BorderSide(),
+                    backgroundColor: (locationActive) ? Colors.red[600] : Color(0xff344E41),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)))
+                  ),
+                  onPressed: ()async{
+                    final bool? hasCollection = await checkLocationStatus();
+                    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                    if(hasCollection == null){
+                      setState(() {
+                        locationActive = false;
+                      });
+                      _getLocation();
+                      _listenLocation();
+                    }else if(locationActive){
+                      setState(() {
+                        locationActive = false;
+                      });
+                      _stopListening();
+                      prefs.setBool("location", false);
+                    }else{
+                      _listenLocation();
+                      setState(() {
+                        locationActive = true;
+                      });
+                    }
+                  }, 
+                  child: Text((locationActive)? "Desactivar ubicación":"Activar ubicación", style: GoogleFonts.rubik(fontSize: 20),)
+                ),
+
+                const SizedBox(height: 40,),
               ],
             ),
           ),
