@@ -1,3 +1,5 @@
+[![Publish Docker image](https://github.com/crijumubu/MiEnvio/actions/workflows/backend_pipeline.yml/badge.svg)](https://github.com/crijumubu/MiEnvio/actions/workflows/backend_pipeline.yml)
+
 # MiEnvio
 
 ### Descripción del producto
