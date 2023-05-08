@@ -32,7 +32,7 @@ class _RegisterShippingState extends State<RegisterShipping> {
     final int horasEspera = int.parse(horaCargue.text) + int.parse(horaDescargue.text) + int.parse(horaECargue.text) + int.parse(horaEDescargue.text) ;
 
     final envio = NewShipping(_nombre.text, horasEspera, 1111, 1111, widget.userId, 1111, 1111, 1111, 1111, 1111, 1111, 1111,origen,destino,_direccion.text, 1,);
-    _authController.registerShipping(context, envio);
+    _authController.registerShipping(context, envio,widget.userId);
   }
 
   SizedBox title(String title){

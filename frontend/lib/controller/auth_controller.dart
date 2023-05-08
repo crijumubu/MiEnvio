@@ -180,25 +180,23 @@ class AuthController{
     var response = await http.post(urlT, headers: headers, body: body);
 
     if(response.statusCode == 200){
-      // var data = jsonDecode(response.body);
       succesfulAlert(context, "Envío registrado.");
       Future.delayed(const Duration(seconds: 1, milliseconds: 600),(){
         // ! Calcular flete
         // ! Pasar flete calculado a la ruta
-        // print();
         var data = jsonDecode(response.body);
+
         getShippingId(data["idViaje"]).then((e){
           if(e != null){
-            final Shipping envioN = Shipping(nombre: e["nombre"], idViaje: e  ["idViaje"], idUsuario: e["idUsuario"], origen: e["origen"], destino: e["destino"],  estado: e["estado"], idConductor: e["idConductor"], direccion: e["direccion"]);
-            
+            final Shipping envioN = Shipping(nombre: e[0]["nombre"], idViaje: e[0]["idViaje"], idUsuario: e[0]["idUsuario"], origen: e[0]["origen"], destino: e[0]["destino"],  estado: e[0]["estado"], idConductor: e[0]["idConductor"], direccion: e[0]["direccion"]);
             Navigator.pushReplacementNamed(context, "/flete", arguments: [envioN,userId]);
           }
 
         });
-        // final envio = Shipping(nombre: data[""], idViaje: data[""], idUsuario: data[""], origen: data[""], destino: data[""], estado: data[""], idConductor: data[""], direccion: data[""]);
+
+      
         // Navigator.pushNamed(context, "/flete");
       }); 
-      // registerFlete(envio, data["idViaje"]);
 
     }
   }

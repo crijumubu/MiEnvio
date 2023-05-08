@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/flete/flete.dart';
 import 'package:frontend/views/flete_form/widgets/input.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -178,3 +179,5 @@ class _FleteFormState extends State<FleteForm> {
     );
   }
 }
+
+final FleteView flete1 = FleteView(toneladaMovilizacion: "\$328.53", costoToneladaMovilizacion: "\$131,345.54", costoMovilizacionCarga: "\$1,182,109.83", costoHoraAdicional: "\$27.171", horasDeEspera: "17", costoTiemposEspera: "\$461,903.43", toneladaKMViaje: "\$456.90", costoToneladaViaje: "\$182,668.14", costoTotalViaje: "\$1,644,013.26", costoKmMovilizacion: "\$2,956.75", costoKmViaje: "\$4,112.09");
