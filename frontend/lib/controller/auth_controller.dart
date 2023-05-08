@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/home.dart';
 import 'package:frontend/views/register_shipping/register_shipping.dart';
@@ -85,7 +86,7 @@ class AuthController{
 
     if(response.statusCode == 200){
       var userData = jsonDecode(response.body);
-      Usuario user = Usuario(userData[0]["id"], userData[0]["name"], userData[0]["email"], userData[0]["password"]);
+      Usuario user = Usuario(userData[0]["id"], userData[0]["name"], userData[0]["email"], userData[0]["password"], userData[0]["userType"]);
       return user;
      
     }
@@ -171,7 +172,7 @@ class AuthController{
     return false;
   }
 
-  Future registerShipping(context, NewShipping envio)async{
+  Future registerShipping(context, NewShipping envio, int userId)async{
     Uri urlT = Uri.parse("http://mienvio.bucaramanga.upb.edu.co:1802/mienvio/api/registroViaje");
     final headers = {"Content-type":'application/json'};
     final body = '{"idUsuario":${envio.idUsuario}, "nombre":"${envio.nombre}","origen":"${envio.origen}","destino":"${envio.destino}","estado":${1},"direccion":"${envio.direccion}" }';
@@ -184,7 +185,18 @@ class AuthController{
       Future.delayed(const Duration(seconds: 1, milliseconds: 600),(){
         // ! Calcular flete
         // ! Pasar flete calculado a la ruta
-        Navigator.pushNamed(context, "/flete");
+        // print();
+        var data = jsonDecode(response.body);
+        getShippingId(data["idViaje"]).then((e){
+          if(e != null){
+            final Shipping envioN = Shipping(nombre: e["nombre"], idViaje: e  ["idViaje"], idUsuario: e["idUsuario"], origen: e["origen"], destino: e["destino"],  estado: e["estado"], idConductor: e["idConductor"], direccion: e["direccion"]);
+            
+            Navigator.pushReplacementNamed(context, "/flete", arguments: [envioN,userId]);
+          }
+
+        });
+        // final envio = Shipping(nombre: data[""], idViaje: data[""], idUsuario: data[""], origen: data[""], destino: data[""], estado: data[""], idConductor: data[""], direccion: data[""]);
+        // Navigator.pushNamed(context, "/flete");
       }); 
       // registerFlete(envio, data["idViaje"]);
 
@@ -223,5 +235,23 @@ class AuthController{
       return data;
     }
 
+  }
+
+  Future getFlete(int idViaje)async{
+    var response = await http.get(Uri.parse("$_url/fleteId/$idViaje"));
+
+    if(response.statusCode == 200){
+      var data = jsonDecode(response.body);
+      return data;
+    }
+  }
+
+  Future getShippingId(int idViaje)async{
+    var response = await http.get(Uri.parse("$_url/viajeId/$idViaje"));
+
+    if(response.statusCode == 200){
+      var data = jsonDecode(response.body);
+      return data;
+    }
   }
 }

@@ -25,13 +25,13 @@ class _HomeSupervisorState extends State<HomeSupervisor> {
   List<int> filterList = [1,2,3];
   late List<Shipping?> enviosShow = [];
   final AuthController _authController = AuthController();
-  late Usuario usuario = Usuario(0, "", "", "");
+  late Usuario usuario = Usuario(0, "", "", "", 0);
 
   Future getUser()async{
     _authController.getUserData(widget.id).then((value) {
       if(value != null){
         setState(() {
-          usuario = Usuario(value.id, value.name, value.email, value.password);
+          usuario = Usuario(value.id, value.name, value.email, value.password, value.userType);
         });
       }
     });

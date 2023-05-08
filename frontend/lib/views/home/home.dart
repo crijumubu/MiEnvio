@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // final Usuario user;
-  late Usuario usuario = Usuario(0, "", "", "");
+  late Usuario usuario = Usuario(0, "", "", "", 0);
   final AuthController _authController = AuthController();
 
   @override
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
     _authController.getUserData(widget.id).then((value) {
       if(value != null){
         setState(() {
-          usuario = Usuario(value.id, value.name, value.email, value.password);
+          usuario = Usuario(value.id, value.name, value.email, value.password, value.userType);
         });
       }
     });
@@ -108,7 +108,7 @@ class _HomeState extends State<Home> {
                   MenuButton(text: 'Viajes', imgRoute: 'delivery2.png', btnRoute: '/shippings-driver', args: widget.id ,),
                   MenuButton(text: 'Escanear QR', imgRoute: 'camara.png', btnRoute: "/scan-qr", args: [0,0,0]),
                   MenuButton(text: 'Generar QR', imgRoute: 'codigo-qr.png', btnRoute: '/generate-qr', args: QrGenerator(true, "QR Conductor", usuario.id),) ,
-                  MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/user', args: UserView(hasAppBar: true, name: usuario.name, email: usuario.email, password: usuario.password, id:usuario.id, updateUser: getUser),),
+                  MenuButton(text: 'Perfil', imgRoute: 'user.png', btnRoute: '/user', args: UserView(hasAppBar: true, name: usuario.name, email: usuario.email, password: usuario.password, id:usuario.id, updateUser: getUser, userType: usuario.userType),),
                 ],
               ),
             )
@@ -124,9 +124,10 @@ class _HomeState extends State<Home> {
 
 class Usuario{
   final int id;
+  final int userType;
   final String name;
   final String email;
   final String password;
 
-  Usuario(this.id, this.name, this.email, this.password, );
+  Usuario(this.id, this.name, this.email, this.password, this.userType, );
 }

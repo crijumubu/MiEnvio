@@ -12,12 +12,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../controller/auth_controller.dart';
 
 class User extends StatefulWidget {
-  User({super.key, required this.hasAppbar, required this.name, required this.email, required this.password, required this.id, required this.updateUser});
+  User({super.key, required this.hasAppbar, required this.name, required this.email, required this.password, required this.id, required this.updateUser, required this.userType});
   final bool hasAppbar;
   final String name;
   final String email;
   final String password;
   final int id;
+  final int userType;
   final Function updateUser;
 
   @override
@@ -120,7 +121,10 @@ class _UserState extends State<User> {
         });
       }
     });
-    _requestPermission();
+    if(widget.userType == 2){
+      _requestPermission();
+
+    }
     location.changeSettings(interval: 300, accuracy: LocationAccuracy.high);
     location.enableBackgroundMode(enable: true);
     super.initState();

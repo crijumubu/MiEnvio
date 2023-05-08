@@ -58,15 +58,17 @@ class RouteGenerator{
 
       case "/user":
         final args = settings.arguments as UserView;
-        return MaterialPageRoute(builder: (_)=> User(hasAppbar: args.hasAppBar, email: args.email, name: args.name, password: args.password, id: args.id, updateUser: args.updateUser,));
+        return MaterialPageRoute(builder: (_)=> User(hasAppbar: args.hasAppBar, email: args.email, name: args.name, password: args.password, id: args.id, updateUser: args.updateUser, userType: args.userType,));
 
       case "/register-shipping":
         int arg = settings.arguments as int;
         return MaterialPageRoute(builder: (_)=> RegisterShipping(userId: arg,));
 
       case "/flete":
-        Shipping envio = settings.arguments as Shipping;
-        return MaterialPageRoute(builder: (_) => Flete(envio: envio,));
+        final args = settings.arguments as List;
+        Shipping envio = args[0] as Shipping;
+        int userID = args[1] as int;
+        return MaterialPageRoute(builder: (_) => Flete(envio: envio, userId: userID, ));
 
       case "/shippings-details":
         Shipping envio = settings.arguments as Shipping;
@@ -109,9 +111,11 @@ class UserView{
   final String email;
   final String password;
   final int id;
+  final int userType;
+  
   final Function updateUser;
 
 
-  UserView({required this.hasAppBar, required this.name, required this.email, required this.password, required this.id, required this.updateUser});
+  UserView({required this.hasAppBar, required this.name, required this.email, required this.password, required this.id, required this.updateUser, required this.userType});
   
 }
