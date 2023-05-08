@@ -48,13 +48,13 @@ class _LoginState extends State<Login> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Iniciar Sesion", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
+                    Text("Iniciar Sesión", style: GoogleFonts.rubik(fontSize: 38, fontWeight: FontWeight.w700),),
                     const SizedBox(height: 30,),
                     TextInput(fieldController: _userController, placeholder: "Email",  inputType: 'email'),
                     const SizedBox(height: 20,),
                     TextInput(fieldController: _passwordController, placeholder:  "Contraseña", inputType: 'password',),
                     const SizedBox(height: 20,),
-                    RoutingButton(text: "Iniciar Sesion", route: "/home", btnStyle: null, 
+                    RoutingButton(text: "Iniciar Sesión", route: "/home", btnStyle: null, 
                       callback: (){
                         if(_key.currentState!.validate()){
                           setState(() {
