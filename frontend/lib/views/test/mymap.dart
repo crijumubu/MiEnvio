@@ -24,6 +24,24 @@ class _MyMapState extends State<MyMap> {
   final loc.Location location = loc.Location();
   late GoogleMapController _controller;
   bool _added = false;
+
+  final AuthController _authController = AuthController();
+  late String conductor = "";
+
+  void getConductorName(){
+    _authController.getUserData(widget.envio.idConductor).then((value){
+      setState(() {
+        conductor = value!.name;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    getConductorName();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -73,7 +91,7 @@ class _MyMapState extends State<MyMap> {
                     );
               },
             ),
-            DriverInfo(height: height, envio: widget.envio)
+            DriverInfo(height: height, conductor: conductor, destino: widget.envio.destino, direccion: widget.envio.direccion, origen: widget.envio.origen, nombre: widget.envio.nombre,)
 
           ],
         ));
@@ -92,40 +110,27 @@ class _MyMapState extends State<MyMap> {
   }
 }
 
-class DriverInfo extends StatefulWidget {
+class DriverInfo extends StatelessWidget {
   DriverInfo({
     super.key,
-    required this.height, required this.envio,
+    required this.height, required this.conductor, required this.origen, required this.destino, required this.direccion, required this.nombre,
   });
-  final Shipping envio;
   final double height;
+  final String conductor;
+  final String origen;
+  final String destino;
+  final String nombre;
+  final String direccion;
 
-  @override
-  State<DriverInfo> createState() => _DriverInfoState();
-}
-
-class _DriverInfoState extends State<DriverInfo> {
-  final AuthController _authController = AuthController();
-
-  late String conductor;
-
-  void getConductorName(){
-    _authController.getUserData(widget.envio.idConductor).then((value){
-      setState(() {
-        conductor = value!.name;
-      });
-    });
-  }
-
+  // final AuthController _authController = AuthController();
   @override
   Widget build(BuildContext context) {
-    getConductorName();
     return Padding(
       padding: const EdgeInsets.only(left:15, right:15, bottom: 35),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: SizedBox(
-          height: widget.height*0.24,
+          height: height*0.24,
           width: double.infinity,
           child: DecoratedBox(
             decoration: BoxDecoration(
@@ -147,7 +152,7 @@ class _DriverInfoState extends State<DriverInfo> {
                   children: [
                     Row(
                       children: [
-                        Text(widget.envio.nombre, style: GoogleFonts.rubik(fontSize: 32, fontWeight: FontWeight.w600, color: Color(0xff344E41)),),
+                        Text(nombre, style: GoogleFonts.rubik(fontSize: 32, fontWeight: FontWeight.w600, color: Color(0xff344E41)),),
                       ],
                     ),
                     const Divider(color: Colors.grey,),
@@ -159,17 +164,17 @@ class _DriverInfoState extends State<DriverInfo> {
                     SizedBox(height: 5,),
                     Row(
                       children: [
-                        TextInfo(icon: Icons.arrow_circle_left_rounded, info: widget.envio.origen, title: 'Origen: ',),
+                        TextInfo(icon: Icons.arrow_circle_left_rounded, info: origen, title: 'Origen: ',),
                       ],
                     ),
                     SizedBox(height: 5,),
                     Row(
                       children: [
-                        TextInfo(icon: Icons.arrow_circle_right_rounded, info: widget.envio.destino, title: 'Destino: ',),
+                        TextInfo(icon: Icons.arrow_circle_right_rounded, info: destino, title: 'Destino: ',),
                       ],
                     ),
                     SizedBox(height: 5,),
-                    TextInfo(icon: Icons.location_pin, info: widget.envio.direccion, title: 'Dirección: ',),
+                    TextInfo(icon: Icons.location_pin, info: direccion, title: 'Dirección: ',),
                     
                   ],
                 ),
