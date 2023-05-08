@@ -61,6 +61,7 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   remove_alpha_ios: true
+  image_path_ios: "assets/icons/rectangular1024.png"
   image_path: "assets/icons/circle1024.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to

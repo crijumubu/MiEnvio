@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Frontend</string>
+	<string>MiEnvio</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -55,6 +55,11 @@
 	<string>This app needs camera access to scan QR codes</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs photos access to get QR code from photo library</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>Your location is required for taking control of your packages</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Your location is required for taking control of your packages</string>
+
 
 </dict>
 </plist>
