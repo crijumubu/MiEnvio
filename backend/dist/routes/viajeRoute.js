@@ -1078,7 +1078,7 @@ class viajeRoute {
          *                   example: Error interno del servidor.
          */
         this.router.post('/registroFlete', this.controller.registerFlete);
-        this.router.get('/calcular', this.controller.calcularViaje);
+        //this.router.get('/calcular', this.controller.calcularViaje);
         this.router.post('/asignar', this.controller.asignarConductor);
     }
 }
