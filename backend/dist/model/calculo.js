@@ -36,16 +36,16 @@ class calculo {
         this.velocidades = new promedioVelocidadModel_1.default();
     }
     horasViaje(ruta, velocidades, espera) {
-        let horasViaje = (ruta.planoRuta / velocidades.plano) + (ruta.onduladoRuta / velocidades.ondulado) + (ruta.montanaRuta / velocidades.montana) + (ruta.urbanoRuta / velocidades.urbano) + (ruta.despavimentadoRuta / velocidades.despavimentado);
-        let horasRecorrido = horasViaje + espera;
-        let recorridosMes = 288 / horasViaje;
-        let recorridosConEsperaMes = 288 / horasRecorrido;
+        const horasViaje = (ruta.planoRuta / velocidades.plano) + (ruta.onduladoRuta / velocidades.ondulado) + (ruta.montanaRuta / velocidades.montana) + (ruta.urbanoRuta / velocidades.urbano) + (ruta.despavimentadoRuta / velocidades.despavimentado);
+        const horasRecorrido = horasViaje + espera;
+        const recorridosMes = 288 / horasViaje;
+        const recorridosConEsperaMes = 288 / horasRecorrido;
         return [horasRecorrido, recorridosMes, recorridosConEsperaMes];
     }
     calcularFijos(items, viajes, peso) {
-        let nombres = [];
-        let valoresViaje = [];
-        let valoresTonelada = [];
+        const nombres = [];
+        const valoresViaje = [];
+        const valoresTonelada = [];
         for (let index = 0; index < items.length; index++) {
             nombres.push(items[index].nombreItemFijo);
             valoresViaje.push(items[index].nuevoValorItem / viajes);
@@ -54,7 +54,7 @@ class calculo {
         return { 'nombresItems': nombres, 'valoresViaje': valoresViaje, 'ValoresXton': valoresTonelada };
     }
     combustible(ruta, consumos) {
-        let res = 9357 * ((ruta.planoRuta / consumos.plano) + (ruta.onduladoRuta / consumos.ondulado) + (ruta.montanaRuta / consumos.montana) + (ruta.urbanoRuta / consumos.urbano) + (ruta.despavimentadoRuta / consumos.despavimentado));
+        const res = 9357 * ((ruta.planoRuta / consumos.plano) + (ruta.onduladoRuta / consumos.ondulado) + (ruta.montanaRuta / consumos.montana) + (ruta.urbanoRuta / consumos.urbano) + (ruta.despavimentadoRuta / consumos.despavimentado));
         return res;
     }
     peajes(listaPeajes, categoria) {
@@ -63,25 +63,25 @@ class calculo {
             switch (categoria) {
                 case 2:
                     for (let index = 0; index < listaPeajes.length; index++) {
-                        let temp = yield this.peaje.getPeaje(listaPeajes[index].idPeaje);
+                        const temp = yield this.peaje.getPeaje(listaPeajes[index].idPeaje);
                         total = total + temp.categoriaII;
                     }
                     break;
                 case 3:
                     for (let index = 0; index < listaPeajes.length; index++) {
-                        let temp = yield this.peaje.getPeaje(listaPeajes[index].idPeaje);
+                        const temp = yield this.peaje.getPeaje(listaPeajes[index].idPeaje);
                         total = total + temp.categoriaIII;
                     }
                     break;
                 case 4:
                     for (let index = 0; index < listaPeajes.length; index++) {
-                        let temp = yield this.peaje.getPeaje(listaPeajes[index].idPeaje);
+                        const temp = yield this.peaje.getPeaje(listaPeajes[index].idPeaje);
                         total = total + temp.categoriaIV;
                     }
                     break;
                 case 5:
                     for (let index = 0; index < listaPeajes.length; index++) {
-                        let temp = yield this.peaje.getPeaje(listaPeajes[index].idPeaje);
+                        const temp = yield this.peaje.getPeaje(listaPeajes[index].idPeaje);
                         total = total + temp.categoriaV;
                     }
                     break;
@@ -119,7 +119,7 @@ class calculo {
                     break;
             }
         }
-        return { 'llantas': [llantas, llantas / peso], "lubricantes": [lubricantes, lubricantes / peso], 'filtros': [filtros, filtros / peso], 'mantenimiento': [mantenimiento, mantenimiento / peso], 'lavado': [lavado, lavado / peso] };
+        return { 'llantas': [llantas, llantas / peso], 'lubricantes': [lubricantes, lubricantes / peso], 'filtros': [filtros, filtros / peso], 'mantenimiento': [mantenimiento, mantenimiento / peso], 'lavado': [lavado, lavado / peso] };
     }
     calcular(configuracion, origen, destino, horas) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -175,7 +175,8 @@ class calculo {
             const costoTonKmViaje = costoTonViaje / (ruta.planoRuta + ruta.onduladoRuta + ruta.montanaRuta + ruta.urbanoRuta + ruta.despavimentadoRuta);
             const costoKmMovil = costoMovil / (ruta.planoRuta + ruta.onduladoRuta + ruta.montanaRuta + ruta.urbanoRuta + ruta.despavimentadoRuta);
             //console.log(costoKmMovil);
-            return { 'resumen': [
+            return {
+                'resumen': [
                     {
                         'costoTotalViaje': totalopercaion,
                         'costoTiempoEspera': costoTiempoEspera,
@@ -189,7 +190,8 @@ class calculo {
                         'costoKmViaje': costoKmViaje,
                         'costoKmMovilizacion': costoKmMovil
                     }
-                ] };
+                ]
+            };
         });
     }
 }

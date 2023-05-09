@@ -18,7 +18,7 @@ import viajeModel from '../model/viajeModel';
 import calculo from '../model/calculo';
 calculo
 class viajesController {
-    private calculadora:calculo;
+    private calculadora: calculo;
     private viaje: viajeModel;
     private detalle: detalleModel;
     private flete: fleteModel;
@@ -36,7 +36,7 @@ class viajesController {
     private costoVariable: costoVariableModel;
     private rutaPeaje: rutaPeajeModel;
     constructor() {
-        this.calculadora=new calculo();
+        this.calculadora = new calculo();
         this.detalle = new detalleModel();
         this.viaje = new viajeModel();
         this.flete = new fleteModel();
@@ -215,7 +215,6 @@ class viajesController {
             }
         });
     }
-    
     public registerDetalle = async (req: Request, res: Response) => {
         if (req.body) {
             await this.detalle.registroDetalles(req.body.idFlete, req.body.tipoCosto, req.body.concepto, req.body.mes, req.body.viaje, req.body.tonelada, req.body.participacion, (error: any) => {
@@ -230,7 +229,7 @@ class viajesController {
     }
     public updateEstado = async (req: Request, res: Response) => {
         if (req.body) {
-            await this.viaje.cambiarEstado(req.body.idViaje, req.body.estado,(error: any) => {
+            await this.viaje.cambiarEstado(req.body.idViaje, req.body.estado, (error: any) => {
                 if (error) {
                     return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
                 }
@@ -242,7 +241,7 @@ class viajesController {
     }
     public asignarConductor = async (req: Request, res: Response) => {
         if (req.body) {
-            await this.viaje.asignarConductor(req.body.idViaje, req.body.idConductor,(error: any) => {
+            await this.viaje.asignarConductor(req.body.idViaje, req.body.idConductor, (error: any) => {
                 if (error) {
                     return res.status(500).json({ error: true, message: 'Registro no exitóso!' });
                 }
@@ -283,41 +282,38 @@ class viajesController {
         });
     }
     public registerViaje = async (req: Request, res: Response) => {
-        const { idUsuario, nombre, origen, destino,estado,direccion } = req.body;
-        await this.viaje.registroViaje(idUsuario, nombre, origen, destino, estado,direccion, (error: any,id:number) => {
+        const { idUsuario, nombre, origen, destino, estado, direccion } = req.body;
+        await this.viaje.registroViaje(idUsuario, nombre, origen, destino, estado, direccion, (error: any, id: number) => {
             if (!error) {
-                return res.json({ error: false, message: 'Registro  exitóso!',idViaje:id });
+                return res.json({ error: false, message: 'Registro  exitóso!', idViaje: id });
             }
-            else{
+            else {
                 return res.json({ error: true, message: 'Algo ha salido mal al realizar el registro!' });
             }
-
         });
-        
     }
     public registerFlete = async (req: Request, res: Response) => {
-        const { idViaje, toneladaKilometro, costoTonelada, costocarga,costoHoraadicional,horasEspera,costoTiempoEspera, toneladaKilometroViaje,toneladaViaje,costoKilometro,costoKilometroViaje} = req.body;
-        await this.flete.registroFlete(idViaje, toneladaKilometro, costoTonelada, costocarga,costoHoraadicional,horasEspera,costoTiempoEspera, toneladaKilometroViaje,toneladaViaje,costoKilometro,costoKilometroViaje, (error: any) => {
+        const { idViaje, toneladaKilometro, costoTonelada, costocarga, costoHoraadicional, horasEspera, costoTiempoEspera, toneladaKilometroViaje, toneladaViaje, costoKilometro, costoKilometroViaje } = req.body;
+        await this.flete.registroFlete(idViaje, toneladaKilometro, costoTonelada, costocarga, costoHoraadicional, horasEspera, costoTiempoEspera, toneladaKilometroViaje, toneladaViaje, costoKilometro, costoKilometroViaje, (error: any) => {
             if (!error) {
                 return res.json({ error: false, message: 'Registro  exitóso!' });
             }
-            else{
+            else {
                 return res.json({ error: true, message: 'Algo ha salido mal al realizar el registro!' });
             }
         });
     }
     public calcularViaje = async (req: Request, res: Response) => {
-        const {configuracion,ciudadOrigen,ciudadDestino,horasEspera} = req.body;
-        try{
-           const data:any= await this.calculadora.calcular(configuracion,ciudadOrigen,ciudadDestino,horasEspera);
-           return res.json(data)
+        const { configuracion, ciudadOrigen, ciudadDestino, horasEspera } = req.body;
+        try {
+            const data: any = await this.calculadora.calcular(configuracion, ciudadOrigen, ciudadDestino, horasEspera);
+            return res.json(data)
         }
-        catch(e){
+        catch (e) {
             console.log(e)
             return res.status(404).json({ error: true, message: 'User not found' });
         }
-        
-        
+
     }
 }
 export default viajesController;
