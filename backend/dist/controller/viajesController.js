@@ -28,6 +28,8 @@ const rutapeajeModel_1 = __importDefault(require("../model/rutapeajeModel"));
 const fleteModel_1 = __importDefault(require("../model/fleteModel"));
 const detalleModel_1 = __importDefault(require("../model/detalleModel"));
 const viajeModel_1 = __importDefault(require("../model/viajeModel"));
+const calculo_1 = __importDefault(require("../model/calculo"));
+calculo_1.default;
 class viajesController {
     constructor() {
         this.dataInicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -282,6 +284,18 @@ class viajesController {
                 }
             });
         });
+        this.calcularViaje = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { configuracion, ciudadOrigen, ciudadDestino, horasEspera } = req.body;
+            try {
+                const data = yield this.calculadora.calcular(configuracion, ciudadOrigen, ciudadDestino, horasEspera);
+                return res.json(data);
+            }
+            catch (e) {
+                console.log(e);
+                return res.status(404).json({ error: true, message: 'User not found' });
+            }
+        });
+        this.calculadora = new calculo_1.default();
         this.detalle = new detalleModel_1.default();
         this.viaje = new viajeModel_1.default();
         this.flete = new fleteModel_1.default();

@@ -17,6 +17,10 @@ const configuracionSchema = new Schema({
   idUnidadConfiguracion: {
     type: Number,
     required: true
+  },
+  costoHoraAdicional: {
+    type: Number,
+    required: true
   }
 },
   {

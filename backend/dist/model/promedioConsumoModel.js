@@ -25,6 +25,11 @@ class promedioConsumoModel {
             const rows = yield this.mongo.model.find({ idConsumo: id });
             fn(rows);
         });
+        this.getConsumos = (id) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ idVehiculoConsumo: id });
+            return rows[0];
+        });
         this.mongo = new mongo_1.default(6);
     }
 }

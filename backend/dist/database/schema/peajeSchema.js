@@ -14,23 +14,23 @@ const peajeSchema = new mongoose_1.Schema({
         type: String,
         requied: true
     },
-    categoria1: {
+    categoriaI: {
         type: Number,
         required: true
     },
-    categoria2: {
+    categoriaII: {
         type: Number,
         required: true
     },
-    categoria3: {
+    categoriaIII: {
         type: Number,
         required: true
     },
-    categoria4: {
+    categoriaIV: {
         type: Number,
         required: true
     },
-    categoria5: {
+    categoriaV: {
         type: Number,
         required: true
     }

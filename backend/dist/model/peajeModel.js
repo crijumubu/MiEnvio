@@ -20,6 +20,11 @@ class peajeModel {
             const rows = yield this.mongo.model.find({ idPeaje: id });
             fn(rows);
         });
+        this.getPeaje = (id) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ idPeaje: id });
+            return rows[0];
+        });
         this.mongo = new mongo_1.default(5);
     }
 }

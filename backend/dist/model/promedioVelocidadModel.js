@@ -27,5 +27,12 @@ class promedioVelocidadModel {
         });
         this.mongo = new mongo_1.default(7);
     }
+    velocidadVehiculo(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ idVehiculoVelocidad: id });
+            return (rows[0]);
+        });
+    }
 }
 exports.default = promedioVelocidadModel;

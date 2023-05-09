@@ -14,5 +14,11 @@ class promedioVelocidadModel {
     const rows = await this.mongo.model.find({ idVelocidad: id });
     fn(rows);
   }
+  public async velocidadVehiculo(id:number):Promise<any>{
+    this.mongo.connect();
+    const rows=await this.mongo.model.find({idVehiculoVelocidad:id});
+    return(rows[0]);
+}
+  
 }
 export default promedioVelocidadModel;

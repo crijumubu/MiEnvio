@@ -15,7 +15,10 @@ import rutaPeajeModel from '../model/rutapeajeModel';
 import fleteModel from '../model/fleteModel';
 import detalleModel from '../model/detalleModel';
 import viajeModel from '../model/viajeModel';
+import calculo from '../model/calculo';
+calculo
 class viajesController {
+    private calculadora:calculo;
     private viaje: viajeModel;
     private detalle: detalleModel;
     private flete: fleteModel;
@@ -33,6 +36,7 @@ class viajesController {
     private costoVariable: costoVariableModel;
     private rutaPeaje: rutaPeajeModel;
     constructor() {
+        this.calculadora=new calculo();
         this.detalle = new detalleModel();
         this.viaje = new viajeModel();
         this.flete = new fleteModel();
@@ -301,6 +305,19 @@ class viajesController {
                 return res.json({ error: true, message: 'Algo ha salido mal al realizar el registro!' });
             }
         });
+    }
+    public calcularViaje = async (req: Request, res: Response) => {
+        const {configuracion,ciudadOrigen,ciudadDestino,horasEspera} = req.body;
+        try{
+           const data:any= await this.calculadora.calcular(configuracion,ciudadOrigen,ciudadDestino,horasEspera);
+           return res.json(data)
+        }
+        catch(e){
+            console.log(e)
+            return res.status(404).json({ error: true, message: 'User not found' });
+        }
+        
+        
     }
 }
 export default viajesController;

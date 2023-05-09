@@ -9,5 +9,10 @@ class rutaModel {
     const rows = await this.mongo.model.find({ idCiudadOrigen: idOrigen, idCiudadDestino: idDestino });
     fn(rows);
   }
+  public async getRutas (idOrigen:number, idDestino:number):Promise<any>{
+    this.mongo.connect();
+    const rows=await this.mongo.model.find({ idCiudadOrigen: idOrigen, idCiudadDestino: idDestino });
+    return(rows[0]);
+}
 }
 export default rutaModel;

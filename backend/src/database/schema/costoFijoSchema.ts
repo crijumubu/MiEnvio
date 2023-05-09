@@ -14,7 +14,7 @@ const costoFijoSchema = new Schema({
     type: String,
     requied: true
   },
-  valorItemFijo: {
+  nuevoValorItem: {
     type: Number,
     required: true
   }

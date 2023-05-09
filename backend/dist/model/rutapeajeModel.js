@@ -20,6 +20,11 @@ class rutaPeajeModel {
             const rows = yield this.mongo.model.find({ idRuta: idTuta });
             fn(rows);
         });
+        this.getRutaPeaje = (idTuta) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ idRuta: idTuta });
+            return rows;
+        });
         this.mongo = new mongo_1.default(8);
     }
 }

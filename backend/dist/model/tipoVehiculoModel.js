@@ -25,6 +25,11 @@ class tipoVehiculoModel {
             const rows = yield this.mongo.model.find({ idTipoVehiculo: id });
             fn(rows);
         });
+        this.vehiculoInfo = (id) => __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ idTipoVehiculo: id });
+            return (rows);
+        });
         this.mongo = new mongo_1.default(13);
     }
 }

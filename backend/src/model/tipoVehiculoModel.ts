@@ -14,5 +14,10 @@ class tipoVehiculoModel {
     const rows = await this.mongo.model.find({ idTipoVehiculo: id });
     fn(rows);
   }
+  public vehiculoInfo = async (id: number) => {
+    this.mongo.connect();
+    const rows = await this.mongo.model.find({ idTipoVehiculo: id });
+    return(rows)
+  }
 }
 export default tipoVehiculoModel;

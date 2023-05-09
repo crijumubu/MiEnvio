@@ -5,4 +5,5 @@ export default interface IConfiguracion extends Document {
     idVehiculoConfiguracion: number;
     idCargaConfiguracion: number;
     idUnidadConfiguracion: number;
+    costoHoraAdicional: number;
 }

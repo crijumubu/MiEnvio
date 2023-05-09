@@ -15,5 +15,10 @@ class ciudadModel {
         const rows=await this.mongo.model.find({idCiudad:id});
         fn(rows);
     }
+    public async ciudadNombre(nombre:string):Promise<any>{
+        this.mongo.connect();
+        const rows=await this.mongo.model.find({nombreCiudad:nombre});
+        return(rows[0].idCiudad);
+    }
 }
 export default ciudadModel;

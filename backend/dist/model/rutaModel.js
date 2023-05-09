@@ -22,5 +22,12 @@ class rutaModel {
         });
         this.mongo = new mongo_1.default(9);
     }
+    getRutas(idOrigen, idDestino) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ idCiudadOrigen: idOrigen, idCiudadDestino: idDestino });
+            return (rows[0]);
+        });
+    }
 }
 exports.default = rutaModel;

@@ -14,7 +14,7 @@ const costoVariableSchema = new mongoose_1.Schema({
         type: String,
         requied: true
     },
-    valorItemVariable: {
+    nuevoValorItem: {
         type: Number,
         required: true
     },
@@ -26,7 +26,7 @@ const costoVariableSchema = new mongoose_1.Schema({
         type: Number,
         required: true
     },
-    costoItemVariable: {
+    nuevocCostoItem: {
         type: Number,
         requied: true
     },

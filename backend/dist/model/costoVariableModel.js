@@ -22,5 +22,12 @@ class costoVariableModel {
         });
         this.mongo = new mongo_1.default(4);
     }
+    getVariables(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ idConfiguracionVehiculo: id });
+            return (rows);
+        });
+    }
 }
 exports.default = costoVariableModel;

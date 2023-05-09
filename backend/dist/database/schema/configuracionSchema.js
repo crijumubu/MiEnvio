@@ -17,6 +17,10 @@ const configuracionSchema = new mongoose_1.Schema({
     idUnidadConfiguracion: {
         type: Number,
         required: true
+    },
+    costoHoraAdicional: {
+        type: Number,
+        required: true
     }
 }, {
     versionKey: false

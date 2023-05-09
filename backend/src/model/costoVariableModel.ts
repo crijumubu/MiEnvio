@@ -9,5 +9,10 @@ class costoVariableModel {
     const rows = await this.mongo.model.find({ idConfiguracionVehiculo: id });
     fn(rows);
   }
+  public async getVariables(id:number):Promise<any>{
+    this.mongo.connect();
+    const rows=await this.mongo.model.find({ idConfiguracionVehiculo: id });
+    return(rows);
+}
 }
 export default costoVariableModel;

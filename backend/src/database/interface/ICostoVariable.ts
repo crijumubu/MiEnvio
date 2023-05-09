@@ -4,9 +4,9 @@ export default interface ICostoVariable extends Document {
     idItemVariable: number;
     idConfiguracionVehiculo: number;
     nombreItemVariable: string;
-    valorItemVariable: number;
+    nuevoValorItem: number;
     cantidadItemVariable: number;
     cambioItemVariable: number;
-    costoItemVariableKm: number;
+    nuevocCostoItem: number;
     idParametroItemVariable: number;
 }

@@ -14,7 +14,7 @@ const costoFijoSchema = new mongoose_1.Schema({
         type: String,
         requied: true
     },
-    valorItemFijo: {
+    nuevoValorItem: {
         type: Number,
         required: true
     }

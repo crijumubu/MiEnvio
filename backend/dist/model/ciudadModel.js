@@ -28,5 +28,12 @@ class ciudadModel {
         });
         this.mongo = new mongo_1.default(1);
     }
+    ciudadNombre(nombre) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.mongo.connect();
+            const rows = yield this.mongo.model.find({ nombreCiudad: nombre });
+            return (rows[0].idCiudad);
+        });
+    }
 }
 exports.default = ciudadModel;
