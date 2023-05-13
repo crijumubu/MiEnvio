@@ -1,3 +1,5 @@
+[![Release application](https://github.com/crijumubu/MiEnvio/actions/workflows/pipeline.yml/badge.svg)](https://github.com/crijumubu/MiEnvio/actions/workflows/pipeline.yml)
+
 # MiEnvio
 
 ### Descripción del producto

@@ -1,0 +1,159 @@
+name: Release application
+
+on:
+  push:
+    branches:
+      - frontend
+
+permissions: write-all
+
+jobs:
+
+  avoid_redundancy:
+
+    name: Check skip
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel previous redundant builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+  build_android_artifact:
+
+    name: Build android artifact
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+          
+      - name: Set up java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Set up flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.12'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build application
+        run: flutter build apk
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MiEnvio_android
+          path: ${{ secrets.BUILD_ANDROID_ARTIFACT }}
+  
+  build_ios_artifact:
+  
+    name: Build ios artifact
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    
+    steps:
+        
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Set up java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Set up flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.12'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build application
+        run: flutter build ios --release --no-codesign
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MiEnvio_ios
+          path: ${{ secrets.BUILD_IOS_ARTIFACT }}
+  
+  release:
+  
+    needs: [build_android_artifact, build_ios_artifact] 
+    permissions: write-all
+
+    name: Create Release
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+    
+      - name: Check out the repo
+        uses: actions/checkout@v3
+    
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+
+      - name: Download android artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: MiEnvio_android 
+      
+      - name: Update android artifact to release
+        id: upload_android_release_asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./app-release.apk
+          asset_name: MiEnvio.apk
+          asset_content_type: application/zip
+
+      - name: Make directory
+        run: mkdir ${{ secrets.RELEASE_IOS_PATH }}
+
+      - name: Download ios artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: MiEnvio_ios
+          path: ${{ secrets.RELEASE_IOS_PATH }}
+
+      - name: Zip artifact
+        run: zip -r Mienvio.zip ${{ secrets.RELEASE_IOS_PATH }}
+      
+      - name: Move zip to ipa
+        run: mv Mienvio.zip Mienvio.ipa
+      
+      - name: Update ios artifact to release
+        id: upload_ios_release_asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ secrets.RELEASE_IOS_ARTIFACT }}
+          asset_name: MiEnvio.ipa
+          asset_content_type: application/zip
