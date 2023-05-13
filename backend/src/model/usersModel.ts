@@ -1,59 +1,88 @@
 import mongo from '../database/mongo';
 import bcrypt from 'bcryptjs';
-
-class usersModel{
-
+class usersModel {
   private mongo: mongo;
-
-  constructor(){
-        
-    this.mongo = new mongo();
+  constructor() {
+    this.mongo = new mongo(0);
   }
-
-  public login = async (email: string, password: string, fn: (status: number) => void) => {
-        
+  public login = async (email: string, password: string, fn: (status: number, type: number, id: number) => void) => {
     this.mongo.connect();
-        
-    await this.mongo.model.find({'email': email}, {'password': 1, '_id': 0})
+    await this.mongo.model.find({ 'email': email })
       .then((response: any, error: any) => {
-            
-        if (error){
-
-          fn(-1);
+        if (error) {
+          fn(-1, -1, -1);
           return;
         }
-
-        if(response.length == 1){
-                
-          if (bcrypt.compareSync(password, response[0]['password'])){
-                    
-            fn(1);
+        if (response.length == 1) {
+          //console.log(response[0]['password']);
+          if (bcrypt.compareSync(password, response[0]['password'])) {
+            fn(1, response[0]['userType'], response[0]['id']);
             return;
           }
         }
-
-        fn(0);
+        fn(0, 0, 0);
       })
   }
-
-  public register = async (email: string, password: string, fn:(status: any) => void) => {
-        
+  public register = async (name: string, email: string, password: string, userType: Int16Array, fn: (status: any) => void) => {
     this.mongo.connect();
-
-    await this.mongo.model.create({'email': email, 'password': this.cryptPassword(password)})
+    let cant = -1;
+    try {
+      await this.mongo.model.aggregate([
+        {
+          $group:
+          {
+            '_id': null,
+            'nid': { $max: '$id' },
+          }
+        }
+      ]).then((response: any, error: any) => {
+        cant = response[0].nid + 1;
+      });
+    } catch (err) {
+      console.log(err);
+      cant = 1;
+    }
+    try{
+    await this.mongo.model.create({ 'id': cant, 'name': name, 'email': email, 'password': this.cryptPassword(password), 'userType': userType })
       .then((response: any, error: any) => {
-            
+        //console.log(response);
+        //console.log(error);
         fn(error);
       })
+    }catch(err){
+      console.log(err);
+      fn(err);
+    }
   }
-
   public cryptPassword = (password: string) => {
-
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
-
     return hashedPassword;
   }
+  public getNombre = async (id: number, fn: any) => {
+    this.mongo.connect();
+    const rows = await this.mongo.model.find({ 'id': id });
+    fn(rows);
+  }
+  public updateUser = async (id: number, nombre: string, email: string, pass: string, fn: any) => {
+    this.mongo.connect();
+    const rows = await this.mongo.model.find({ 'id': id });
+    if(rows[0].password==pass){
+      await this.mongo.model.update({ 'id': id }, { $set: { 'name': nombre, 'email': email } }, { multi: true })
+      .then((response: any, error: any) => {
+        //console.log(response);
+        //console.log(error);
+        fn(error);
+      })
+    }else{
+      await this.mongo.model.update({ 'id': id }, { $set: { 'name': nombre, 'email': email, 'password': this.cryptPassword(pass) } }, { multi: true })
+      .then((response: any, error: any) => {
+        //console.log(response);
+        //console.log(error);
+        fn(error);
+      })
+    }
+   
+  }
 }
-
 export default usersModel;

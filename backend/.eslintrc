@@ -10,7 +10,7 @@
       "plugin:@typescript-eslint/recommended"
     ],
     "rules": { 
-      "indent": ["error", 2],
+      "indent": "off",
       "quotes": ["error", "single"],
       "no-multiple-empty-lines": ["error", { "max": 1 }],
       "@typescript-eslint/no-var-requires": "off",
